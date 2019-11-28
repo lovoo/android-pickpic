@@ -1,0 +1,12 @@
+$dokka.format:gfm
+$dokka.linkExtension:md
+$dokka.location:com.lovoo.android.pickcore.destination$moveToPublicDirectory(java.io.File)com.lovoo.android.pickcore.destination/java.io.-file/move-to-public-directory.md
+com.lovoo.android.pickcore
+com.lovoo.android.pickcore.adapter
+com.lovoo.android.pickcore.contract
+com.lovoo.android.pickcore.destination
+com.lovoo.android.pickcore.engine
+com.lovoo.android.pickcore.loader
+com.lovoo.android.pickcore.model
+com.lovoo.android.pickcore.permission
+com.lovoo.android.pickcore.presenter

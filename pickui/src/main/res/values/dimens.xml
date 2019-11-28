@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="pickpic_picture_item_space">1dp</dimen>
+
+    <dimen name="pickpic_gallery_item_width">202dp</dimen>
+    <dimen name="pickpic_gallery_item_height">48dp</dimen>
+    <dimen name="pickpic_gallery_item_padding">16dp</dimen>
+    <dimen name="pickpic_gallery_item_cover_size">24dp</dimen>
+    <dimen name="pickpic_gallery_item_count_width">40dp</dimen>
+    <dimen name="pickpic_gallery_item_name_width">90dp</dimen>
+
+    <dimen name="pickpic_button_corner">30dp</dimen>
+
+    <dimen name="pickpic_permission_icon_size">64dp</dimen>
+
+    <dimen name="pickpic_picture_checkbox_size">26dp</dimen>
+</resources>

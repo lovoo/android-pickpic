@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#5C80BC</color>
+    <color name="colorPrimaryDark">#4D5061</color>
+    <color name="colorAccent">#E7E247</color>
+
+    <color name="pickpic_text">#3D3B30</color>
+    <color name="pickpic_subtext">#9D9B90</color>
+    <color name="pickpic_text_actionbar">#3D3B30</color>
+
+    <color name="pickpic_background">#E7E7E7</color>
+    <color name="pickpic_background_item">#777777</color>
+    <color name="pickpic_background_toolbar">#FFFFFF</color>
+    <color name="pickpic_background_overlay">#E7E7E7</color>
+    <color name="pickpic_selection_overlay">#BBE7E247</color>
+
+    <color name="pickpic_stroke">#3D3B30</color>
+</resources>

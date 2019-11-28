@@ -1,0 +1,119 @@
+<resources>
+
+    <style name="PickPicAppTheme" parent="Theme.AppCompat.Light">
+        <item name="buttonStyle">@style/Button</item>
+    </style>
+
+    <style name="PickPicAppThemeAppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="PickPicAppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="PickPicGalleryBar">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+    <style name="PickPicGalleryListItem">
+        <item name="android:layout_width">@dimen/pickpic_gallery_item_width</item>
+        <item name="android:layout_height">@dimen/pickpic_gallery_item_height</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingStart">@dimen/pickpic_gallery_item_padding</item>
+        <item name="android:paddingEnd">@dimen/pickpic_gallery_item_padding</item>
+        <item name="android:paddingLeft">@dimen/pickpic_gallery_item_padding</item>
+        <item name="android:paddingRight">@dimen/pickpic_gallery_item_padding</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+    </style>
+
+    <style name="PickPicCamera">
+        <item name="android:foreground">@drawable/pickpic_picture_selector</item>
+        <item name="android:background">?attr/colorPrimary</item>
+    </style>
+
+    <style name="PickPicOverlay" />
+
+    <style name="CheckBoxTheme" parent="Widget.AppCompat.CompoundButton.CheckBox" />
+
+    <style name="CheckBoxTheme.PickPic" />
+
+    <style name="CheckBox" />
+
+    <style name="CheckBox.PickPic" />
+
+    <style name="TextView" parent="android:Widget.TextView">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Button" parent="Widget.AppCompat.Button" />
+
+    <style name="Button.PickPic">
+        <item name="android:minWidth">48dp</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+
+    <style name="Button.PickPic.Permission">
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <style name="TextView.PickPicPermission" />
+
+    <style name="TextView.PickPicPermission.Title">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="TextView.PickPicPermission.Description">
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="TextView.PickPicGallery" />
+
+    <style name="TextView.PickPicGallery.Name">
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="TextView.PickPicGallery.Button">
+        <item name="android:textSize">12sp</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:textColor">@color/pickpic_button_selector</item>
+    </style>
+
+    <style name="TextView.PickPicGallery.Item" />
+
+    <style name="TextView.PickPicGallery.Item.Name">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">@dimen/pickpic_gallery_item_name_width</item>
+        <item name="android:layout_marginStart">@dimen/pickpic_gallery_item_padding</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="TextView.PickPicGallery.Item.Count">
+        <item name="android:layout_width">@dimen/pickpic_gallery_item_count_width</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">end</item>
+    </style>
+
+    <style name="TextView.PickPicCamera">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:drawableTop">@android:drawable/ic_menu_camera</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:drawableTint">@android:color/white</item>
+    </style>
+
+    <style name="ImageView" />
+
+    <style name="ImageView.PickPicPicture">
+        <item name="android:background">@color/pickpic_picture_background</item>
+    </style>
+
+    <style name="ImageView.PickPicCover">
+        <item name="android:layout_height">@dimen/pickpic_gallery_item_cover_size</item>
+        <item name="android:layout_width">@dimen/pickpic_gallery_item_cover_size</item>
+        <item name="android:scaleType">centerCrop</item>
+    </style>
+
+</resources>

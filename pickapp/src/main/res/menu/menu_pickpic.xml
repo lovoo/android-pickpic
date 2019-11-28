@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/pickpic_menu_faq"
+        android:title="@string/pickpic_menu_faq"
+        android:visible="false"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/pickpic_menu_remove"
+        android:icon="@drawable/ic_menu_pickpic_delete"
+        android:title="@string/pickpic_menu_delete"
+        android:visible="false"
+        app:showAsAction="ifRoom" />
+</menu>

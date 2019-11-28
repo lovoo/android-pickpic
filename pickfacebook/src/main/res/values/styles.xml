@@ -1,0 +1,27 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Button.PickPicFacebook" parent="Button.PickPic">
+        <item name="android:background">@drawable/pickfacebook_button_background</item>
+    </style>
+
+    <style name="Button.PickPicFacebook.Error">
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <style name="Button.PickPicFacebook.Permission">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:drawableStart" tools:targetApi="LOLLIPOP">@drawable/ic_facebook_white</item>
+    </style>
+
+    <style name="TextView.PickPicFacebook" parent="TextView.PickPicPermission" />
+
+    <style name="TextView.PickPicFacebook.Error" />
+
+    <style name="TextView.PickPicFacebook.Error.Title">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="TextView.PickPicFacebook.Error.Description">
+        <item name="android:textSize">17sp</item>
+    </style>
+</resources>

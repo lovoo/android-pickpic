@@ -1,0 +1,28 @@
+gcloud:
+  results-bucket: firebase-testlab-android-pickpic
+  results-dir: $BITRISE_BUILD_NUMBER
+  record-video: true
+  timeout: 30m
+  async: false
+  results-history-name: PICKPIC_ANDROID
+  flaky-test-attempts: 2
+  app: $BITRISE_APK_PATH
+  test: $BITRISE_TEST_APK_PATH
+  auto-google-login: false
+  use-orchestrator: true
+  environment-variables:
+    clearPackageData: true
+  performance-metrics: true
+  device:
+    - model: walleye
+      version: 28
+      locale: en
+      orientation: portrait
+flank:
+  max-test-shards: 1
+  shard-time: -1
+  repeat-tests: 1
+  smart-flank-gcs-path: gs://firebase-testlab-android-pickpic/firebase-testlab-shards-calculation/results.xml
+  smart-flank-disable-upload: false
+  disable-sharding: false
+  project: lovoo-dev

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="pickpic_facebook_button_color">#415dae</color>
+    <color name="pickpic_facebook_button_color_pressed">#2f477a</color>
+</resources>
