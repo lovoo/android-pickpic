@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">pickFacebook</string>
+    <string name="facebook_app_id">your_app_id</string>
+    <string name="fb_login_protocol_scheme">your_protocol_scheme</string>
+
+    <string name="pickfacebook_default_error_title">Error</string>
+    <string name="pickfacebook_default_error_message">Upps, something went wrong!</string>
+    <string name="pickfacebook_default_error_action">Retry</string>
+</resources>

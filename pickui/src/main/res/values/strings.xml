@@ -1,0 +1,8 @@
+<resources>
+    <string name="pickpic_label_all_folder">All Pictures</string>
+    <string name="pickpic_gallery_permission_denied_title">Need permission</string>
+    <string name="pickpic_gallery_permission_denied_text">Allow us to access your photos.</string>
+    <string name="pickpic_gallery_permission_denied_action">Unlock photos</string>
+    <string name="pickpic_gallery_button">Select gallery</string>
+    <string name="pickpic_gallery_loading">Pictures are loading</string>
+</resources>

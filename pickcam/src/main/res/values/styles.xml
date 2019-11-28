@@ -1,0 +1,19 @@
+<resources>
+
+    <style name="PickPicCameraProgressBar" parent="Widget.AppCompat.ProgressBar">
+        <item name="android:indeterminate">false</item>
+        <item name="android:layout_width">@dimen/pickpic_camera_process_size</item>
+        <item name="android:layout_height">@dimen/pickpic_camera_process_size</item>
+    </style>
+
+    <style name="TextView" parent="android:Widget.TextView">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TextView.PickPicCameraProcess">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+</resources>

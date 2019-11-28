@@ -1,0 +1,172 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="PickPicAppTheme" parent="Theme.AppCompat.Light">
+        <item name="android:windowBackground">@color/pickpic_background</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor" tools:ignore="NewApi">@color/pickpic_subtext</item>
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
+    </style>
+
+    <style name="PickPicAppTheme.Toolbar">
+        <item name="android:textColorPrimary">@color/pickpic_text</item>
+        <item name="android:textColorSecondary">@color/pickpic_text</item>
+        <item name="actionMenuTextColor">@color/pickpic_text</item>
+    </style>
+
+    <style name="PickPicAppTheme.AppBarLayout" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textColorPrimary">@color/pickpic_text_actionbar</item>
+    </style>
+
+    <style name="PickPicAppTheme.NoActionbar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="PickPicTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">?attr/colorAccent</item>
+        <item name="tabSelectedTextColor">?attr/colorPrimary</item>
+        <item name="tabTextAppearance">@style/PickPicTabTextAppearance</item>
+    </style>
+
+    <style name="PickPicTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/pickpic_text_actionbar</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="PickPicCamera">
+        <item name="android:foreground">@drawable/pickpic_picture_selector</item>
+        <item name="android:background">?attr/colorPrimary</item>
+    </style>
+
+    <style name="PickPicOverlay">
+        <item name="android:background">@color/pickpic_background_overlay</item>
+    </style>
+
+    <style name="CheckBox.PickPic">
+        <item name="android:button" tools:targetApi="LOLLIPOP">
+            @drawable/pickpic_checkbox_multi_selector
+        </item>
+    </style>
+
+    <style name="CheckBoxTheme.PickPic" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="colorControlNormal">@android:color/white</item>
+        <item name="colorControlActivated">?attr/colorPrimary</item>
+        <item name="android:buttonTint" tools:targetApi="LOLLIPOP">
+            @color/pickpic_checkbox_multi_selector
+        </item>
+    </style>
+
+    <style name="Button.PickPic" tools:override="true">
+        <item name="android:layout_height">48dp</item>
+        <item name="android:maxHeight">60dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/pickpic_button_background</item>
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:paddingEnd">20dp</item>
+        <item name="android:elevation" tools:ignore="NewApi">3dp</item>
+    </style>
+
+    <style name="Button.PickPic.Selectionbar">
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
+    <style name="Button.PickPic.Permission">
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <style name="ImageButton.PickPic.Selectionbar" parent="Widget.AppCompat.ImageButton">
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_width">48dp</item>
+        <item name="android:background">@drawable/pickpic_imagebutton_background</item>
+    </style>
+
+    <style name="TextView.PickPicPermission">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <style name="TextView.PickPicPermission.Title">
+        <item name="android:textColor">@color/pickpic_text</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="TextView.PickPicPermission.Description">
+        <item name="android:textColor">@color/pickpic_subtext</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+
+    <style name="TextView.PickPicActionBar" />
+
+    <style name="TextView.PickPicActionBar.Headline">
+        <item name="android:layout_marginStart">@dimen/pickpic_actionbar_headline_margin</item>
+        <item name="android:layout_marginEnd">@dimen/pickpic_actionbar_headline_margin</item>
+
+        <item name="android:textColor">@color/pickpic_subtext</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:gravity">start</item>
+    </style>
+
+    <style name="PickPicSelection">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">bottom</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:background">@color/pickpic_background_toolbar</item>
+    </style>
+
+    <style name="PickPicGalleryBar">
+        <item name="android:background">@color/pickpic_background_toolbar</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingStart">@dimen/pickpic_actionbar_headline_margin</item>
+        <item name="android:paddingTop">14dp</item>
+        <item name="android:paddingEnd">@dimen/pickpic_actionbar_headline_margin</item>
+        <item name="android:paddingBottom">14dp</item>
+    </style>
+
+    <style name="TextView.PickPicGallery.Name">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/pickpic_text</item>
+    </style>
+
+    <style name="TextView.PickPicSelection">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/pickpic_text_actionbar</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="TextView.PickPicGallery.Button">
+        <item name="android:textColor">@color/pickpic_button_selector</item>
+    </style>
+
+    <style name="ImageView.PickPicThumbnail">
+        <item name="android:layout_width">@dimen/pickpic_thumbnail_size</item>
+        <item name="android:layout_height">@dimen/pickpic_thumbnail_size</item>
+        <item name="android:foreground">@drawable/pickpic_thumb_selector</item>
+        <item name="android:scaleType">centerCrop</item>
+    </style>
+
+    <style name="ImageView.PickPicPicture">
+        <item name="android:foreground">@drawable/pickpic_picture_selector</item>
+        <item name="android:background">@color/pickpic_background_item</item>
+    </style>
+
+    <style name="TextView.PickPicFacebook" parent="TextView.PickPicPermission" />
+
+    <style name="TextView.PickPicFacebook.Error.Title" parent="TextView.PickPicPermission.Title" />
+
+    <style name="TextView.PickPicFacebook.Error.Description" parent="TextView.PickPicPermission.Description" />
+
+</resources>

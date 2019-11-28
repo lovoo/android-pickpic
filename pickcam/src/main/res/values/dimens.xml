@@ -1,0 +1,4 @@
+<resources>
+    <dimen name="pickpic_camera_process_size">72dp</dimen>
+    <dimen name="pickpick_camera_process_padding">16dp</dimen>
+</resources>

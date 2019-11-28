@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name" translatable="false">PickPic Example</string>
+    <string name="facebook_app_id" translatable="false">your_app_id</string>
+    <string name="fb_login_protocol_scheme" translatable="false">your_protocol_scheme</string>
+
+
+    <string name="example_start_button">Start PickPic</string>
+</resources>

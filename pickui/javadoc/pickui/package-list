@@ -1,0 +1,6 @@
+$dokka.format:gfm
+$dokka.linkExtension:md
+
+com.lovoo.android.pickui
+com.lovoo.android.pickui.adapter
+com.lovoo.android.pickui.view

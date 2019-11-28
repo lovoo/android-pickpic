@@ -1,0 +1,8 @@
+$dokka.format:gfm
+$dokka.linkExtension:md
+
+com.lovoo.android.pickapp
+com.lovoo.android.pickapp.adapter
+com.lovoo.android.pickapp.factory
+com.lovoo.android.pickapp.model
+com.lovoo.android.pickapp.view

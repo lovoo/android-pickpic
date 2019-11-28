@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="example_start_button">Starte PickPic</string>
+
+
+    <!-- APP -->
+    <string name="pickpic_title">Foto auswählen</string>
+    <string name="pickpic_actionbar_header">Ein gutes Bild sagt mehr als 1000 Worte!</string>
+
+    <string name="pickpic_menu_faq">FAQ</string>
+    <string name="pickpic_menu_delete">entfernen</string>
+
+
+    <plurals name="pickpic_label_selection_more">
+        <item quantity="one">Wähle noch ein Foto aus</item>
+        <item quantity="other">Wähle mindestens noch %d Fotos aus</item>
+    </plurals>
+    <plurals name="pickpic_label_selection_count">
+        <item quantity="one">%d Foto ausgewählt</item>
+        <item quantity="other">%d Fotos ausgewählt</item>
+    </plurals>
+    <plurals name="pickpic_label_selection_max">
+        <item quantity="one">Du kannst maximal ein Foto auswählen</item>
+        <item quantity="other">Du kannst maximal %d Fotos auswählen</item>
+    </plurals>
+
+    <string name="pickpic_camera_button">Foto aufnehmen</string>
+
+    <string name="pickpic_tab_gallery">Galerie</string>
+    <string name="pickpic_tab_facebook">Facebook</string>
+
+    <!-- CAMERA -->
+    <string name="pickpic_camera_prepare">Aufnahme wird verarbeitet…</string>
+
+    <!-- FACEBOOK -->
+    <string name="pickfacebook_default_error_title">Fehler</string>
+    <string name="pickfacebook_default_error_message">Upps, da lief was schief!</string>
+    <string name="pickfacebook_default_error_action">Wiederholen</string>
+
+    <!-- UI -->
+    <string name="pickpic_label_all_folder">Alle Bilder</string>
+    <string name="pickpic_gallery_permission_denied_title">Fehlende Berechtigungen</string>
+    <string name="pickpic_gallery_permission_denied_text">Erlaube uns den Zugriff auf deine Fotos.</string>
+    <string name="pickpic_gallery_permission_denied_action">Fotos freischalten</string>
+    <string name="pickpic_gallery_button">Album wählen</string>
+    <string name="pickpic_gallery_loading">Fotos werden geladen</string>
+</resources>

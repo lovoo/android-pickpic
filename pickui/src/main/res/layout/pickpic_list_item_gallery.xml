@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/PickPicGalleryListItem">
+
+    <ImageView
+        android:id="@+id/gallery_cover"
+        style="@style/ImageView.PickPicCover" />
+
+    <TextView
+        android:id="@+id/gallery_name"
+        style="@style/TextView.PickPicGallery.Item.Name"
+        tools:text="Alle Bilder" />
+
+    <TextView
+        android:id="@+id/gallery_count"
+        style="@style/TextView.PickPicGallery.Item.Count"
+        tools:text="1234" />
+</LinearLayout>

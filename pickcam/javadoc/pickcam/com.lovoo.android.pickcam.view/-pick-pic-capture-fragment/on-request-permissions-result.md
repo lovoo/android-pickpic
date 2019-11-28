@@ -1,0 +1,5 @@
+[pickcam](../../index.md) / [com.lovoo.android.pickcam.view](../index.md) / [PickPicCaptureFragment](index.md) / [onRequestPermissionsResult](./on-request-permissions-result.md)
+
+# onRequestPermissionsResult
+
+`fun onRequestPermissionsResult(requestCode: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`, permissions: `[`Array`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html)`<out `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`>, grantResults: `[`IntArray`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int-array/index.html)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcam/src/main/kotlin/com/lovoo/android/pickcam/view/PickPicCaptureFragment.kt#L103)

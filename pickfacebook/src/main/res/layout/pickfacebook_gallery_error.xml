@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/PickPicOverlay"
+    android:id="@+id/error_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:padding="32dp">
+
+        <ImageView
+            android:layout_width="@dimen/pickpic_permission_icon_size"
+            android:layout_height="@dimen/pickpic_permission_icon_size"
+            android:layout_gravity="center_horizontal"
+            app:srcCompat="@drawable/pickfacebook_gallery_permission_denied_icon" />
+
+        <TextView
+            style="@style/TextView.PickPicFacebook.Error.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center_horizontal"
+            android:text="@string/pickfacebook_default_error_title" />
+
+        <TextView
+            android:id="@+id/error_message"
+            style="@style/TextView.PickPicFacebook.Error.Description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center_horizontal"
+            android:text="@string/pickfacebook_default_error_message" />
+
+        <Button
+            android:id="@+id/error_button"
+            style="@style/Button.PickPicFacebook.Error"
+            android:layout_marginTop="24dp"
+            android:text="@string/pickfacebook_default_error_action" />
+
+    </LinearLayout>
+</FrameLayout>

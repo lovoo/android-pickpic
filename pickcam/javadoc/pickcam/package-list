@@ -1,0 +1,7 @@
+$dokka.format:gfm
+$dokka.linkExtension:md
+
+com.lovoo.android.pickcam
+com.lovoo.android.pickcam.factory
+com.lovoo.android.pickcam.view
+com.lovoo.android.pickcam.worker

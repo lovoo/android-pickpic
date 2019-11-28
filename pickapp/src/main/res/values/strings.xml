@@ -1,0 +1,28 @@
+<resources>
+    <string name="pickpic_title">Select photos</string>
+    <string name="pickpic_actionbar_header">A good photo says more than a thousand words!</string>
+
+    <string name="pickpic_menu_faq">FAQ</string>
+    <string name="pickpic_menu_delete">remove</string>
+
+
+    <plurals name="pickpic_label_selection_more">
+        <item quantity="one">Select at least %d more photo</item>
+        <item quantity="other">Select at least %d more photos</item>
+    </plurals>
+    <plurals name="pickpic_label_selection_count">
+        <item quantity="one">%d photo selected</item>
+        <item quantity="other">%d photos selected</item>
+    </plurals>
+    <plurals name="pickpic_label_selection_max">
+        <item quantity="one">You can select a maximum of %d photo</item>
+        <item quantity="other">You can select a maximum of %d photos</item>
+    </plurals>
+
+    <string name="pickpic_label_all_folder">All images</string>
+    <string name="pickpic_gallery_button">Select album</string>
+    <string name="pickpic_camera_button">New picture</string>
+
+    <string name="pickpic_tab_gallery">Gallery</string>
+    <string name="pickpic_tab_facebook">Facebook</string>
+</resources>
