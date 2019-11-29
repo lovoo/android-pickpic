@@ -31,7 +31,7 @@ buildscript {
     ext.target_version = 28
     ext.min_version = 18
 
-    def version = System.getenv("VERSION")
+    def version = '1.0.0' //System.getenv("VERSION")
     def time = System.currentTimeMillis()
 
     ext.version_name = version == null ? "$time-SNAPSHOT" : version
@@ -46,6 +46,7 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'org.jfrog.buildinfo:build-info-extractor-gradle:4.9.0'
         classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.9.18"
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -60,33 +61,6 @@ allprojects {
         google()
         jcenter()
     }
-
-    if (it.name != 'app') {
-        apply plugin: 'org.jetbrains.dokka'
-        dokka {
-            outputFormat = 'gfm'
-            outputDirectory = "$projectDir/javadoc"
-            jdkVersion = 8
-            includeNonPublic = false
-            reportUndocumented = false
-
-            linkMapping {
-                // Unix based directory relative path to the root of the project (where you execute gradle respectively).
-                dir = "./"
-
-                // URL showing where the source code can be accessed through the web browser
-                url = "https://github.com/lovoo/android-pickpic/blob/master"
-
-                // Suffix which is used to append the line number to the URL. Use #L for GitHub
-                suffix = "#L"
-            }
-        }
-    }
-}
-
-// file will be deleted before public deploy
-if (file('deploy-internal.gradle').exists()) {
-    apply from: 'deploy-internal.gradle'
 }
 
 task clean(type: Delete) {

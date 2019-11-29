@@ -1,0 +1,48 @@
+
+apply plugin: 'maven-publish' // --> jitpack deploy
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'org.jetbrains.dokka'
+
+dokka {
+    outputFormat = 'gfm'
+    outputDirectory = "$projectDir/javadoc"
+    jdkVersion = 8
+    includeNonPublic = false
+    reportUndocumented = false
+
+    linkMapping {
+        // Unix based directory relative path to the root of the project (where you execute gradle respectively).
+        dir = "./"
+
+        // URL showing where the source code can be accessed through the web browser
+        url = "https://github.com/lovoo/android-pickpic/blob/master"
+
+        // Suffix which is used to append the line number to the URL. Use #L for GitHub
+        suffix = "#L"
+    }
+}
+
+task sourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java.sourceFiles
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.sourceFiles
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+task classesJar(type: Jar) {
+    from "$buildDir/intermediates/classes/release"
+}
+
+artifacts {
+    archives classesJar
+    archives javadocJar
+    archives sourcesJar
+}

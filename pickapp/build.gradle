@@ -51,3 +51,5 @@ dependencies {
 repositories {
     mavenCentral()
 }
+
+apply from: '../submodules.gradle'
