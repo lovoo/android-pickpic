@@ -3,6 +3,10 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
+ext.moduleName = 'pickcam'
+ext.moduleDescription = 'The camera capture implementation\t'
+apply from: '../submodules.gradle'
+
 android {
     compileSdkVersion target_version
 
@@ -46,5 +50,3 @@ dependencies {
 repositories {
     mavenCentral()
 }
-
-apply from: '../submodules.gradle'

@@ -1,48 +1,43 @@
+ext.moduleId = ""
 
-apply plugin: 'maven-publish' // --> jitpack deploy
-apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'org.jetbrains.dokka'
+apply plugin: 'com.novoda.bintray-release'
 
-dokka {
-    outputFormat = 'gfm'
-    outputDirectory = "$projectDir/javadoc"
-    jdkVersion = 8
-    includeNonPublic = false
-    reportUndocumented = false
+def getUserAndKey() {
+    def user = project.hasProperty('bintray.user') ? project.property('bintray.user') : System.getenv("BINTRAY_USER")
+    def key = project.hasProperty('bintray.apikey') ? project.property('bintray.apikey') : System.getenv("BINTRAY_APIKEY")
+    return [user, key]
+}
 
-    linkMapping {
-        // Unix based directory relative path to the root of the project (where you execute gradle respectively).
-        dir = "./"
+if (moduleName == null) {
+    throw new IllegalStateException("Must specify a module name build.gradle")
+}
 
-        // URL showing where the source code can be accessed through the web browser
-        url = "https://github.com/lovoo/android-pickpic/blob/master"
-
-        // Suffix which is used to append the line number to the URL. Use #L for GitHub
-        suffix = "#L"
+task checkBintrayConfig {
+    doLast {
+        def (user, key) = getUserAndKey()
+        if (user == null || user.isEmpty() || key == null || key.isEmpty()) {
+            throw new IllegalStateException("Missing Bintray user and api key")
+        }
     }
 }
 
-task sourcesJar(type: Jar) {
-    classifier = 'sources'
-    from android.sourceSets.main.java.sourceFiles
+afterEvaluate {
+    bintrayUpload.dependsOn checkBintrayConfig
 }
 
-task javadoc(type: Javadoc) {
-    source = android.sourceSets.main.java.sourceFiles
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+def (user, key) = getUserAndKey()
+
+publish {
+    bintrayUser = user
+    bintrayKey = key
+    userOrg = 'lovoo'
+    groupId = 'com.lovoo.android'
+    uploadName = "PickPic"
+    artifactId = moduleName
+    publishVersion = version
+    desc = moduleDescription
+    website = "https://github.com/lovoo/android-pickpic/tree/master/$moduleName"
+    dryRun = false
 }
 
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-
-task classesJar(type: Jar) {
-    from "$buildDir/intermediates/classes/release"
-}
-
-artifacts {
-    archives classesJar
-    archives javadocJar
-    archives sourcesJar
-}
+ext.moduleId = publish.groupId + '.' + publish.artifactId

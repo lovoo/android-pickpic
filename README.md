@@ -1,5 +1,5 @@
 # android-pickpic (Pick a Picture)
-[![](https://jitci.com/gh/lovoo/android-pickpic/svg)](https://jitci.com/gh/lovoo/android-pickpic)
+[ ![Download](https://api.bintray.com/packages/lovoo/maven/PickPic/images/download.svg) ](https://bintray.com/lovoo/maven/PickPic/_latestVersion)
 
 ## Description
 Ready to use library that allows people to select pictures from their device and Facebook account. It's designed to unify multiple picture sources in one flow.

@@ -2,6 +2,10 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+ext.moduleName = 'pickui'
+ext.moduleDescription = 'The basic UI implementation'
+apply from: '../submodules.gradle'
+
 android {
     compileSdkVersion target_version
 
@@ -45,5 +49,3 @@ dependencies {
 repositories {
     mavenCentral()
 }
-
-apply from: '../submodules.gradle'
