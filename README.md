@@ -21,11 +21,11 @@ What PickPic will not handle are animated pictures and videos.
  <img src="/images/screenshot.png" width="50%" height="50%" alt="Screenshot">
  
  ## Import 
- PickPic is hosted on JitPack. Add this to your project's `build.gradle`.
+ PickPic is hosted on Jcenter. Add this to your project's `build.gradle`.
  
  ```groovy
  repositories {
-     maven { url 'https://jitpack.io' }
+     jcenter()
  }
  ```
  
