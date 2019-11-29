@@ -6,4 +6,4 @@
 /build
 /captures
 .externalNativeBuild
-deploy-internal.gradle
+deploy-*.gradle

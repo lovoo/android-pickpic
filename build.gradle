@@ -32,10 +32,9 @@ buildscript {
     ext.min_version = 18
 
     def version = System.getenv("VERSION")
-    def time = System.currentTimeMillis()
-
-    ext.version_name = version == null ? "$time-SNAPSHOT" : version
-    ext.version_code = 1
+    def code = System.getenv("VERSION_CODE")
+    ext.version_name = version == null ? "${System.currentTimeMillis()}-SNAPSHOT" : version
+    ext.version_code = code == null ? 1 : code.toInteger()
 
     repositories {
         google()
@@ -44,8 +43,9 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'org.jfrog.buildinfo:build-info-extractor-gradle:4.9.0'
-        classpath "org.jetbrains.dokka:dokka-gradle-plugin:0.9.18"
+        classpath 'org.jetbrains.dokka:dokka-gradle-plugin:0.9.18'
+        classpath 'com.diffplug.spotless:spotless-plugin-gradle:3.24.2'
+        classpath 'com.novoda:bintray-release:0.9.1'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -61,32 +61,9 @@ allprojects {
         jcenter()
     }
 
-    if (it.name != 'app') {
-        apply plugin: 'org.jetbrains.dokka'
-        dokka {
-            outputFormat = 'gfm'
-            outputDirectory = "$projectDir/javadoc"
-            jdkVersion = 8
-            includeNonPublic = false
-            reportUndocumented = false
-
-            linkMapping {
-                // Unix based directory relative path to the root of the project (where you execute gradle respectively).
-                dir = "./"
-
-                // URL showing where the source code can be accessed through the web browser
-                url = "https://github.com/lovoo/android-pickpic/blob/master"
-
-                // Suffix which is used to append the line number to the URL. Use #L for GitHub
-                suffix = "#L"
-            }
-        }
+    tasks.withType(Javadoc).all {
+        enabled = false
     }
-}
-
-// file will be deleted before public deploy
-if (file('deploy-internal.gradle').exists()) {
-    apply from: 'deploy-internal.gradle'
 }
 
 task clean(type: Delete) {

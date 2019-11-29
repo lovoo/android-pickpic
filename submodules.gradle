@@ -1,0 +1,43 @@
+ext.moduleId = ""
+
+apply plugin: 'com.novoda.bintray-release'
+
+def getUserAndKey() {
+    def user = project.hasProperty('bintray.user') ? project.property('bintray.user') : System.getenv("BINTRAY_USER")
+    def key = project.hasProperty('bintray.apikey') ? project.property('bintray.apikey') : System.getenv("BINTRAY_APIKEY")
+    return [user, key]
+}
+
+if (moduleName == null) {
+    throw new IllegalStateException("Must specify a module name build.gradle")
+}
+
+task checkBintrayConfig {
+    doLast {
+        def (user, key) = getUserAndKey()
+        if (user == null || user.isEmpty() || key == null || key.isEmpty()) {
+            throw new IllegalStateException("Missing Bintray user and api key")
+        }
+    }
+}
+
+afterEvaluate {
+    bintrayUpload.dependsOn checkBintrayConfig
+}
+
+def (user, key) = getUserAndKey()
+
+publish {
+    bintrayUser = user
+    bintrayKey = key
+    userOrg = 'lovoo'
+    groupId = 'com.lovoo.android'
+    uploadName = "PickPic"
+    artifactId = moduleName
+    publishVersion = version
+    desc = moduleDescription
+    website = "https://github.com/lovoo/android-pickpic/tree/master/$moduleName"
+    dryRun = false
+}
+
+ext.moduleId = publish.groupId + '.' + publish.artifactId

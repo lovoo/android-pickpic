@@ -1,4 +1,5 @@
 # android-pickpic (Pick a Picture)
+[ ![Download](https://api.bintray.com/packages/lovoo/maven/PickPic/images/download.svg) ](https://bintray.com/lovoo/maven/PickPic/_latestVersion)
 
 ## Description
 Ready to use library that allows people to select pictures from their device and Facebook account. It's designed to unify multiple picture sources in one flow.
@@ -20,7 +21,7 @@ What PickPic will not handle are animated pictures and videos.
  <img src="/images/screenshot.png" width="50%" height="50%" alt="Screenshot">
  
  ## Import 
- PickPic is hosted on jCenter. Add this to your project's `build.gradle`.
+ PickPic is hosted on Jcenter. Add this to your project's `build.gradle`.
  
  ```groovy
  repositories {
@@ -28,10 +29,10 @@ What PickPic will not handle are animated pictures and videos.
  }
  ```
  
- Then add this to your app's `build.gradle` and replace `<version>` with the version you want to use:
+ Then add this to your app's `build.gradle` and replace `<tag>` with the version you want to use:
  
  ```groovy
- pickpic_version = "<version>"
+ pickpic_version = "<tag>"
  
  dependencies {
      implementation "com.lovoo.android:pickui:$pickpic_version"
@@ -115,7 +116,7 @@ PickPick is divided in different modules:
 | _PickCore_ | The base of PickPick | `com.lovoo.android:pickcore:$pickpic_version` | androidx.exifinterface:exifinterface<br>androidx.appcompat:appcompat<br>androidx.recyclerview:recyclerview<br>androidx.lifecycle:lifecycle-livedata | [link](pickcore/javadoc/pickcore/index.md) |
 | _PickUI_ | The basic UI implementation | `com.lovoo.android:pickui:$pickpic_version` | _pickcore_<br>androidx.vectordrawable:vectordrawable<br>androidx.constraintlayout:constraintlayout | [link](pickui/javadoc/pickui/index.md) |
 | _PickCam_ | The camera capture implementation | `com.lovoo.android:pickcam:$pickpic_version` | _pickcore_<br>androidx.appcompat:appcompat<br>androidx.constraintlayout:constraintlayout<br>android.arch.work:work-runtime<br>android.arch.work:work-runtime-ktx<br>android.arch.work:work-rxjava2 | [link](pickcam/javadoc/pickcam/index.md) |
-| _PickFacebook_ | The basic UI implementation | `com.lovoo.android:pickfacebook:$pickpic_version` | _pickui_<br>com.google.code.gson:gson<br>com.facebook.android:facebook-android-sdk | [link](pickfacebook/javadoc/pickfacebook/index.md) |
+| _PickFacebook_ | Facebook module for PickPic | `com.lovoo.android:pickfacebook:$pickpic_version` | _pickui_<br>com.google.code.gson:gson<br>com.facebook.android:facebook-android-sdk | [link](pickfacebook/javadoc/pickfacebook/index.md) |
 | _PickApp_ | A ready to use PickPicActivity that can be configured | `com.lovoo.android:pickapp:$pickpic_version` | _pickfacebook_ (alternative _pickui_)<br>_pickcam_ (optional)<br>com.google.android.material:material<br>io.reactivex.rxjava2:rxjava<br>io.reactivex.rxjava2:rxandroid<br>com.github.bumptech.glide:compiler<br>androidx.lifecycle:lifecycle-compiler | [link](pickapp/javadoc/pickapp/index.md) |
 
 For _PickApp_: The Facebook Tab will only appear if _PickFacebook_ is packed within your dependencies.

@@ -2,6 +2,10 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+ext.moduleName = 'pickfacebook'
+ext.moduleDescription = 'Facebook module for PickPic'
+apply from: '../submodules.gradle'
+
 android {
     compileSdkVersion target_version
 
