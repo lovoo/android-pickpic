@@ -56,7 +56,7 @@ dependencies {
     implementation "androidx.legacy:legacy-support-v4:$legacy_v4_version"
     implementation "com.google.android.material:material:$material_version"
 
-    implementation project(path: ':pickapp')
+    implementation "com.lovoo.android:pickapp:$pickpic_version"
 
     androidTestImplementation "androidx.test:runner:$androidX_test_version"
     androidTestImplementation "androidx.test:rules:$androidX_test_version"

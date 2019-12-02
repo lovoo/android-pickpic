@@ -35,11 +35,19 @@ What PickPic will not handle are animated pictures and videos.
  pickpic_version = "<tag>"
  
  dependencies {
-     implementation "com.lovoo.android:pickui:$pickpic_version"
+     implementation "com.lovoo.android:pickapp:$pickpic_version"
+ }
+ ```
+ 
+ ```groovy
+ pickpic_version = "<tag>"
+ 
+ dependencies {
      implementation "com.lovoo.android:pickcore:$pickpic_version"
+     implementation "com.lovoo.android:pickui:$pickpic_version"
+     implementation "com.lovoo.android:pickcam:$pickpic_version"
      implementation "com.lovoo.android:pickfacebook:$pickpic_version"
      implementation "com.lovoo.android:pickapp:$pickpic_version"
-     implementation "com.lovoo.android:pickcam:$pickpic_version"
  }
  ```
  
