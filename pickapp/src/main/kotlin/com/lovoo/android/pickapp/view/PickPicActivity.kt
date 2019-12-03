@@ -23,6 +23,7 @@ import com.lovoo.android.pickcam.view.PickPicCaptureFragment
 import com.lovoo.android.pickcore.Constants
 import com.lovoo.android.pickcore.PickPicProvider
 import com.lovoo.android.pickcore.contract.CameraEngine
+import com.lovoo.android.pickcore.contract.CaptureCallback
 import com.lovoo.android.pickcore.contract.SelectionHolder
 import com.lovoo.android.pickcore.contract.ToggleCallback
 import com.lovoo.android.pickcore.engine.DisabledCameraEngine
@@ -37,7 +38,7 @@ import java.util.*
 /**
  * Ready to use PickPic implementation. Configurable with [PickPicConfig].
  */
-class PickPicActivity : AppCompatActivity(), SelectionHolder, CameraEngine, PickPicCaptureFragment.CaptureCallback {
+class PickPicActivity : AppCompatActivity(), SelectionHolder, CameraEngine, CaptureCallback {
 
     private lateinit var config: PickPicConfig
     private lateinit var picker: Picker

@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentManager
 import com.lovoo.android.pickcam.R
 import com.lovoo.android.pickcam.worker.CaptureResultWorker
 import com.lovoo.android.pickcore.contract.CameraDestination
+import com.lovoo.android.pickcore.contract.CaptureCallback
 import com.lovoo.android.pickcore.destination.PrivateDirectory
 import com.lovoo.android.pickcore.destination.PublicDirectory
 import com.lovoo.android.pickcore.loader.CameraLoader
@@ -142,16 +143,6 @@ class PickPicCaptureFragment : DialogFragment() {
         }.also {
             CameraLoader.startCamera(requireContext(), this, CAMERA_REQUEST_CODE, it)
         }
-    }
-
-    /**
-     * The interface that the calling UI should implement to receive the captured file.
-     */
-    interface CaptureCallback {
-        /**
-         * @param uri the path to the captured file or null
-         */
-        fun onCapture(uri: Uri?)
     }
 
     companion object {
