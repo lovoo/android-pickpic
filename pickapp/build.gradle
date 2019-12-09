@@ -48,8 +48,9 @@ dependencies {
 
     kapt "androidx.lifecycle:lifecycle-compiler:$arch_version"
 
-    api project(path: ':pickfacebook')
-    api project(path: ':pickcam')
+    implementation project(path: ':pickfacebook')
+    implementation project(path: ':pickcam')
+    api project(path: ':pickui')
 }
 
 repositories {

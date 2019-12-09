@@ -28,13 +28,15 @@ buildscript {
     ext.orchestrator_version = "1.2.0"
     ext.androidX_test_version = "1.2.0"
 
+    ext.pickpic_version = "1.0.1"
+
     ext.target_version = 28
     ext.min_version = 18
 
     def version = System.getenv("VERSION")
     def code = System.getenv("VERSION_CODE")
-    ext.version_name = version == null ? "${System.currentTimeMillis()}-SNAPSHOT" : version
-    ext.version_code = code == null ? 1 : code.toInteger()
+    ext.version_name = version == null ? "1.0.1" : version
+    ext.version_code = code == null ? 2 : code.toInteger()
 
     repositories {
         google()
