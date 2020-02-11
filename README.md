@@ -1,4 +1,4 @@
-# android-pickpic (Pick a Picture)
+# android-pickpic (Pick a Picture) 
 [ ![Download](https://api.bintray.com/packages/lovoo/maven/PickPic/images/download.svg) ](https://bintray.com/lovoo/maven/PickPic/_latestVersion)
 
 ## Description
