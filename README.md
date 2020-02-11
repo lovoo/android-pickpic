@@ -7,6 +7,7 @@ PickPic can be configured for different use cases:
 * select one profile picture
 * select multiple pictures as attachment
 * select a minimum of 2 pictures to finish an onboarding
+
 * ...
 
 It is also possible to configure title, subtitle and the call to action (text or icon).
