@@ -108,7 +108,8 @@ class PickPicCaptureFragment : DialogFragment() {
             if (deniedPermissions.isEmpty()) {
                 startCamera()
             } else {
-                dismiss()
+                captureCallback?.onCapture(null)
+                dismissAllowingStateLoss()
             }
         }
     }
