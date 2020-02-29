@@ -54,6 +54,12 @@ buildscript {
     }
 }
 
+gradle.projectsEvaluated {
+    subprojects{
+        preBuild.dependsOn spotlessApply
+    }
+}
+
 allprojects {
     setGroup('com.lovoo.android')
     setVersion(version_name)
