@@ -107,6 +107,9 @@ class PickPicCaptureFragment : DialogFragment() {
             val deniedPermissions = Permission.getDeniedPermissions(requireActivity(), Permission.cameraPermissions.plus(Permission.galleryPermissions))
             if (deniedPermissions.isEmpty()) {
                 startCamera()
+            } else {
+                captureCallback?.onCapture(null)
+                dismissAllowingStateLoss()
             }
         }
     }
