@@ -3,6 +3,8 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
+apply from: '../spotless.gradle'
+
 android {
     compileSdkVersion target_version
     defaultConfig {

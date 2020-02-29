@@ -1,11 +1,26 @@
+/**
+ * Copyright 2018 LOVOO GmbH
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.lovoo.android.pickui.adapter
 
 import android.content.Context
 import android.database.Cursor
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.lovoo.android.pickcore.PickPicProvider
 import com.lovoo.android.pickcore.adapter.RecyclerViewCursorAdapter
 import com.lovoo.android.pickcore.loader.PictureLoader
@@ -25,9 +40,9 @@ import com.lovoo.android.pickui.R
  * @param onClick the callback when an entry was clicked
  */
 class PictureAdapter(
-        context: Context,
-        private val selectionLookUp: (Picture) -> Boolean,
-        private val onClick: (View, Picture) -> Unit
+  context: Context,
+  private val selectionLookUp: (Picture) -> Boolean,
+  private val onClick: (View, Picture) -> Unit
 ) : RecyclerViewCursorAdapter<RecyclerView.ViewHolder>(null) {
 
     private val inflater = LayoutInflater.from(context)
@@ -64,9 +79,9 @@ class PictureAdapter(
     }
 
     private class ViewHolder(
-            view: View,
-            selectionLookUp: (Picture) -> Boolean,
-            onClick: (View, Picture) -> Unit
+      view: View,
+      selectionLookUp: (Picture) -> Boolean,
+      onClick: (View, Picture) -> Unit
     ) : com.lovoo.android.pickui.adapter.ViewHolder<Picture>(
 
             view,

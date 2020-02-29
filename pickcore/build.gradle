@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android'
 ext.moduleName = 'pickcore'
 ext.moduleDescription = 'The base of PickPick'
 apply from: '../submodules.gradle'
+apply from: '../spotless.gradle'
 
 android {
     compileSdkVersion target_version

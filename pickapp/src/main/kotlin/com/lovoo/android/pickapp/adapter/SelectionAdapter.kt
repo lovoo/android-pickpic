@@ -1,14 +1,29 @@
+/**
+ * Copyright 2018 LOVOO GmbH
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.lovoo.android.pickapp.adapter
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import android.net.Uri
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
 import android.widget.ImageView
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
 import com.lovoo.android.pickapp.R
 import com.lovoo.android.pickcore.PickPicProvider
 import com.lovoo.android.pickcore.contract.ImageEngine
@@ -90,8 +105,8 @@ class SelectionAdapter : RecyclerView.Adapter<SelectionAdapter.ViewHolder>() {
     }
 
     class ViewHolder(
-            view: View,
-            private val imageEngine: ImageEngine
+      view: View,
+      private val imageEngine: ImageEngine
     ) : RecyclerView.ViewHolder(view) {
 
         val size = MutableLiveData<Int>()
@@ -110,7 +125,6 @@ class SelectionAdapter : RecyclerView.Adapter<SelectionAdapter.ViewHolder>() {
             itemView.isSelected = isSelected
             itemView.setOnClickListener { view ->
                 uri?.let { onClickListener?.invoke(view, it) }
-
             }
             (itemView as? ImageView)?.setImageBitmap(null)
             if (uri == null) return

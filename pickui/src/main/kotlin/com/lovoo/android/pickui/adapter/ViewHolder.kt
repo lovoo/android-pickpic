@@ -1,14 +1,29 @@
+/**
+ * Copyright 2018 LOVOO GmbH
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.lovoo.android.pickui.adapter
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import android.net.Uri
-import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewTreeObserver
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatCheckBox
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
 import com.lovoo.android.pickcore.contract.CameraEngine
 import com.lovoo.android.pickcore.contract.ImageEngine
 import com.lovoo.android.pickui.R
@@ -23,10 +38,10 @@ import com.lovoo.android.pickui.view.PlaceHolderDrawable
  * @param onClick click callback for this item
  */
 abstract class ViewHolder<T>(
-        view: View,
-        private val engine: ImageEngine,
-        private val selectionLookUp: (T) -> Boolean,
-        private val onClick: (View, T) -> Unit
+  view: View,
+  private val engine: ImageEngine,
+  private val selectionLookUp: (T) -> Boolean,
+  private val onClick: (View, T) -> Unit
 ) : RecyclerView.ViewHolder(view) {
 
     private val size = MutableLiveData<Int>()

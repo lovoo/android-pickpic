@@ -1,3 +1,18 @@
+/**
+ * Copyright 2018 LOVOO GmbH
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.lovoo.android.pickcam.worker
 
 import android.content.BroadcastReceiver
@@ -5,7 +20,12 @@ import android.content.Context
 import android.content.Intent
 import android.media.MediaScannerConnection
 import android.net.Uri
-import androidx.work.*
+import androidx.work.ExistingWorkPolicy
+import androidx.work.OneTimeWorkRequest
+import androidx.work.RxWorker
+import androidx.work.WorkManager
+import androidx.work.WorkerParameters
+import androidx.work.workDataOf
 import com.lovoo.android.pickcore.contract.CameraDestination
 import com.lovoo.android.pickcore.destination.PrivateDirectory
 import com.lovoo.android.pickcore.destination.moveToPublicDirectory
@@ -27,8 +47,8 @@ import java.lang.RuntimeException
  * @param params the params passed to this [RxWorker]
  */
 class CaptureResultWorker(
-        private val context: Context,
-        params: WorkerParameters
+  private val context: Context,
+  params: WorkerParameters
 ) : RxWorker(context, params) {
 
     private var inputFile: File = File(params.inputData.getString(INPUT_FILE))
@@ -38,7 +58,7 @@ class CaptureResultWorker(
         return Single.create<Result> { emitter ->
             val file = if (isPublic) inputFile else inputFile.moveToPublicDirectory().file
 
-            if(file == null) {
+            if (file == null) {
                 context.sendBroadcast(Intent(INTENT_ACTION_ON_RESULT))
                 emitter.onError(RuntimeException("Captured file is null"))
                 return@create

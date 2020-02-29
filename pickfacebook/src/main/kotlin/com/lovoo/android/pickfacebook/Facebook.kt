@@ -1,16 +1,37 @@
+/**
+ * Copyright 2018 LOVOO GmbH
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.lovoo.android.pickfacebook
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
-import com.facebook.*
+import com.facebook.AccessToken
+import com.facebook.AccessTokenTracker
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.GraphRequest
+import com.facebook.GraphResponse
+import com.facebook.Profile
+import com.facebook.ProfileTracker
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.lovoo.android.pickcore.model.Gallery
 import com.lovoo.android.pickfacebook.model.Converter
 import com.lovoo.android.pickfacebook.model.FbPicture
-
 
 /**
  * Implementation of the Facebook SDK.
@@ -61,14 +82,13 @@ class Facebook {
      * @param callback the callback to handle the result
      */
     fun requestAccessToken(
-            fragment: Fragment,
-            permissions: List<String> = listOf("public_profile"),
-            callback: FacebookCallback<LoginResult>?
+      fragment: Fragment,
+      permissions: List<String> = listOf("public_profile"),
+      callback: FacebookCallback<LoginResult>?
     ) {
 
         LoginManager.getInstance().apply {
             registerCallback(callbackManager, callback)
-
         }.logInWithReadPermissions(fragment, permissions)
     }
 
@@ -93,7 +113,6 @@ class Facebook {
 
                 if (error == null && next != null) {
                     fetchGalleries(next, this)
-
                 } else {
                     callback.invoke(fetchedGalleries, error)
                 }
@@ -120,7 +139,6 @@ class Facebook {
 
         request.apply { setCallback { responseCallback.invoke(it) } }.executeAsync()
     }
-
 
     /**
      * Fetch [FbPicture]s from Facebook.
@@ -202,8 +220,8 @@ class Facebook {
      * @param picture the url to the avatar
      */
     data class User(
-            val id: String,
-            val name: String,
-            val picture: String
+      val id: String,
+      val name: String,
+      val picture: String
     )
 }

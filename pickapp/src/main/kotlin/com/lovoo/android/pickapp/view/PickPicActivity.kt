@@ -1,3 +1,18 @@
+/**
+ * Copyright 2018 LOVOO GmbH
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.lovoo.android.pickapp.view
 
 import android.app.Activity
@@ -33,7 +48,6 @@ import com.lovoo.android.pickcore.permission.Permission
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.pickpic_activity.*
 import kotlinx.android.synthetic.main.pickpic_layout_toolbar.*
-import java.util.*
 
 /**
  * Ready to use PickPic implementation. Configurable with [PickPicConfig].
@@ -134,7 +148,6 @@ class PickPicActivity : AppCompatActivity(), SelectionHolder, CameraEngine, Capt
     override fun onBackPressed() {
         if (selectedUri != null) {
             picker.select(null)
-
         } else {
             super.onBackPressed()
         }
@@ -242,7 +255,6 @@ class PickPicActivity : AppCompatActivity(), SelectionHolder, CameraEngine, Capt
         toolbar_text.let {
             if (config.header.isNullOrEmpty()) {
                 it.visibility = View.GONE
-
             } else {
                 it.text = config.header
                 it.visibility = View.VISIBLE
@@ -276,7 +288,6 @@ class PickPicActivity : AppCompatActivity(), SelectionHolder, CameraEngine, Capt
 
             val mode = CollapsingToolbarLayout.LayoutParams.COLLAPSE_MODE_PIN
             (toolbar.layoutParams as CollapsingToolbarLayout.LayoutParams).collapseMode = mode
-
         } else {
             tab_layout.setupWithViewPager(fragment_pager)
         }
