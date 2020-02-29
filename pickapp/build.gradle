@@ -6,6 +6,8 @@ apply plugin: 'kotlin-kapt'
 ext.moduleName = 'pickapp'
 ext.moduleDescription = 'A ready to use PickPicActivity that can be configured'
 apply from: '../submodules.gradle'
+apply from: '../spotless.gradle'
+
 
 android {
     compileSdkVersion target_version
