@@ -1,3 +1,18 @@
+/**
+ * Copyright 2018 LOVOO GmbH
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.lovoo.android.pickfacebook.model
 
 import com.facebook.FacebookException
@@ -65,17 +80,17 @@ object Converter {
      * @param picture the album data
      */
     data class FbAlbum(
-            @SerializedName("id") val id: String? = "",
-            @SerializedName("name") val name: String? = "",
-            @SerializedName("count") val count: Int? = 0,
-            @SerializedName("picture") val picture: FbAlbumData? = null
+      @SerializedName("id") val id: String? = "",
+      @SerializedName("name") val name: String? = "",
+      @SerializedName("count") val count: Int? = 0,
+      @SerializedName("picture") val picture: FbAlbumData? = null
     )
 
     /**
      * @param data the album cover
      */
     data class FbAlbumData(
-            @SerializedName("data") val data: FbCover? = null
+      @SerializedName("data") val data: FbCover? = null
     )
 
     /**
@@ -83,8 +98,8 @@ object Converter {
      * @param url the path to the cover image
      */
     data class FbCover(
-            @SerializedName("is_silhouette") val isPlaceholder: Boolean? = false,
-            @SerializedName("url") val url: String? = ""
+      @SerializedName("is_silhouette") val isPlaceholder: Boolean? = false,
+      @SerializedName("url") val url: String? = ""
     )
 
     /**
@@ -92,8 +107,8 @@ object Converter {
      * @param images a list of available [FbImage]s
      */
     data class FbPhoto(
-            @SerializedName("id") val id: String? = "",
-            @SerializedName("images") val images: List<FbImage>? = emptyList()
+      @SerializedName("id") val id: String? = "",
+      @SerializedName("images") val images: List<FbImage>? = emptyList()
     )
 
     /**
@@ -102,8 +117,8 @@ object Converter {
      * @param width the image width or 0
      */
     data class FbImage(
-            @SerializedName("source") val url: String? = "",
-            @SerializedName("height") val height: Int? = 0,
-            @SerializedName("width") val width: Int? = 0
+      @SerializedName("source") val url: String? = "",
+      @SerializedName("height") val height: Int? = 0,
+      @SerializedName("width") val width: Int? = 0
     )
 }

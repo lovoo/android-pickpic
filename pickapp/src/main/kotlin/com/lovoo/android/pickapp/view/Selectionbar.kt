@@ -1,3 +1,18 @@
+/**
+ * Copyright 2018 LOVOO GmbH
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.lovoo.android.pickapp.view
 
 import android.content.Context
@@ -21,7 +36,6 @@ import com.lovoo.android.pickapp.model.Picker
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.pickpic_layout_selectionbar.view.*
 
-
 /**
  * UI extension to handle the PickPicActivities Selectionbar and RecyclerView.
  * It observes changes emitted by [Picker] and add, removes or select the Thumbnails.
@@ -34,9 +48,9 @@ import kotlinx.android.synthetic.main.pickpic_layout_selectionbar.view.*
  * @param dependingViews the views that should dodge the sheet
  */
 class Selectionbar(
-        private val picker: Picker,
-        private val layout: View,
-        private val dependingViews: Array<View>
+  private val picker: Picker,
+  private val layout: View,
+  private val dependingViews: Array<View>
 ) {
 
     private val adapter = SelectionAdapter()
@@ -159,7 +173,6 @@ class Selectionbar(
             // triggered before layout pass --> visible without animation
             layout.visibility = View.VISIBLE
             layout.post { updateDependingViews(layout.measuredHeight) }
-
         } else if (layout.visibility == View.GONE) {
             layout.animate()
                     .alpha(1f)

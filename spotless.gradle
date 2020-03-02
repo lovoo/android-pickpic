@@ -1,0 +1,20 @@
+apply plugin: "com.diffplug.gradle.spotless"
+
+ext.ktlint_version = "0.36.0"
+
+spotless {
+    kotlin {
+        target '**/*.kt'
+        ktlint(ktlint_version).userData([
+                'indent_size': '2',
+                'continuation_indent_size': '2'
+        ])
+        licenseHeaderFile '../licenseHeader.kt'
+
+        trimTrailingWhitespace()
+        endWithNewline()
+
+        replace      'Not enough space after if', 'if(', 'if ('
+        replaceRegex 'Too much space after if', 'if +\\(', 'if ('
+    }
+}

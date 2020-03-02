@@ -1,3 +1,18 @@
+/**
+ * Copyright 2018 LOVOO GmbH
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.lovoo.android.pickapp.model
 
 import android.net.Uri
@@ -15,7 +30,7 @@ import io.reactivex.subjects.BehaviorSubject
  * @param config the [PickConfig] to determine the limits
  */
 class Picker(
-        val config: PickConfig
+  val config: PickConfig
 ) {
 
     /**
@@ -100,7 +115,6 @@ class Picker(
         select(position, getPickedUris().getOrNull(position))
     }
 
-
     /**
      * Select an item, if null the selection will be cleaned.
      *
@@ -121,8 +135,8 @@ class Picker(
      * @param maxCount the allowed amount of picked items
      */
     data class PickConfig(
-            val minCount: Int = 1,
-            val maxCount: Int = 1
+      val minCount: Int = 1,
+      val maxCount: Int = 1
     )
 
     open class State
@@ -134,8 +148,8 @@ class Picker(
      * @param uri the selected [Uri] or null if selection is cleared
      */
     data class SelectionState(
-            val position: Int,
-            val uri: Uri?
+      val position: Int,
+      val uri: Uri?
     ) : State()
 
     /**
@@ -145,8 +159,8 @@ class Picker(
      * @param gallery the [Gallery] of the picture
      */
     data class AddState(
-            val uri: Uri,
-            val gallery: Gallery
+      val uri: Uri,
+      val gallery: Gallery
     ) : State()
 
     /**
@@ -156,7 +170,7 @@ class Picker(
      * @param gallery the [Gallery] of the picture
      */
     data class RemoveState(
-            val uri: Uri,
-            val gallery: Gallery
+      val uri: Uri,
+      val gallery: Gallery
     ) : State()
 }

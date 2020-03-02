@@ -6,6 +6,7 @@ apply plugin: 'kotlin-kapt'
 ext.moduleName = 'pickcam'
 ext.moduleDescription = 'The camera capture implementation\t'
 apply from: '../submodules.gradle'
+apply from: '../spotless.gradle'
 
 android {
     compileSdkVersion target_version
