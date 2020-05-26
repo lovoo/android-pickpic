@@ -3,10 +3,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/selection_bar"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@color/pickpic_background_toolbar">
+    style="@style/PickPicSelectionbar"
+    android:id="@+id/selection_bar">
 
     <TextView
         android:id="@+id/selection_text"
@@ -66,11 +64,11 @@
         app:layout_constraintTop_toBottomOf="@id/selection_text" />
 
     <View
+        style="@style/PickPicSelectionbarFade"
         android:id="@+id/selection_fade"
         android:layout_width="24dp"
         android:layout_height="0dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/pickpic_left_fade"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/selection_list"
         app:layout_constraintEnd_toStartOf="@id/selection_button"

@@ -25,28 +25,41 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    <include
-        android:id="@+id/selection_bar"
-        layout="@layout/pickpic_layout_selectionbar"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:visibility="invisible" />
+        android:layout_height="match_parent">
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/preview_pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:background="@color/pickpic_background_toolbar"
-        android:visibility="gone" />
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/preview_pager"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/pickpic_background_toolbar"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@id/selection_bar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/top_stroke"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#19000000"
-        app:layout_anchor="@+id/selection_bar"
-        app:layout_anchorGravity="top" />
+        <include
+            android:id="@+id/selection_bar"
+            style="@style/PickPicSelectionbar"
+            layout="@layout/pickpic_layout_selectionbar"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:visibility="visible"/>
+
+        <View
+            android:id="@+id/top_stroke"
+            style="@style/PickPicStroke"
+            android:layout_width="0dp"
+            app:layout_anchor="@+id/selection_bar"
+            app:layout_constraintBottom_toTopOf="@id/selection_bar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_anchorGravity="top" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
