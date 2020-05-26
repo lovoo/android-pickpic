@@ -28,8 +28,6 @@ buildscript {
     ext.orchestrator_version = "1.2.0"
     ext.androidX_test_version = "1.2.0"
 
-    ext.pickpic_version = "1.0.3"
-
     ext.target_version = 28
     ext.min_version = 18
 
