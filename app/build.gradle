@@ -61,9 +61,7 @@ dependencies {
     implementation "androidx.browser:browser:$browser_version"
     implementation "androidx.media:media:$media_version"
     implementation "androidx.legacy:legacy-support-v4:$legacy_v4_version"
-    implementation "com.google.android.material:material:1.0.0"
-
-    implementation "com.lovoo.android:pickapp:$pickpic_version"
+    implementation "com.google.android.material:material:$material_version"
 
     androidTestImplementation "androidx.test:runner:$androidX_test_version"
     androidTestImplementation "androidx.test:rules:$androidX_test_version"
@@ -76,4 +74,9 @@ dependencies {
     androidTestImplementation "androidx.test.uiautomator:uiautomator:$uiautomator_version"
 
     androidTestUtil "androidx.test:orchestrator:$orchestrator_version"
+    implementation project(path: ':pickcam')
+    implementation project(path: ':pickcore')
+    implementation project(path: ':pickfacebook')
+    implementation project(path: ':pickui')
+    implementation project(path: ':pickapp')
 }
