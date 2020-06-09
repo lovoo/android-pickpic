@@ -104,6 +104,8 @@ class PickPicActivity : AppCompatActivity(), SelectionHolder, CameraEngine, Capt
             // initialise selection bar and preview if enabled or multiple pictures can be selected
             initSelectionBar()
             initPreview()
+        } else {
+            selection_bar.visibility = View.GONE
         }
 
         if (!config.isPreviewEnabled()) {
