@@ -15,7 +15,8 @@ buildscript {
     ext.exif_version = "1.2.0"
     ext.media_version = "1.1.0"
     ext.arch_version = "2.2.0"
-    ext.arch_worker_version = "1.0.1"
+    ext.arch_worker_version = "2.3.4"
+    ext.lifecycle_version = "2.2.0"
 
     ext.rx_java_version = '2.2.15'
     ext.rx_android_version = '2.1.1'
