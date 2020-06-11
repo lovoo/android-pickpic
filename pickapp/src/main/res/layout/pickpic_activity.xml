@@ -27,6 +27,7 @@
 
     <include
         android:id="@+id/selection_bar"
+        style="@style/PickPicSelectionbar"
         layout="@layout/pickpic_layout_selectionbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -43,9 +44,8 @@
 
     <View
         android:id="@+id/top_stroke"
+        style="@style/PickPicStroke"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#19000000"
         app:layout_anchor="@+id/selection_bar"
         app:layout_anchorGravity="top" />
 

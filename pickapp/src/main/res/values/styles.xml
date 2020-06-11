@@ -115,12 +115,20 @@
         <item name="android:gravity">start</item>
     </style>
 
-    <style name="PickPicSelection">
+    <style name="PickPicStroke">
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">@color/pickpic_stroke</item>
+    </style>
+
+    <style name="PickPicSelectionbar">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">bottom</item>
         <item name="android:padding">0dp</item>
         <item name="android:background">@color/pickpic_background_toolbar</item>
+    </style>
+
+    <style name="PickPicSelectionbarFade">
+        <item name="android:background">@drawable/pickpic_left_fade</item>
     </style>
 
     <style name="PickPicGalleryBar">

@@ -35,7 +35,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation "androidx.exifinterface:exifinterface:1.0.0"
+    implementation "androidx.exifinterface:exifinterface:$exif_version"
     implementation "androidx.appcompat:appcompat:$app_compat_version"
     implementation "androidx.recyclerview:recyclerview:$recycler_view_version"
     implementation "androidx.lifecycle:lifecycle-livedata:$arch_version"

@@ -13,6 +13,4 @@
     <color name="pickpic_background_toolbar">#FFFFFF</color>
     <color name="pickpic_background_overlay">#E7E7E7</color>
     <color name="pickpic_selection_overlay">#BBE7E247</color>
-
-    <color name="pickpic_stroke">#3D3B30</color>
 </resources>

@@ -46,9 +46,9 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:$rx_java_version"
     implementation "io.reactivex.rxjava2:rxandroid:$rx_android_version"
     implementation "com.github.bumptech.glide:glide:$glide_version"
-    kapt "com.github.bumptech.glide:compiler:$glide_version"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
 
-    kapt "androidx.lifecycle:lifecycle-compiler:$arch_version"
+    kapt "com.github.bumptech.glide:compiler:$glide_version"
 
     implementation project(path: ':pickfacebook')
     implementation project(path: ':pickcam')
