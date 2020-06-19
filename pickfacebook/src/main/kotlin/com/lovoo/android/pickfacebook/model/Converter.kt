@@ -49,9 +49,9 @@ object Converter {
                 albumArray.filter { !it.id.isNullOrBlank() && !it.name.isNullOrBlank() }
                     .map {
                         Gallery(
-                            it.id ?: "", it.picture?.data?.url ?: "",
-                            it.name
-                                ?: "",
+                            it.id ?: "",
+                            it.picture?.data?.url ?: "",
+                            it.name ?: "",
                             it.count?.toLong() ?: 0L
                         )
                     }
@@ -71,9 +71,10 @@ object Converter {
                     .map {
                         val photo = it.images?.first() ?: FbImage()
                         FbPicture(
-                            it.id
-                                ?: "",
-                            photo.url ?: "", photo.width ?: 0, photo.height ?: 0
+                            it.id ?: "",
+                            photo.url ?: "",
+                            photo.width ?: 0,
+                            photo.height ?: 0
                         )
                     }
             )

@@ -47,8 +47,7 @@ class PopUpGalleryAdapter(
 
     override fun getView(position: Int, convertView: View?, container: ViewGroup?): View {
         val item = getItem(position) ?: return View(context)
-        val view = convertView
-            ?: inflater.inflate(R.layout.pickpic_list_item_gallery, container, false)
+        val view = convertView ?: inflater.inflate(R.layout.pickpic_list_item_gallery, container, false)
 
         view.gallery_cover.viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
             override fun onPreDraw(): Boolean {
@@ -76,8 +75,7 @@ class PopUpGalleryAdapter(
 
     override fun getItem(position: Int) = items.getOrNull(position)
 
-    override fun getItemId(position: Int) = items.getOrNull(position)?.id?.hashCode()?.toLong()
-        ?: 0L
+    override fun getItemId(position: Int) = items.getOrNull(position)?.id?.hashCode()?.toLong() ?: 0L
 
     override fun getCount() = items.size
 }

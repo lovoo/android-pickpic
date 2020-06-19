@@ -32,7 +32,6 @@ import com.lovoo.android.pickcore.destination.moveToPublicDirectory
 import com.lovoo.android.pickcore.loader.CameraLoader
 import io.reactivex.Single
 import java.io.File
-import java.lang.RuntimeException
 
 /**
  * Worker that handles all the tasks to finalize the captured image from the camera.
@@ -65,7 +64,8 @@ class CaptureResultWorker(
             }
 
             CameraLoader.finalizeCapturedImage(
-                context, file,
+                context,
+                file,
                 MediaScannerConnection.OnScanCompletedListener { _, uri ->
                     if (uri == null) return@OnScanCompletedListener
                     // LiveData holds to long the old result so we have to forward the result as broadcast

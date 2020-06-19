@@ -78,7 +78,8 @@ class FbGalleryPresenterImpl(private val view: FbGalleryView) : FbGalleryPresent
      */
     override fun loginWithPicturePermission(fragment: Fragment) {
         facebook.requestAccessToken(
-            fragment, listOf(PERMISSION_PHOTOS),
+            fragment,
+            listOf(PERMISSION_PHOTOS),
             object : FacebookCallback<LoginResult> {
                 override fun onSuccess(result: LoginResult?) {
                     // no-op

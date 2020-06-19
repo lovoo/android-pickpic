@@ -132,12 +132,11 @@ class Facebook {
             callback.invoke(Converter.convertToGalleries(json), Converter.convert(response.error?.exception), nextRequest)
         }
 
-        val request = next
-            ?: GraphRequest(AccessToken.getCurrentAccessToken(), "/me/albums").apply {
-                parameters = Bundle().apply {
-                    putString("fields", "id,count,name,picture")
-                }
+        val request = next ?: GraphRequest(AccessToken.getCurrentAccessToken(), "/me/albums").apply {
+            parameters = Bundle().apply {
+                putString("fields", "id,count,name,picture")
             }
+        }
 
         request.apply { setCallback { responseCallback.invoke(it) } }.executeAsync()
     }
@@ -157,12 +156,11 @@ class Facebook {
             callback.invoke(Converter.convertToPictures(json), Converter.convert(response.error?.exception), albumId, nextRequest)
         }
 
-        val request = next
-            ?: GraphRequest(AccessToken.getCurrentAccessToken(), "/$albumId/photos").apply {
-                parameters = Bundle().apply {
-                    putString("fields", "id,images")
-                }
+        val request = next ?: GraphRequest(AccessToken.getCurrentAccessToken(), "/$albumId/photos").apply {
+            parameters = Bundle().apply {
+                putString("fields", "id,images")
             }
+        }
 
         request.apply { setCallback { responseCallback.invoke(it) } }.executeAsync()
     }

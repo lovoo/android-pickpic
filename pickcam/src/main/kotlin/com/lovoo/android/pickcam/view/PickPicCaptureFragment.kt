@@ -153,8 +153,7 @@ class PickPicCaptureFragment : DialogFragment() {
                 when (directory) {
                     null -> PublicDirectory() // need proper error handle
                     else -> {
-                        val packageName = context?.applicationInfo?.packageName
-                            ?: requireContext().packageName
+                        val packageName = context?.applicationInfo?.packageName ?: requireContext().packageName
                         PrivateDirectory("$packageName.pickpicfileprovider", directory)
                     }
                 }
