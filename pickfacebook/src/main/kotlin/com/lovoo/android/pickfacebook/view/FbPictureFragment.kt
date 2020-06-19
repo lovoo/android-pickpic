@@ -64,6 +64,7 @@ class FbPictureFragment : Fragment(), FbPictureView {
 
         list_view.apply {
             setHasFixedSize(true)
+            isNestedScrollingEnabled = arguments?.getBoolean(ARGUMENT_NESTED_SCROLL) ?: true
             addItemDecoration(PictureDecoration(3, resources.getDimensionPixelOffset(R.dimen.pickpic_picture_item_space)))
             layoutManager = GridLayoutManager(context, 3)
             adapter = FbPictureAdapter(context,
@@ -137,5 +138,18 @@ class FbPictureFragment : Fragment(), FbPictureView {
 
     private fun onPictureClick(picture: FbPicture) {
         gallery?.let { selectionHolder?.toggle(picture.getUri(), it) }
+    }
+
+    companion object {
+        const val TAG = "FbPictureFragment"
+        private const val ARGUMENT_NESTED_SCROLL = "argumentNestedScroll"
+
+        /**
+         * @param allowNestedScroll pass false to prevent nested scrolling
+         * @return new instance of [FbPictureFragment]
+         */
+        fun newInstance(allowNestedScroll: Boolean = true) = FbPictureFragment().apply {
+            arguments = Bundle().apply { putBoolean(ARGUMENT_NESTED_SCROLL, allowNestedScroll) }
+        }
     }
 }
