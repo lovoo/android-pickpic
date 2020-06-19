@@ -24,8 +24,8 @@ package com.lovoo.android.pickcore.model
  * @param count the amount of pictures within this gallery
  */
 data class GalleryLib(
-  val id: String? = "",
-  val coverPath: String? = "",
-  val name: String? = "",
-  val count: Long? = 0L
+    val id: String? = "",
+    val coverPath: String? = "",
+    val name: String? = "",
+    val count: Long? = 0L
 )

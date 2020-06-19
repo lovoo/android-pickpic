@@ -59,12 +59,13 @@ class PreviewFragment : Fragment() {
         view?.post {
             (view as? ImageView)?.let {
                 imageEngine.loadImage(
-                        it.context,
-                        it.measuredWidth,
-                        it.measuredHeight,
-                        uri,
-                        it,
-                        0)
+                    it.context,
+                    it.measuredWidth,
+                    it.measuredHeight,
+                    uri,
+                    it,
+                    0
+                )
             }
         }
     }

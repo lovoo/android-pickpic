@@ -67,26 +67,31 @@ class FbPictureFragment : Fragment(), FbPictureView {
             isNestedScrollingEnabled = arguments?.getBoolean(ARGUMENT_NESTED_SCROLL) ?: true
             addItemDecoration(PictureDecoration(3, resources.getDimensionPixelOffset(R.dimen.pickpic_picture_item_space)))
             layoutManager = GridLayoutManager(context, 3)
-            adapter = FbPictureAdapter(context,
-                    { selectionHolder?.isSelected(it.getUri()) == true },
-                    { _, picture -> onPictureClick(picture) })
+            adapter = FbPictureAdapter(
+                context,
+                { selectionHolder?.isSelected(it.getUri()) == true },
+                { _, picture -> onPictureClick(picture) }
+            )
         }
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        selectionHolder?.addToggleListener(tag, object : ToggleCallback {
-            override fun toggle(uri: Uri, gallery: Gallery) {
-                (list_view?.adapter as? FbPictureAdapter)?.let { adapter ->
-                    val position = adapter.indexOf { it.getUri() == uri }
-                    if (position >= 0) {
-                        adapter.notifyItemChanged(position)
-                    } else {
-                        adapter.notifyDataSetChanged()
+        selectionHolder?.addToggleListener(
+            tag,
+            object : ToggleCallback {
+                override fun toggle(uri: Uri, gallery: Gallery) {
+                    (list_view?.adapter as? FbPictureAdapter)?.let { adapter ->
+                        val position = adapter.indexOf { it.getUri() == uri }
+                        if (position >= 0) {
+                            adapter.notifyItemChanged(position)
+                        } else {
+                            adapter.notifyDataSetChanged()
+                        }
                     }
                 }
             }
-        })
+        )
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

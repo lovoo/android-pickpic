@@ -48,9 +48,9 @@ import kotlinx.android.synthetic.main.pickpic_layout_selectionbar.view.*
  * @param dependingViews the views that should dodge the sheet
  */
 class Selectionbar(
-  private val picker: Picker,
-  private val layout: View,
-  private val dependingViews: Array<View>
+    private val picker: Picker,
+    private val layout: View,
+    private val dependingViews: Array<View>
 ) {
 
     private val adapter = SelectionAdapter()
@@ -175,11 +175,11 @@ class Selectionbar(
             layout.post { updateDependingViews(layout.measuredHeight) }
         } else if (layout.visibility == View.GONE) {
             layout.animate()
-                    .alpha(1f)
-                    .yBy(-layout.measuredHeight.toFloat())
-                    .setInterpolator(DecelerateInterpolator(2f))
-                    .withEndAction { updateDependingViews(layout.measuredHeight) }
-                    .start()
+                .alpha(1f)
+                .yBy(-layout.measuredHeight.toFloat())
+                .setInterpolator(DecelerateInterpolator(2f))
+                .withEndAction { updateDependingViews(layout.measuredHeight) }
+                .start()
             layout.visibility = View.VISIBLE
         }
     }
@@ -198,11 +198,11 @@ class Selectionbar(
         if (adapter.itemCount == 0) {
             updateDependingViews(0)
             layout.animate()
-                    .alpha(0f)
-                    .yBy(layout.measuredHeight.toFloat())
-                    .setInterpolator(AccelerateInterpolator(2f))
-                    .withEndAction { layout.visibility = View.GONE }
-                    .start()
+                .alpha(0f)
+                .yBy(layout.measuredHeight.toFloat())
+                .setInterpolator(AccelerateInterpolator(2f))
+                .withEndAction { layout.visibility = View.GONE }
+                .start()
         }
     }
 
@@ -214,7 +214,8 @@ class Selectionbar(
     }
 
     private fun registerPicker() {
-        subscriptions.add(picker.getObservable().subscribe(
+        subscriptions.add(
+            picker.getObservable().subscribe(
                 { state ->
                     when (state) {
                         is Picker.AddState -> addThumbnail(state.uri)
@@ -230,7 +231,8 @@ class Selectionbar(
                     }
                 },
                 { error -> error.printStackTrace() }
-        ))
+            )
+        )
     }
 
     private fun updateView() {

@@ -45,7 +45,8 @@ class PictureLoader(context: Context, private val gallery: GalleryLib) :
         projection,
         getSelection(gallery),
         getSelectionArgs(gallery),
-        "${MediaStore.Images.Media.DATE_TAKEN} DESC") {
+        "${MediaStore.Images.Media.DATE_TAKEN} DESC"
+    ) {
 
     private val cameraEngine: CameraEngine
         get() = PickPicProvider.cameraEngine
@@ -77,10 +78,11 @@ class PictureLoader(context: Context, private val gallery: GalleryLib) :
 
         private val query = MediaStore.Files.getContentUri("external")
         private val projection = arrayOf(
-                MediaStore.Files.FileColumns._ID,
-                MediaStore.MediaColumns.DISPLAY_NAME,
-                MediaStore.MediaColumns.MIME_TYPE,
-                MediaStore.MediaColumns.SIZE)
+            MediaStore.Files.FileColumns._ID,
+            MediaStore.MediaColumns.DISPLAY_NAME,
+            MediaStore.MediaColumns.MIME_TYPE,
+            MediaStore.MediaColumns.SIZE
+        )
 
         private fun getSelection(gallery: GalleryLib) = when (gallery.name) {
             Constants.All_FOLDER_NAME, "" -> "${MediaStore.Files.FileColumns.MEDIA_TYPE}=? AND ${MediaStore.MediaColumns.SIZE}>0"
@@ -108,9 +110,9 @@ class PictureLoader(context: Context, private val gallery: GalleryLib) :
          * @return the [PictureLib] object with the data from the [Cursor]
          */
         fun convert(cursor: Cursor) = PictureLib(
-                cursor.getLong(cursor.getColumnIndex(MediaStore.Files.FileColumns._ID)),
-                cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.MIME_TYPE)),
-                cursor.getLong(cursor.getColumnIndex(MediaStore.MediaColumns.SIZE))
+            cursor.getLong(cursor.getColumnIndex(MediaStore.Files.FileColumns._ID)),
+            cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.MIME_TYPE)),
+            cursor.getLong(cursor.getColumnIndex(MediaStore.MediaColumns.SIZE))
         )
     }
 }

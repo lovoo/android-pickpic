@@ -46,11 +46,16 @@ object Converter {
         json?.optJSONArray("data")?.let { array ->
             val albumArray = Gson().fromJson(array.toString(), Array<FbAlbum>::class.java)
             addAll(
-                    albumArray.filter { !it.id.isNullOrBlank() && !it.name.isNullOrBlank() }
-                            .map {
-                                Gallery(it.id ?: "", it.picture?.data?.url ?: "", it.name
-                                        ?: "", it.count?.toLong() ?: 0L)
-                            })
+                albumArray.filter { !it.id.isNullOrBlank() && !it.name.isNullOrBlank() }
+                    .map {
+                        Gallery(
+                            it.id ?: "", it.picture?.data?.url ?: "",
+                            it.name
+                                ?: "",
+                            it.count?.toLong() ?: 0L
+                        )
+                    }
+            )
         }
     }
 
@@ -62,12 +67,16 @@ object Converter {
         json?.optJSONArray("data")?.let { array ->
             val photosArray = Gson().fromJson(array.toString(), Array<FbPhoto>::class.java)
             addAll(
-                    photosArray.filter { !it.id.isNullOrBlank() }
-                            .map {
-                                val photo = it.images?.first() ?: FbImage()
-                                FbPicture(it.id
-                                        ?: "", photo.url ?: "", photo.width ?: 0, photo.height ?: 0)
-                            })
+                photosArray.filter { !it.id.isNullOrBlank() }
+                    .map {
+                        val photo = it.images?.first() ?: FbImage()
+                        FbPicture(
+                            it.id
+                                ?: "",
+                            photo.url ?: "", photo.width ?: 0, photo.height ?: 0
+                        )
+                    }
+            )
         }
     }
 
@@ -80,17 +89,17 @@ object Converter {
      * @param picture the album data
      */
     data class FbAlbum(
-      @SerializedName("id") val id: String? = "",
-      @SerializedName("name") val name: String? = "",
-      @SerializedName("count") val count: Int? = 0,
-      @SerializedName("picture") val picture: FbAlbumData? = null
+        @SerializedName("id") val id: String? = "",
+        @SerializedName("name") val name: String? = "",
+        @SerializedName("count") val count: Int? = 0,
+        @SerializedName("picture") val picture: FbAlbumData? = null
     )
 
     /**
      * @param data the album cover
      */
     data class FbAlbumData(
-      @SerializedName("data") val data: FbCover? = null
+        @SerializedName("data") val data: FbCover? = null
     )
 
     /**
@@ -98,8 +107,8 @@ object Converter {
      * @param url the path to the cover image
      */
     data class FbCover(
-      @SerializedName("is_silhouette") val isPlaceholder: Boolean? = false,
-      @SerializedName("url") val url: String? = ""
+        @SerializedName("is_silhouette") val isPlaceholder: Boolean? = false,
+        @SerializedName("url") val url: String? = ""
     )
 
     /**
@@ -107,8 +116,8 @@ object Converter {
      * @param images a list of available [FbImage]s
      */
     data class FbPhoto(
-      @SerializedName("id") val id: String? = "",
-      @SerializedName("images") val images: List<FbImage>? = emptyList()
+        @SerializedName("id") val id: String? = "",
+        @SerializedName("images") val images: List<FbImage>? = emptyList()
     )
 
     /**
@@ -117,8 +126,8 @@ object Converter {
      * @param width the image width or 0
      */
     data class FbImage(
-      @SerializedName("source") val url: String? = "",
-      @SerializedName("height") val height: Int? = 0,
-      @SerializedName("width") val width: Int? = 0
+        @SerializedName("source") val url: String? = "",
+        @SerializedName("height") val height: Int? = 0,
+        @SerializedName("width") val width: Int? = 0
     )
 }

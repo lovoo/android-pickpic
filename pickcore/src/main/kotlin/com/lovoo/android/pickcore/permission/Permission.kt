@@ -116,6 +116,6 @@ object Permission {
 
     // check if the Manifest declares to use the camera permission
     private fun isCameraManifestPermission(context: Context) = context.packageManager
-            .getPackageInfo(context.packageName, PackageManager.GET_PERMISSIONS)
-            .requestedPermissions.contains(Manifest.permission.CAMERA)
+        .getPackageInfo(context.packageName, PackageManager.GET_PERMISSIONS)
+        .requestedPermissions.contains(Manifest.permission.CAMERA)
 }

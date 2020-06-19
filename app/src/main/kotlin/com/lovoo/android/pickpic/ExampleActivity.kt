@@ -37,12 +37,12 @@ class ExampleActivity : AppCompatActivity() {
             // create an Intent, apply the configuration and start for result
             Intent(view.context, PickPicActivity::class.java).let {
                 val config = PickPicConfig(
-                        style = R.style.ExampleAppTheme_NoActionbar,
-                        minCount = 2,
-                        maxCount = 10,
-                        sendIcon = R.drawable.ic_send,
-                        header = getString(R.string.pickpic_actionbar_header),
-                        title = getString(R.string.pickpic_title)
+                    style = R.style.ExampleAppTheme_NoActionbar,
+                    minCount = 2,
+                    maxCount = 10,
+                    sendIcon = R.drawable.ic_send,
+                    header = getString(R.string.pickpic_actionbar_header),
+                    title = getString(R.string.pickpic_title)
                 )
                 // pass the config to PickPic
                 PickPicActivity.applyConfig(it, config)

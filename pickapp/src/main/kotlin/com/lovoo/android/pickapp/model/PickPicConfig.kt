@@ -36,25 +36,26 @@ import androidx.annotation.StyleRes
  * @param faqUrl the url that is used for the FAQ toolbar menu or null if not wanted
  */
 data class PickPicConfig(
-  @StyleRes val style: Int = 0,
-  val minCount: Int = 1,
-  val maxCount: Int = 1,
-  val title: String = "",
-  val sendText: String? = null,
-  @DrawableRes val sendIcon: Int? = null,
-  val header: String? = null,
-  val faqUrl: String? = null
+    @StyleRes val style: Int = 0,
+    val minCount: Int = 1,
+    val maxCount: Int = 1,
+    val title: String = "",
+    val sendText: String? = null,
+    @DrawableRes val sendIcon: Int? = null,
+    val header: String? = null,
+    val faqUrl: String? = null
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
-            parcel.readInt(),
-            parcel.readInt(),
-            parcel.readInt(),
-            parcel.readString() ?: "",
-            parcel.readString(),
-            parcel.readValue(Int::class.java.classLoader) as? Int,
-            parcel.readString(),
-            parcel.readString())
+        parcel.readInt(),
+        parcel.readInt(),
+        parcel.readInt(),
+        parcel.readString() ?: "",
+        parcel.readString(),
+        parcel.readValue(Int::class.java.classLoader) as? Int,
+        parcel.readString(),
+        parcel.readString()
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(style)

@@ -47,8 +47,8 @@ import java.lang.RuntimeException
  * @param params the params passed to this [RxWorker]
  */
 class CaptureResultWorker(
-  private val context: Context,
-  params: WorkerParameters
+    private val context: Context,
+    params: WorkerParameters
 ) : RxWorker(context, params) {
 
     private var inputFile: File = File(params.inputData.getString(INPUT_FILE))
@@ -64,12 +64,15 @@ class CaptureResultWorker(
                 return@create
             }
 
-            CameraLoader.finalizeCapturedImage(context, file, MediaScannerConnection.OnScanCompletedListener { _, uri ->
-                if (uri == null) return@OnScanCompletedListener
-                // LiveData holds to long the old result so we have to forward the result as broadcast
-                context.sendBroadcast(Intent(INTENT_ACTION_ON_RESULT).putExtra(OUTPUT_URI, uri))
-                emitter.onSuccess(Result.success())
-            })
+            CameraLoader.finalizeCapturedImage(
+                context, file,
+                MediaScannerConnection.OnScanCompletedListener { _, uri ->
+                    if (uri == null) return@OnScanCompletedListener
+                    // LiveData holds to long the old result so we have to forward the result as broadcast
+                    context.sendBroadcast(Intent(INTENT_ACTION_ON_RESULT).putExtra(OUTPUT_URI, uri))
+                    emitter.onSuccess(Result.success())
+                }
+            )
         }
     }
 
@@ -94,13 +97,13 @@ class CaptureResultWorker(
          */
         fun start(destination: CameraDestination, name: String = "CaptureResultWorker") {
             val data = workDataOf(
-                    INPUT_IS_PUBLIC to (destination !is PrivateDirectory),
-                    INPUT_FILE to (destination.file?.path ?: "")
+                INPUT_IS_PUBLIC to (destination !is PrivateDirectory),
+                INPUT_FILE to (destination.file?.path ?: "")
             )
 
             val request = OneTimeWorkRequest.Builder(CaptureResultWorker::class.java)
-                    .setInputData(data)
-                    .build()
+                .setInputData(data)
+                .build()
 
             WorkManager.getInstance().enqueueUniqueWork(name, ExistingWorkPolicy.REPLACE, request)
         }

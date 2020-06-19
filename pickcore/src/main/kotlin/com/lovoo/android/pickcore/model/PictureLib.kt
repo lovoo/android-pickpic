@@ -23,7 +23,7 @@ package com.lovoo.android.pickcore.model
  * @param size the file size or null
  */
 data class PictureLib(
-  val id: Long,
-  val mimeType: String? = "",
-  val size: Long? = 0L
+    val id: Long,
+    val mimeType: String? = "",
+    val size: Long? = 0L
 )
