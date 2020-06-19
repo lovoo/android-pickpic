@@ -77,19 +77,23 @@ class FbGalleryPresenterImpl(private val view: FbGalleryView) : FbGalleryPresent
      * @param fragment the [Fragment] that will receive the onActivityResult call
      */
     override fun loginWithPicturePermission(fragment: Fragment) {
-        facebook.requestAccessToken(fragment, listOf(PERMISSION_PHOTOS), object : FacebookCallback<LoginResult> {
-            override fun onSuccess(result: LoginResult?) {
-                // no-op
-            }
+        facebook.requestAccessToken(
+            fragment,
+            listOf(PERMISSION_PHOTOS),
+            object : FacebookCallback<LoginResult> {
+                override fun onSuccess(result: LoginResult?) {
+                    // no-op
+                }
 
-            override fun onCancel() {
-                view.onError(Throwable("user canceled"))
-            }
+                override fun onCancel() {
+                    view.onError(Throwable("user canceled"))
+                }
 
-            override fun onError(error: FacebookException?) {
-                error?.let { view.onError(it) }
+                override fun onError(error: FacebookException?) {
+                    error?.let { view.onError(it) }
+                }
             }
-        })
+        )
     }
 
     /**

@@ -25,8 +25,8 @@ import android.widget.BaseAdapter
 import com.lovoo.android.pickcore.PickPicProvider
 import com.lovoo.android.pickcore.model.Gallery
 import com.lovoo.android.pickui.R
-import java.io.File
 import kotlinx.android.synthetic.main.pickpic_list_item_gallery.view.*
+import java.io.File
 
 /**
  * Adapter for ListView or PopUpWindows.
@@ -38,17 +38,16 @@ import kotlinx.android.synthetic.main.pickpic_list_item_gallery.view.*
  * @param folderNameLookUp determine the display name for a [Gallery]
  */
 class PopUpGalleryAdapter(
-  private val context: Context,
-  private val items: List<Gallery>,
-  private val folderNameLookUp: (Gallery) -> String
+    private val context: Context,
+    private val items: List<Gallery>,
+    private val folderNameLookUp: (Gallery) -> String
 ) : BaseAdapter() {
 
     private val inflater = LayoutInflater.from(context)
 
     override fun getView(position: Int, convertView: View?, container: ViewGroup?): View {
         val item = getItem(position) ?: return View(context)
-        val view = convertView
-                ?: inflater.inflate(R.layout.pickpic_list_item_gallery, container, false)
+        val view = convertView ?: inflater.inflate(R.layout.pickpic_list_item_gallery, container, false)
 
         view.gallery_cover.viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
             override fun onPreDraw(): Boolean {
@@ -59,11 +58,12 @@ class PopUpGalleryAdapter(
                     false -> Uri.parse(item.coverPath)
                 }
                 PickPicProvider.imageEngine.loadThumbnail(
-                        context,
-                        view.gallery_cover.measuredHeight,
-                        uri,
-                        view.gallery_cover,
-                        0)
+                    context,
+                    view.gallery_cover.measuredHeight,
+                    uri,
+                    view.gallery_cover,
+                    0
+                )
                 return true
             }
         })
@@ -75,8 +75,7 @@ class PopUpGalleryAdapter(
 
     override fun getItem(position: Int) = items.getOrNull(position)
 
-    override fun getItemId(position: Int) = items.getOrNull(position)?.id?.hashCode()?.toLong()
-            ?: 0L
+    override fun getItemId(position: Int) = items.getOrNull(position)?.id?.hashCode()?.toLong() ?: 0L
 
     override fun getCount() = items.size
 }

@@ -32,9 +32,9 @@ import androidx.loader.content.Loader
  * @param id a unique identifier to register the loader within the manager
  */
 class Collector(
-  private val manager: LoaderManager,
-  private val loader: Loader<Cursor>,
-  private val id: Int
+    private val manager: LoaderManager,
+    private val loader: Loader<Cursor>,
+    private val id: Int
 ) : LoaderManager.LoaderCallbacks<Cursor> {
 
     /**

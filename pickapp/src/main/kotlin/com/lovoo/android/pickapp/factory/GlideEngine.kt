@@ -61,15 +61,17 @@ class GlideEngine : ImageEngine {
 
         // load the image for the requested size and handle error case
         Glide.with(context)
-                .load(uri)
-                .apply(RequestOptions()
-                        .override(width, height)
-                        .centerCrop())
-                .apply {
-                    if (errorRes != 0) {
-                        error(errorRes)
-                    }
+            .load(uri)
+            .apply(
+                RequestOptions()
+                    .override(width, height)
+                    .centerCrop()
+            )
+            .apply {
+                if (errorRes != 0) {
+                    error(errorRes)
                 }
-                .into(target)
+            }
+            .into(target)
     }
 }

@@ -50,11 +50,13 @@ class Facebook {
             if (currentProfile == null) {
                 user.postValue(null)
             } else {
-                user.postValue(User(
+                user.postValue(
+                    User(
                         currentProfile.id,
                         currentProfile.name,
                         currentProfile.getProfilePictureUri(1000, 1000).path ?: ""
-                ))
+                    )
+                )
             }
         }
     }
@@ -82,9 +84,9 @@ class Facebook {
      * @param callback the callback to handle the result
      */
     fun requestAccessToken(
-      fragment: Fragment,
-      permissions: List<String> = listOf("public_profile"),
-      callback: FacebookCallback<LoginResult>?
+        fragment: Fragment,
+        permissions: List<String> = listOf("public_profile"),
+        callback: FacebookCallback<LoginResult>?
     ) {
 
         LoginManager.getInstance().apply {
@@ -130,12 +132,11 @@ class Facebook {
             callback.invoke(Converter.convertToGalleries(json), Converter.convert(response.error?.exception), nextRequest)
         }
 
-        val request = next
-                ?: GraphRequest(AccessToken.getCurrentAccessToken(), "/me/albums").apply {
-                    parameters = Bundle().apply {
-                        putString("fields", "id,count,name,picture")
-                    }
-                }
+        val request = next ?: GraphRequest(AccessToken.getCurrentAccessToken(), "/me/albums").apply {
+            parameters = Bundle().apply {
+                putString("fields", "id,count,name,picture")
+            }
+        }
 
         request.apply { setCallback { responseCallback.invoke(it) } }.executeAsync()
     }
@@ -155,12 +156,11 @@ class Facebook {
             callback.invoke(Converter.convertToPictures(json), Converter.convert(response.error?.exception), albumId, nextRequest)
         }
 
-        val request = next
-                ?: GraphRequest(AccessToken.getCurrentAccessToken(), "/$albumId/photos").apply {
-                    parameters = Bundle().apply {
-                        putString("fields", "id,images")
-                    }
-                }
+        val request = next ?: GraphRequest(AccessToken.getCurrentAccessToken(), "/$albumId/photos").apply {
+            parameters = Bundle().apply {
+                putString("fields", "id,images")
+            }
+        }
 
         request.apply { setCallback { responseCallback.invoke(it) } }.executeAsync()
     }
@@ -220,8 +220,8 @@ class Facebook {
      * @param picture the url to the avatar
      */
     data class User(
-      val id: String,
-      val name: String,
-      val picture: String
+        val id: String,
+        val name: String,
+        val picture: String
     )
 }

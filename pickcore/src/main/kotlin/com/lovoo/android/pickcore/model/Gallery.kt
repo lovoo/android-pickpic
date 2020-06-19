@@ -27,17 +27,17 @@ import android.os.Parcelable
  * @param count the amount of pictures within this gallery
  */
 data class Gallery(
-  val id: String,
-  val coverPath: String,
-  val name: String,
-  val count: Long
+    val id: String,
+    val coverPath: String,
+    val name: String,
+    val count: Long
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
-            parcel.readString() ?: "",
-            parcel.readString() ?: "",
-            parcel.readString() ?: "",
-            parcel.readLong()
+        parcel.readString() ?: "",
+        parcel.readString() ?: "",
+        parcel.readString() ?: "",
+        parcel.readLong()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
