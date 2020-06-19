@@ -99,7 +99,7 @@ class GalleryFragment : Fragment(), GalleryView {
         if (childFragmentManager.findFragmentByTag(PictureFragment.TAG) == null) {
             val allowNestedScroll = (arguments?.getBoolean(ARGUMENT_NESTED_SCROLL) ?: true)
             val fragment = PictureFragment.newInstance(allowNestedScroll)
-            childFragmentManager.beginTransaction().add(R.id.picture_fragment, fragment, PictureFragment.TAG)
+            childFragmentManager.beginTransaction().add(R.id.picture_fragment, fragment, PictureFragment.TAG).commitNow()
         }
 
         restoredGallery = savedInstanceState?.getParcelable("currentGallery")

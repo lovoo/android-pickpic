@@ -75,7 +75,7 @@ class FbGalleryFragment : Fragment(), FbGalleryView {
         if (childFragmentManager.findFragmentByTag(FbPictureFragment.TAG) == null) {
             val allowNestedScroll = (arguments?.getBoolean(ARGUMENT_NESTED_SCROLL) ?: true)
             val fragment = FbPictureFragment.newInstance(allowNestedScroll)
-            childFragmentManager.beginTransaction().add(R.id.picture_fragment, fragment, FbPictureFragment.TAG)
+            childFragmentManager.beginTransaction().add(R.id.picture_fragment, fragment, FbPictureFragment.TAG).commitNow()
         }
 
         restoredGallery = savedInstanceState?.getParcelable("currentGallery")
