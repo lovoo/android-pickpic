@@ -29,15 +29,16 @@ import android.provider.MediaStore
  * @param size the file size
  */
 data class Picture(
-  val id: Long,
-  val mimeType: String,
-  val size: Long
+    val id: Long,
+    val mimeType: String,
+    val size: Long
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
-            parcel.readLong(),
-            parcel.readString() ?: "",
-            parcel.readLong())
+        parcel.readLong(),
+        parcel.readString() ?: "",
+        parcel.readLong()
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeLong(id)

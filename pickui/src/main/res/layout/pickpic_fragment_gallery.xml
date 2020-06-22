@@ -31,16 +31,14 @@
             tools:text="select" />
     </LinearLayout>
 
-    <fragment
+    <FrameLayout
         android:id="@+id/picture_fragment"
-        android:name="com.lovoo.android.pickui.view.PictureFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header"
-        tools:layout="@layout/pickpic_fragment_picture" />
+        app:layout_constraintTop_toBottomOf="@id/header" />
 
     <include
         layout="@layout/pickpic_gallery_permission_denied"

@@ -38,10 +38,10 @@ import com.lovoo.android.pickui.view.PlaceHolderDrawable
  * @param onClick click callback for this item
  */
 abstract class ViewHolder<T>(
-  view: View,
-  private val engine: ImageEngine,
-  private val selectionLookUp: (T) -> Boolean,
-  private val onClick: (View, T) -> Unit
+    view: View,
+    private val engine: ImageEngine,
+    private val selectionLookUp: (T) -> Boolean,
+    private val onClick: (View, T) -> Unit
 ) : RecyclerView.ViewHolder(view) {
 
     private val size = MutableLiveData<Int>()
@@ -71,10 +71,12 @@ abstract class ViewHolder<T>(
      */
     fun recycle() {
         val width = size.value ?: 0
-        itemView.findViewById<ImageView>(R.id.picture)?.setImageDrawable(PlaceHolderDrawable().apply {
-            this.width = width
-            this.height = width
-        })
+        itemView.findViewById<ImageView>(R.id.picture)?.setImageDrawable(
+            PlaceHolderDrawable().apply {
+                this.width = width
+                this.height = width
+            }
+        )
     }
 
     /**

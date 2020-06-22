@@ -40,9 +40,9 @@ import com.lovoo.android.pickui.R
  * @param onClick the callback when an entry was clicked
  */
 class PictureAdapter(
-  context: Context,
-  private val selectionLookUp: (Picture) -> Boolean,
-  private val onClick: (View, Picture) -> Unit
+    context: Context,
+    private val selectionLookUp: (Picture) -> Boolean,
+    private val onClick: (View, Picture) -> Unit
 ) : RecyclerViewCursorAdapter<RecyclerView.ViewHolder>(null) {
 
     private val inflater = LayoutInflater.from(context)
@@ -79,15 +79,16 @@ class PictureAdapter(
     }
 
     private class ViewHolder(
-      view: View,
-      selectionLookUp: (Picture) -> Boolean,
-      onClick: (View, Picture) -> Unit
+        view: View,
+        selectionLookUp: (Picture) -> Boolean,
+        onClick: (View, Picture) -> Unit
     ) : com.lovoo.android.pickui.adapter.ViewHolder<Picture>(
 
-            view,
-            PickPicProvider.imageEngine,
-            selectionLookUp,
-            onClick) {
+        view,
+        PickPicProvider.imageEngine,
+        selectionLookUp,
+        onClick
+    ) {
 
         override fun getUri(item: Picture) = item.getUri()
     }

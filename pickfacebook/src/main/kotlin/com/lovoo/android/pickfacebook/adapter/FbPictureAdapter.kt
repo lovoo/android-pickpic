@@ -34,9 +34,9 @@ import com.lovoo.android.pickfacebook.model.FbPicture
  * @param onClick the callback when an entry was clicked
  */
 class FbPictureAdapter(
-  context: Context,
-  private val selectionLookUp: (FbPicture) -> Boolean,
-  private val onClick: (View, FbPicture) -> Unit
+    context: Context,
+    private val selectionLookUp: (FbPicture) -> Boolean,
+    private val onClick: (View, FbPicture) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private val inflater = LayoutInflater.from(context)
@@ -105,16 +105,17 @@ class FbPictureAdapter(
     }
 
     private class ViewHolder(
-      view: View,
-      engine: ImageEngine,
-      selectionLookUp: (FbPicture) -> Boolean,
-      onClick: (View, FbPicture) -> Unit
+        view: View,
+        engine: ImageEngine,
+        selectionLookUp: (FbPicture) -> Boolean,
+        onClick: (View, FbPicture) -> Unit
     ) : com.lovoo.android.pickui.adapter.ViewHolder<FbPicture>(
 
-            view,
-            engine,
-            selectionLookUp,
-            onClick) {
+        view,
+        engine,
+        selectionLookUp,
+        onClick
+    ) {
 
         override fun getUri(item: FbPicture): Uri = item.getUri()
     }

@@ -73,31 +73,37 @@ class PictureFragment : Fragment(), PictureView {
 
         list_view.apply {
             setHasFixedSize(true)
+            isNestedScrollingEnabled = arguments?.getBoolean(ARGUMENT_NESTED_SCROLL) ?: true
             addItemDecoration(PictureDecoration(3, resources.getDimensionPixelOffset(R.dimen.pickpic_picture_item_space)))
             layoutManager = GridLayoutManager(context, 3)
-            adapter = PictureAdapter(context,
-                    { selectionHolder?.isSelected(it.getUri()) == true },
-                    { _, picture -> onPictureClick(picture) })
+            adapter = PictureAdapter(
+                context,
+                { selectionHolder?.isSelected(it.getUri()) == true },
+                { _, picture -> onPictureClick(picture) }
+            )
         }
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        selectionHolder?.addToggleListener(tag, object : ToggleCallback {
-            override fun toggle(uri: Uri, gallery: Gallery) {
-                (list_view.adapter as? PictureAdapter)?.let { adapter ->
-                    val position = adapter
+        selectionHolder?.addToggleListener(
+            tag,
+            object : ToggleCallback {
+                override fun toggle(uri: Uri, gallery: Gallery) {
+                    (list_view.adapter as? PictureAdapter)?.let { adapter ->
+                        val position = adapter
                             .getItems { PictureLoader.convert(it).convertToUi() }
                             .indexOfFirst { it.getUri() == uri }
 
-                    if (position >= 0) {
-                        adapter.notifyItemChanged(position)
-                    } else {
-                        adapter.notifyDataSetChanged()
+                        if (position >= 0) {
+                            adapter.notifyItemChanged(position)
+                        } else {
+                            adapter.notifyDataSetChanged()
+                        }
                     }
                 }
             }
-        })
+        )
         val filter = IntentFilter().apply {
             addAction(CameraLoader.INTENT_INVALIDATE_GALLERY)
         }
@@ -140,5 +146,18 @@ class PictureFragment : Fragment(), PictureView {
 
     private fun onPictureClick(picture: Picture) {
         gallery?.let { selectionHolder?.toggle(picture.getUri(), it) }
+    }
+
+    companion object {
+        const val TAG = "PictureFragment"
+        private const val ARGUMENT_NESTED_SCROLL = "argumentNestedScroll"
+
+        /**
+         * @param allowNestedScroll pass false to prevent nested scrolling
+         * @return new instance of [PictureFragment]
+         */
+        fun newInstance(allowNestedScroll: Boolean = true) = PictureFragment().apply {
+            arguments = Bundle().apply { putBoolean(ARGUMENT_NESTED_SCROLL, allowNestedScroll) }
+        }
     }
 }

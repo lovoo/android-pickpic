@@ -41,14 +41,16 @@ class GalleryLoader(context: Context) :
         projection,
         selection,
         selectArguments,
-        "${MediaStore.Images.Media.DATE_TAKEN} DESC") {
+        "${MediaStore.Images.Media.DATE_TAKEN} DESC"
+    ) {
 
     private val columns = arrayOf(
-            MediaStore.Files.FileColumns._ID,
-            COLUMN_NAME_ID,
-            COLUMN_NAME_DISPLAY_NAME,
-            MediaStore.MediaColumns.DATA,
-            COLUMN_NAME_COUNT)
+        MediaStore.Files.FileColumns._ID,
+        COLUMN_NAME_ID,
+        COLUMN_NAME_DISPLAY_NAME,
+        MediaStore.MediaColumns.DATA,
+        COLUMN_NAME_COUNT
+    )
 
     override fun loadInBackground(): Cursor {
         try {
@@ -80,11 +82,12 @@ class GalleryLoader(context: Context) :
 
         private val query = MediaStore.Files.getContentUri("external")
         private val projection = arrayOf(
-                MediaStore.Files.FileColumns._ID,
-                COLUMN_NAME_ID,
-                COLUMN_NAME_DISPLAY_NAME,
-                MediaStore.MediaColumns.DATA,
-                "COUNT(*) AS $COLUMN_NAME_COUNT")
+            MediaStore.Files.FileColumns._ID,
+            COLUMN_NAME_ID,
+            COLUMN_NAME_DISPLAY_NAME,
+            MediaStore.MediaColumns.DATA,
+            "COUNT(*) AS $COLUMN_NAME_COUNT"
+        )
         private const val group = ") GROUP BY ($COLUMN_NAME_ID"
         private const val selection = "${MediaStore.Files.FileColumns.MEDIA_TYPE}=? AND ${MediaStore.MediaColumns.SIZE}>0$group"
         private val selectArguments = arrayOf(MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE.toString())
@@ -104,9 +107,10 @@ class GalleryLoader(context: Context) :
          * @return the [GalleryLib] object with the data from the [Cursor]
          */
         fun convert(cursor: Cursor) = GalleryLib(
-                cursor.getString(cursor.getColumnIndex(GalleryLoader.COLUMN_NAME_ID)),
-                cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DATA)),
-                cursor.getString(cursor.getColumnIndex(GalleryLoader.COLUMN_NAME_DISPLAY_NAME)),
-                cursor.getLong(cursor.getColumnIndex(GalleryLoader.COLUMN_NAME_COUNT)))
+            cursor.getString(cursor.getColumnIndex(GalleryLoader.COLUMN_NAME_ID)),
+            cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DATA)),
+            cursor.getString(cursor.getColumnIndex(GalleryLoader.COLUMN_NAME_DISPLAY_NAME)),
+            cursor.getLong(cursor.getColumnIndex(GalleryLoader.COLUMN_NAME_COUNT))
+        )
     }
 }

@@ -81,11 +81,12 @@ class PickPicActivity : AppCompatActivity(), SelectionHolder, CameraEngine, Capt
         super.onCreate(savedInstanceState)
 
         val default = PickPicConfig(
-                minCount = 2,
-                maxCount = 10,
-                sendText = "DONE",
-                title = getString(R.string.pickpic_title),
-                header = getString(R.string.pickpic_actionbar_header))
+            minCount = 2,
+            maxCount = 10,
+            sendText = "DONE",
+            title = getString(R.string.pickpic_title),
+            header = getString(R.string.pickpic_actionbar_header)
+        )
 
         config = intent?.getParcelableExtra(INTENT_IN_CONFIG) ?: default
 
@@ -204,33 +205,42 @@ class PickPicActivity : AppCompatActivity(), SelectionHolder, CameraEngine, Capt
     }
 
     private fun registerPicker() {
-        subscriptions.add(picker.getObservable().subscribe(
+        subscriptions.add(
+            picker.getObservable().subscribe(
                 { state ->
                     when (state) {
-                        is Picker.AddState -> externalToggleListener.forEach { (_, callback) ->
-                            callback.toggle(state.uri, state.gallery)
-                        }
-                        is Picker.RemoveState -> externalToggleListener.forEach { (_, callback) ->
-                            callback.toggle(state.uri, state.gallery)
-                        }
+                        is Picker.AddState ->
+                            externalToggleListener.forEach { (_, callback) ->
+                                callback.toggle(state.uri, state.gallery)
+                            }
+                        is Picker.RemoveState ->
+                            externalToggleListener.forEach { (_, callback) ->
+                                callback.toggle(state.uri, state.gallery)
+                            }
                         is Picker.SelectionState -> selectedUri = state.uri
                     }
                 },
                 { error -> error.printStackTrace() }
-        ))
+            )
+        )
     }
 
     private fun registerAutoFinish() {
-        subscriptions.add(picker.getObservable().subscribe(
+        subscriptions.add(
+            picker.getObservable().subscribe(
                 {
                     if (it is Picker.AddState && picker.getPickedUris().size >= config.maxCount) {
-                        Handler(Looper.getMainLooper()).postDelayed({
-                            finishSelection()
-                        }, AUTO_FINISH_DELAY)
+                        Handler(Looper.getMainLooper()).postDelayed(
+                            {
+                                finishSelection()
+                            },
+                            AUTO_FINISH_DELAY
+                        )
                     }
                 },
                 { /* no-op */ }
-        ))
+            )
+        )
     }
 
     private fun initToolbar() {
@@ -283,10 +293,11 @@ class PickPicActivity : AppCompatActivity(), SelectionHolder, CameraEngine, Capt
 
             val paddingBottom = resources.getDimensionPixelOffset(R.dimen.pickpic_actionbar_headline_margin)
             toolbar_text.setPadding(
-                    toolbar_text.paddingStart,
-                    toolbar_text.paddingTop,
-                    toolbar_text.paddingEnd,
-                    paddingBottom)
+                toolbar_text.paddingStart,
+                toolbar_text.paddingTop,
+                toolbar_text.paddingEnd,
+                paddingBottom
+            )
 
             val mode = CollapsingToolbarLayout.LayoutParams.COLLAPSE_MODE_PIN
             (toolbar.layoutParams as CollapsingToolbarLayout.LayoutParams).collapseMode = mode
@@ -298,9 +309,10 @@ class PickPicActivity : AppCompatActivity(), SelectionHolder, CameraEngine, Capt
     private fun initSelectionBar() {
         val selectionView = findViewById<ViewGroup>(R.id.selection_bar)
         selectionbar = Selectionbar(
-                picker,
-                selectionView,
-                arrayOf(fragment_pager, preview_pager)).apply {
+            picker,
+            selectionView,
+            arrayOf(fragment_pager, preview_pager)
+        ).apply {
 
             setButtonText(this@PickPicActivity.config.sendText)
             setButtonIcon(this@PickPicActivity.config.sendIcon)

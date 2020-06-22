@@ -35,8 +35,8 @@ import com.lovoo.android.pickfacebook.R
  * @param onClick the callback when an entry was clicked
  */
 class FbGalleryAdapter(
-  context: Context,
-  private val onClick: (View, Gallery) -> Unit
+    context: Context,
+    private val onClick: (View, Gallery) -> Unit
 ) : RecyclerView.Adapter<FbGalleryAdapter.ViewHolder>() {
 
     private val inflater = LayoutInflater.from(context)
@@ -75,9 +75,9 @@ class FbGalleryAdapter(
      * @param onClick click callback for this item
      */
     class ViewHolder(
-      view: View,
-      private val engine: ImageEngine,
-      private val onClick: (View, Gallery) -> Unit
+        view: View,
+        private val engine: ImageEngine,
+        private val onClick: (View, Gallery) -> Unit
     ) : RecyclerView.ViewHolder(view) {
 
         fun bind(gallery: Gallery) {
@@ -89,11 +89,12 @@ class FbGalleryAdapter(
                 override fun onPreDraw(): Boolean {
                     itemView.viewTreeObserver.removeOnPreDrawListener(this)
                     engine.loadThumbnail(
-                            itemView.context,
-                            itemView.measuredWidth,
-                            Uri.parse(gallery.coverPath),
-                            itemView.findViewById(R.id.gallery_cover),
-                            0)
+                        itemView.context,
+                        itemView.measuredWidth,
+                        Uri.parse(gallery.coverPath),
+                        itemView.findViewById(R.id.gallery_cover),
+                        0
+                    )
                     return true
                 }
             })

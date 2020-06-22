@@ -72,6 +72,12 @@ class FbGalleryFragment : Fragment(), FbGalleryView {
         permission_layout.visibility = View.GONE
         error_layout.visibility = View.GONE
 
+        if (childFragmentManager.findFragmentByTag(FbPictureFragment.TAG) == null) {
+            val allowNestedScroll = (arguments?.getBoolean(ARGUMENT_NESTED_SCROLL) ?: true)
+            val fragment = FbPictureFragment.newInstance(allowNestedScroll)
+            childFragmentManager.beginTransaction().add(R.id.picture_fragment, fragment, FbPictureFragment.TAG).commitNow()
+        }
+
         restoredGallery = savedInstanceState?.getParcelable("currentGallery")
     }
 
@@ -139,7 +145,7 @@ class FbGalleryFragment : Fragment(), FbGalleryView {
         restoredGallery = gallery
         folder_text.text = gallery.name
         initMenu()
-        (childFragmentManager.findFragmentById(R.id.picture_fragment) as? FbPictureFragment)?.swap(gallery)
+        (childFragmentManager.findFragmentByTag(FbPictureFragment.TAG) as? FbPictureFragment)?.swap(gallery)
     }
 
     private fun checkPermissions() {
@@ -201,10 +207,14 @@ class FbGalleryFragment : Fragment(), FbGalleryView {
     }
 
     companion object {
+        private const val ARGUMENT_NESTED_SCROLL = "argumentNestedScroll"
 
         /**
+         * @param allowNestedScroll pass false to prevent nested scrolling
          * @return new instance of [FbGalleryFragment]
          */
-        fun newInstance() = FbGalleryFragment()
+        fun newInstance(allowNestedScroll: Boolean = true) = FbGalleryFragment().apply {
+            arguments = Bundle().apply { putBoolean(ARGUMENT_NESTED_SCROLL, allowNestedScroll) }
+        }
     }
 }

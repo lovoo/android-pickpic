@@ -30,8 +30,8 @@ import com.lovoo.android.pickcore.loader.GalleryLoader
 import com.lovoo.android.pickcore.model.Gallery
 import com.lovoo.android.pickcore.model.convertToUi
 import com.lovoo.android.pickui.R
-import java.io.File
 import kotlinx.android.synthetic.main.pickpic_list_item_gallery.view.*
+import java.io.File
 
 /**
  * RecyclerView Adapter to present [Gallery]s.
@@ -41,9 +41,9 @@ import kotlinx.android.synthetic.main.pickpic_list_item_gallery.view.*
  * @param onClick the callback when an entry was clicked
  */
 class GalleryAdapter(
-  context: Context,
-  private val allFolderName: String,
-  private val onClick: (View, Gallery) -> Unit
+    context: Context,
+    private val allFolderName: String,
+    private val onClick: (View, Gallery) -> Unit
 ) : RecyclerViewCursorAdapter<RecyclerView.ViewHolder>(null) {
 
     private val inflater = LayoutInflater.from(context)
@@ -58,9 +58,9 @@ class GalleryAdapter(
     }
 
     private class ViewHolder(
-      view: View,
-      private val allFolderName: String,
-      private val onClick: (View, Gallery) -> Unit
+        view: View,
+        private val allFolderName: String,
+        private val onClick: (View, Gallery) -> Unit
     ) : RecyclerView.ViewHolder(view) {
 
         fun bind(gallery: Gallery) {
@@ -72,11 +72,12 @@ class GalleryAdapter(
                 override fun onPreDraw(): Boolean {
                     itemView.viewTreeObserver.removeOnPreDrawListener(this)
                     PickPicProvider.imageEngine.loadThumbnail(
-                            itemView.context,
-                            itemView.measuredWidth,
-                            Uri.fromFile(File(gallery.coverPath)),
-                            itemView.gallery_cover,
-                            0)
+                        itemView.context,
+                        itemView.measuredWidth,
+                        Uri.fromFile(File(gallery.coverPath)),
+                        itemView.gallery_cover,
+                        0
+                    )
                     return true
                 }
             })

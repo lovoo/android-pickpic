@@ -33,9 +33,9 @@ import io.reactivex.disposables.CompositeDisposable
  * @param picker the Picker that will be observed
  */
 class Preview(
-  val pager: ViewPager,
-  val fragmentManager: FragmentManager,
-  val picker: Picker
+    val pager: ViewPager,
+    val fragmentManager: FragmentManager,
+    val picker: Picker
 ) {
 
     private val subscriptions = CompositeDisposable()
@@ -52,7 +52,8 @@ class Preview(
     }
 
     private fun registerPicker() {
-        subscriptions.add(picker.getObservable().subscribe(
+        subscriptions.add(
+            picker.getObservable().subscribe(
                 { state ->
                     when (state) {
                         is Picker.RemoveState -> {
@@ -73,15 +74,17 @@ class Preview(
                         }
                     }
                 },
-                { error -> error.printStackTrace() }))
+                { error -> error.printStackTrace() }
+            )
+        )
     }
 
     private fun showPreview() {
         pager.let {
             it.adapter = object : FragmentStatePagerAdapter(fragmentManager) {
                 override fun getItem(position: Int) = PreviewFragment.createInstance(
-                        position,
-                        picker.getPickedUris().getOrNull(position)
+                    position,
+                    picker.getPickedUris().getOrNull(position)
                 )
 
                 override fun getCount() = picker.map.size

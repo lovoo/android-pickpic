@@ -32,9 +32,9 @@ import com.lovoo.android.pickui.view.GalleryFragment
  * @param dependencies [PickDependencies] instance to decide if [FbGalleryFragment] should be added or not
  */
 class PickPicAdapter(
-  private val context: Context,
-  manager: FragmentManager,
-  private val dependencies: PickDependencies
+    private val context: Context,
+    manager: FragmentManager,
+    private val dependencies: PickDependencies
 ) : FragmentStatePagerAdapter(manager) {
 
     override fun getItem(position: Int) = buildFragment(getType(position))

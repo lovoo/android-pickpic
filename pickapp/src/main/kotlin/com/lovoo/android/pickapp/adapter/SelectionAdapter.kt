@@ -105,8 +105,8 @@ class SelectionAdapter : RecyclerView.Adapter<SelectionAdapter.ViewHolder>() {
     }
 
     class ViewHolder(
-      view: View,
-      private val imageEngine: ImageEngine
+        view: View,
+        private val imageEngine: ImageEngine
     ) : RecyclerView.ViewHolder(view) {
 
         val size = MutableLiveData<Int>()

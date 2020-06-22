@@ -24,8 +24,8 @@ import androidx.recyclerview.widget.RecyclerView
  * equal space between each other and its parent.
  */
 class PictureDecoration(
-  private val spanCount: Int,
-  private val padding: Int
+    private val spanCount: Int,
+    private val padding: Int
 ) : RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {

@@ -96,6 +96,12 @@ class GalleryFragment : Fragment(), GalleryView {
 
         adapter = GalleryAdapter(context, allFolderName) { _, _ -> }
 
+        if (childFragmentManager.findFragmentByTag(PictureFragment.TAG) == null) {
+            val allowNestedScroll = (arguments?.getBoolean(ARGUMENT_NESTED_SCROLL) ?: true)
+            val fragment = PictureFragment.newInstance(allowNestedScroll)
+            childFragmentManager.beginTransaction().add(R.id.picture_fragment, fragment, PictureFragment.TAG).commitNow()
+        }
+
         restoredGallery = savedInstanceState?.getParcelable("currentGallery")
 
         if (savedInstanceState == null) {
@@ -134,7 +140,7 @@ class GalleryFragment : Fragment(), GalleryView {
         restoredGallery = gallery
         folder_text.text = getFolderName(gallery)
         initMenu()
-        (childFragmentManager.findFragmentById(R.id.picture_fragment) as? PictureFragment)?.swap(gallery)
+        (childFragmentManager.findFragmentByTag(PictureFragment.TAG) as? PictureFragment)?.swap(gallery)
     }
 
     private fun requestPermissions(activity: Activity) {
@@ -214,10 +220,14 @@ class GalleryFragment : Fragment(), GalleryView {
 
     companion object {
         private const val PERMISSION_REQUEST_CODE = 30
+        private const val ARGUMENT_NESTED_SCROLL = "argumentNestedScroll"
 
         /**
+         * @param allowNestedScroll pass false to prevent nested scrolling
          * @return new instance of [GalleryFragment]
          */
-        fun newInstance() = GalleryFragment()
+        fun newInstance(allowNestedScroll: Boolean = true) = GalleryFragment().apply {
+            arguments = Bundle().apply { putBoolean(ARGUMENT_NESTED_SCROLL, allowNestedScroll) }
+        }
     }
 }

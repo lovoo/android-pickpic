@@ -45,7 +45,7 @@ class CaptureImageTest : BaseUiTest() {
 
         device.wait(Until.hasObject(By.res(context.resources.getResourceName(R.id.result_list))), Consts.WAIT_DELAY)
         onView(withId(R.id.result_list))
-                .check(RecyclerViewMatcher.RecyclerViewItemCountAssertion(2))
+            .check(RecyclerViewMatcher.RecyclerViewItemCountAssertion(2))
     }
 
     private fun takePictures(amount: Int, context: Context) {
