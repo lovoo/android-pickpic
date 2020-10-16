@@ -18,6 +18,7 @@ package com.lovoo.android.pickapp.view
 import android.app.Activity
 import android.content.Intent
 import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
@@ -134,15 +135,14 @@ class PickPicActivity : AppCompatActivity(), SelectionHolder, CameraEngine, Capt
         }
     }
 
-    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
 
         try {
-            savedInstanceState?.let {
-                val uris = it.getParcelableArray(BUNDLE_URIS) as Array<Uri>
-                val galleries = it.getParcelableArray(BUNDLE_GALLERIES) as Array<Gallery>
+            val uris = savedInstanceState.getParcelableArray(BUNDLE_URIS)?.map { it as Uri }?.toTypedArray()
+            val galleries = savedInstanceState.getParcelableArray(BUNDLE_GALLERIES)?.map { it as Gallery }?.toTypedArray()
+            if (uris != null && galleries != null)
                 picker.toggle(uris, galleries)
-            }
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -261,7 +261,7 @@ class PickPicActivity : AppCompatActivity(), SelectionHolder, CameraEngine, Capt
             it.setNavigationOnClickListener { onBackPressed() }
             it.navigationIcon = it.navigationIcon?.mutate()?.apply {
                 val color = ContextCompat.getColor(it.context, R.color.pickpic_text_actionbar)
-                setColorFilter(color, PorterDuff.Mode.SRC_IN)
+                colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN)
             }
         }
         toolbar_text.let {
