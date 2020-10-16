@@ -66,19 +66,15 @@ class GalleryLoader(context: Context) :
             val galleries = super.loadInBackground()
             val allEntry = MatrixCursor(columns)
             Log.e("#########", columns.joinToString())
-            var totalCount = 0
             var allAlbumCoverPath = ""
 
-            while (galleries?.moveToNext() == true) {
-                totalCount += galleries.getInt(galleries.getColumnIndex(COLUMN_NAME_COUNT))
-            }
             if (galleries?.moveToFirst() == true) {
                 val uri: Uri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, galleries.getLong(galleries.getColumnIndex(MediaStore.Images.Media._ID)))
 
                 // allAlbumCoverPath = galleries.getString(galleries.getColumnIndex(MediaStore.MediaColumns.DATA))
             }
 
-            allEntry.addRow(arrayOf(-1, -1, Constants.All_FOLDER_NAME, allAlbumCoverPath, totalCount.toString()))
+            allEntry.addRow(arrayOf(-1, -1, Constants.All_FOLDER_NAME, allAlbumCoverPath))
 
             return MergeCursor(arrayOf(allEntry, galleries))
         } catch (brokenFileException: SQLiteDiskIOException) {
