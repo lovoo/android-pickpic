@@ -15,12 +15,16 @@
  */
 package com.lovoo.android.pickcore.loader
 
+import android.content.ContentUris
 import android.content.Context
 import android.database.Cursor
 import android.database.MatrixCursor
 import android.database.MergeCursor
 import android.database.sqlite.SQLiteDiskIOException
+import android.net.Uri
+import android.os.Build
 import android.provider.MediaStore
+import android.util.Log
 import androidx.loader.content.CursorLoader
 import com.lovoo.android.pickcore.Constants
 import com.lovoo.android.pickcore.model.GalleryLib
@@ -41,14 +45,19 @@ class GalleryLoader(context: Context) :
         projection,
         selection,
         selectArguments,
-        "${MediaStore.Images.Media.DATE_TAKEN} DESC"
+        sortOrder()
     ) {
 
-    private val columns = arrayOf(
+    private val columns = if (isNewerThanQ()) arrayOf(
         MediaStore.Files.FileColumns._ID,
         COLUMN_NAME_ID,
         COLUMN_NAME_DISPLAY_NAME,
-        MediaStore.MediaColumns.DATA,
+        MediaStore.Images.Media._ID
+    ) else arrayOf(
+        MediaStore.Files.FileColumns._ID,
+        COLUMN_NAME_ID,
+        COLUMN_NAME_DISPLAY_NAME,
+        MediaStore.Images.Media._ID,
         COLUMN_NAME_COUNT
     )
 
@@ -56,7 +65,7 @@ class GalleryLoader(context: Context) :
         try {
             val galleries = super.loadInBackground()
             val allEntry = MatrixCursor(columns)
-
+            Log.e("#########", columns.joinToString())
             var totalCount = 0
             var allAlbumCoverPath = ""
 
@@ -64,7 +73,9 @@ class GalleryLoader(context: Context) :
                 totalCount += galleries.getInt(galleries.getColumnIndex(COLUMN_NAME_COUNT))
             }
             if (galleries?.moveToFirst() == true) {
-                allAlbumCoverPath = galleries.getString(galleries.getColumnIndex(MediaStore.MediaColumns.DATA))
+                val uri: Uri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, galleries.getLong(galleries.getColumnIndex(MediaStore.Images.Media._ID)))
+
+                // allAlbumCoverPath = galleries.getString(galleries.getColumnIndex(MediaStore.MediaColumns.DATA))
             }
 
             allEntry.addRow(arrayOf(-1, -1, Constants.All_FOLDER_NAME, allAlbumCoverPath, totalCount.toString()))
@@ -81,15 +92,21 @@ class GalleryLoader(context: Context) :
         private const val COLUMN_NAME_COUNT = "count"
 
         private val query = MediaStore.Files.getContentUri("external")
-        private val projection = arrayOf(
+        private val projection = if (isNewerThanQ()) arrayOf(
             MediaStore.Files.FileColumns._ID,
             COLUMN_NAME_ID,
             COLUMN_NAME_DISPLAY_NAME,
-            MediaStore.MediaColumns.DATA,
-            "COUNT(*) AS $COLUMN_NAME_COUNT"
-        )
-        private const val group = ") GROUP BY ($COLUMN_NAME_ID"
-        private const val selection = "${MediaStore.Files.FileColumns.MEDIA_TYPE}=? AND ${MediaStore.MediaColumns.SIZE}>0$group"
+            MediaStore.Images.Media._ID
+        ) else
+            arrayOf(
+                MediaStore.Files.FileColumns._ID,
+                COLUMN_NAME_ID,
+                COLUMN_NAME_DISPLAY_NAME,
+                MediaStore.Images.Media._ID,
+                "COUNT(*) AS $COLUMN_NAME_COUNT"
+            )
+        private val group = if (isNewerThanQ()) "" else ") GROUP BY ($COLUMN_NAME_ID"
+        private val selection = "${MediaStore.Files.FileColumns.MEDIA_TYPE}=? AND ${MediaStore.MediaColumns.SIZE}>0$group"
         private val selectArguments = arrayOf(MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE.toString())
 
         /**
@@ -106,11 +123,19 @@ class GalleryLoader(context: Context) :
          * @param cursor the [Cursor]
          * @return the [GalleryLib] object with the data from the [Cursor]
          */
-        fun convert(cursor: Cursor) = GalleryLib(
+        fun convert(cursor: Cursor) = if (isNewerThanQ()) GalleryLib(
             cursor.getString(cursor.getColumnIndex(GalleryLoader.COLUMN_NAME_ID)),
-            cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DATA)),
+            cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media._ID)),
+            cursor.getString(cursor.getColumnIndex(GalleryLoader.COLUMN_NAME_DISPLAY_NAME))
+        ) else GalleryLib(
+            cursor.getString(cursor.getColumnIndex(GalleryLoader.COLUMN_NAME_ID)),
+            cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media._ID)),
             cursor.getString(cursor.getColumnIndex(GalleryLoader.COLUMN_NAME_DISPLAY_NAME)),
             cursor.getLong(cursor.getColumnIndex(GalleryLoader.COLUMN_NAME_COUNT))
         )
+
+        private fun sortOrder() = if (isNewerThanQ()) null else "${MediaStore.Images.Media.DATE_TAKEN} DESC"
+
+        fun isNewerThanQ() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
     }
 }
