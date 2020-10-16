@@ -36,18 +36,18 @@ import com.lovoo.android.pickcore.model.GalleryLib
  *
  * @see GalleryLoader.convert
  */
-class GalleryLoader(context: Context) :
+class GalleryLoader(
+        context: Context
+) : CursorLoader(
+        context,
+        query,
+        projection,
+        selection,
+        selectArguments,
+        "${MediaStore.Images.Media.DATE_TAKEN} DESC"
+) {
 
-        CursorLoader(
-                context,
-                query,
-                projection,
-                selection,
-                selectArguments,
-                "${MediaStore.Images.Media.DATE_TAKEN} DESC"
-        ) {
-
-    private val columns = if (isNewerThanQ()) arrayOf(
+    private val columns = if (isNewerThanQ) arrayOf(
             MediaStore.Files.FileColumns._ID,
             COLUMN_NAME_ID,
             COLUMN_NAME_DISPLAY_NAME,
@@ -65,7 +65,7 @@ class GalleryLoader(context: Context) :
         return try {
             val galleries = super.loadInBackground()
             val allEntry = MatrixCursor(columns)
-            if (isNewerThanQ()) {
+            if (isNewerThanQ) {
                 loadCursorPostQ(galleries, allEntry)
             } else {
                 loadCursorPreQ(galleries, allEntry)
@@ -164,8 +164,9 @@ class GalleryLoader(context: Context) :
         private const val COLUMN_NAME_DISPLAY_NAME = "bucket_display_name"
         private const val COLUMN_NAME_COUNT = "count"
 
+        private val isNewerThanQ = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
         private val query = MediaStore.Files.getContentUri("external")
-        private val projection = if (isNewerThanQ()) arrayOf(
+        private val projection = if (isNewerThanQ) arrayOf(
                 MediaStore.Files.FileColumns._ID,
                 COLUMN_NAME_ID,
                 COLUMN_NAME_DISPLAY_NAME,
@@ -178,7 +179,7 @@ class GalleryLoader(context: Context) :
                     MediaStore.MediaColumns.DATA,
                     "COUNT(*) AS $COLUMN_NAME_COUNT"
             )
-        private val group = if (isNewerThanQ()) "" else ") GROUP BY ($COLUMN_NAME_ID"
+        private val group = if (isNewerThanQ) "" else ") GROUP BY ($COLUMN_NAME_ID"
         private val selection = "${MediaStore.Files.FileColumns.MEDIA_TYPE}=? AND ${MediaStore.MediaColumns.SIZE}>0$group"
         private val selectArguments = arrayOf(MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE.toString())
 
@@ -196,7 +197,7 @@ class GalleryLoader(context: Context) :
          * @param cursor the [Cursor]
          * @return the [GalleryLib] object with the data from the [Cursor]
          */
-        fun convert(cursor: Cursor) = if (isNewerThanQ()) GalleryLib(
+        fun convert(cursor: Cursor) = if (isNewerThanQ) GalleryLib(
                 cursor.getString(cursor.getColumnIndex(COLUMN_NAME_ID)),
                 cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media._ID)),
                 cursor.getString(cursor.getColumnIndex(COLUMN_NAME_DISPLAY_NAME)),
@@ -207,7 +208,5 @@ class GalleryLoader(context: Context) :
                 cursor.getString(cursor.getColumnIndex(COLUMN_NAME_DISPLAY_NAME)),
                 cursor.getLong(cursor.getColumnIndex(COLUMN_NAME_COUNT))
         )
-
-        fun isNewerThanQ() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
     }
 }
