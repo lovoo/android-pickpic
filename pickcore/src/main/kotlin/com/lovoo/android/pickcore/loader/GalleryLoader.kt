@@ -63,20 +63,19 @@ class GalleryLoader(context: Context) :
 
     override fun loadInBackground(): Cursor {
         return try {
+            val galleries = super.loadInBackground()
+            val allEntry = MatrixCursor(columns)
             if (isNewerThanQ()) {
-                loadCursorPostQ()
+                loadCursorPostQ(galleries, allEntry)
             } else {
-                loadCursorPreQ()
+                loadCursorPreQ(galleries, allEntry)
             }
         } catch (brokenFileException: SQLiteDiskIOException) {
             MatrixCursor(columns)
         }
     }
 
-    private fun loadCursorPreQ(): Cursor {
-        val galleries = super.loadInBackground()
-        val allEntry = MatrixCursor(columns)
-
+    private fun loadCursorPreQ(galleries: Cursor?, allEntry: MatrixCursor): Cursor {
         var totalCount = 0
         var allAlbumCoverPath = ""
 
@@ -92,19 +91,15 @@ class GalleryLoader(context: Context) :
         return MergeCursor(arrayOf(allEntry, galleries))
     }
 
-    private fun loadCursorPostQ(): Cursor {
-
-        val galleries = super.loadInBackground()
-        val allEntry = MatrixCursor(columns)
-
+    private fun loadCursorPostQ(galleries: Cursor?, allEntry: MatrixCursor): Cursor {
         var totalCount = 0L
         var allAlbumCoverUri: Uri? = null
 
         // Pseudo GROUP BY
         val countMap: MutableMap<Long, Long> = HashMap()
-        if (galleries != null) {
-            while (galleries.moveToNext()) {
-                val bucketId: Long = galleries.getLong(galleries.getColumnIndex(COLUMN_NAME_ID))
+        galleries?.let {
+            while (it.moveToNext()) {
+                val bucketId = it.getLong(it.getColumnIndex(COLUMN_NAME_ID))
                 var count = countMap[bucketId]
                 if (count == null) {
                     count = 1L
@@ -116,35 +111,32 @@ class GalleryLoader(context: Context) :
         }
 
         val otherAlbums = MatrixCursor(columns)
-        if (galleries != null) {
-            if (galleries.moveToFirst()) {
-                allAlbumCoverUri = getUri(galleries)
+        galleries?.let {
+            if (it.moveToFirst()) {
+                allAlbumCoverUri = getUri(it)
                 val done: MutableSet<Long> = HashSet()
                 do {
-                    val bucketId: Long = galleries.getLong(galleries.getColumnIndex(COLUMN_NAME_ID))
-                    if (done.contains(bucketId)) {
-                        continue
-                    }
-                    val fileId: Long = galleries.getLong(
-                            galleries.getColumnIndex(MediaStore.Files.FileColumns._ID)
-                    )
-                    val bucketDisplayName: String = galleries.getString(
-                            galleries.getColumnIndex(COLUMN_NAME_DISPLAY_NAME)
-                    )
-                    val uri = getUri(galleries)
+                    val bucketId = it.getLong(it.getColumnIndex(COLUMN_NAME_ID))
+                    if (done.contains(bucketId)) continue
+
+                    val fileId = it.getLong(it.getColumnIndex(MediaStore.Files.FileColumns._ID)).toString()
+                    val bucketDisplayName = it.getString(it.getColumnIndex(COLUMN_NAME_DISPLAY_NAME))
+                    val uri = getUri(it)
                     val count = countMap[bucketId] ?: 0L
+
                     otherAlbums.addRow(
                             arrayOf(
-                                    fileId.toString(),
+                                    fileId,
                                     bucketId.toString(),
                                     bucketDisplayName,
                                     uri.toString(),
                                     count.toString()
                             )
                     )
+
                     done.add(bucketId)
                     totalCount += count
-                } while (galleries.moveToNext())
+                } while (it.moveToNext())
             }
         }
 
