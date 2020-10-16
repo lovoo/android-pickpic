@@ -39,47 +39,122 @@ import com.lovoo.android.pickcore.model.GalleryLib
  */
 class GalleryLoader(context: Context) :
 
-    CursorLoader(
-        context,
-        query,
-        projection,
-        selection,
-        selectArguments,
-        sortOrder()
-    ) {
+        CursorLoader(
+                context,
+                query,
+                projection,
+                selection,
+                selectArguments,
+                sortOrder()
+        ) {
 
     private val columns = if (isNewerThanQ()) arrayOf(
-        MediaStore.Files.FileColumns._ID,
-        COLUMN_NAME_ID,
-        COLUMN_NAME_DISPLAY_NAME,
-        MediaStore.Images.Media._ID
+            MediaStore.Files.FileColumns._ID,
+            COLUMN_NAME_ID,
+            COLUMN_NAME_DISPLAY_NAME,
+            MediaStore.Images.Media._ID,
+            COLUMN_NAME_COUNT
+
     ) else arrayOf(
-        MediaStore.Files.FileColumns._ID,
-        COLUMN_NAME_ID,
-        COLUMN_NAME_DISPLAY_NAME,
-        MediaStore.Images.Media._ID,
-        COLUMN_NAME_COUNT
+            MediaStore.Files.FileColumns._ID,
+            COLUMN_NAME_ID,
+            COLUMN_NAME_DISPLAY_NAME,
+            MediaStore.Images.Media._ID,
+            COLUMN_NAME_COUNT
     )
 
     override fun loadInBackground(): Cursor {
         try {
             val galleries = super.loadInBackground()
             val allEntry = MatrixCursor(columns)
-            Log.e("#########", columns.joinToString())
-            var allAlbumCoverPath = ""
 
-            if (galleries?.moveToFirst() == true) {
-                val uri: Uri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, galleries.getLong(galleries.getColumnIndex(MediaStore.Images.Media._ID)))
+            if (isNewerThanQ()) {
 
-                // allAlbumCoverPath = galleries.getString(galleries.getColumnIndex(MediaStore.MediaColumns.DATA))
+                var totalCount = 0L
+                var allAlbumCoverUri: Uri? = null
+
+                // Pseudo GROUP BY
+                val countMap: MutableMap<Long, Long> = HashMap()
+                if (galleries != null) {
+                    while (galleries.moveToNext()) {
+                        val bucketId: Long = galleries.getLong(galleries.getColumnIndex(COLUMN_NAME_ID))
+                        var count = countMap[bucketId]
+                        if (count == null) {
+                            count = 1L
+                        } else {
+                            count++
+                        }
+                        countMap[bucketId] = count
+                    }
+                }
+
+                val otherAlbums = MatrixCursor(columns)
+                if (galleries != null) {
+                    if (galleries.moveToFirst()) {
+                        allAlbumCoverUri = getUri(galleries)
+                        val done: MutableSet<Long> = HashSet()
+                        do {
+                            val bucketId: Long = galleries.getLong(galleries.getColumnIndex(COLUMN_NAME_ID))
+                            if (done.contains(bucketId)) {
+                                continue
+                            }
+                            val fileId: Long = galleries.getLong(
+                                    galleries.getColumnIndex(MediaStore.Files.FileColumns._ID)
+                            )
+                            val bucketDisplayName: String = galleries.getString(
+                                    galleries.getColumnIndex(COLUMN_NAME_DISPLAY_NAME)
+                            )
+                            val uri = getUri(galleries)
+                            val count = countMap[bucketId] ?: 0L
+                            otherAlbums.addRow(
+                                    arrayOf(
+                                            fileId.toString(),
+                                            bucketId.toString(),
+                                            bucketDisplayName,
+                                            uri.toString(),
+                                            count.toString()
+                                    )
+                            )
+                            done.add(bucketId)
+                            totalCount += count
+                        } while (galleries.moveToNext())
+                    }
+                }
+
+                allEntry.addRow(
+                        arrayOf(
+                                -1,
+                                -1,
+                                Constants.All_FOLDER_NAME,
+                                allAlbumCoverUri?.toString(),
+                                totalCount
+                        )
+                )
+
+                return MergeCursor(arrayOf<Cursor>(allEntry, otherAlbums))
+            } else {
+                Log.e("#########", columns.joinToString())
+                var allAlbumCoverPath = ""
+
+                if (galleries?.moveToFirst() == true) {
+                    val uri: Uri = ContentUris.withAppendedId(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, galleries.getLong(galleries.getColumnIndex(MediaStore.Images.Media._ID)))
+
+                    // allAlbumCoverPath = galleries.getString(galleries.getColumnIndex(MediaStore.MediaColumns.DATA))
+                }
+
+                allEntry.addRow(arrayOf(-1, -1, Constants.All_FOLDER_NAME, allAlbumCoverPath))
+
+                return MergeCursor(arrayOf(allEntry, galleries))
             }
-
-            allEntry.addRow(arrayOf(-1, -1, Constants.All_FOLDER_NAME, allAlbumCoverPath))
-
-            return MergeCursor(arrayOf(allEntry, galleries))
         } catch (brokenFileException: SQLiteDiskIOException) {
             return MatrixCursor(columns)
         }
+    }
+
+    private fun getUri(cursor: Cursor): Uri? {
+        val id = cursor.getLong(cursor.getColumnIndex(MediaStore.Files.FileColumns._ID))
+        val contentUri: Uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        return ContentUris.withAppendedId(contentUri, id)
     }
 
     companion object {
@@ -89,17 +164,17 @@ class GalleryLoader(context: Context) :
 
         private val query = MediaStore.Files.getContentUri("external")
         private val projection = if (isNewerThanQ()) arrayOf(
-            MediaStore.Files.FileColumns._ID,
-            COLUMN_NAME_ID,
-            COLUMN_NAME_DISPLAY_NAME,
-            MediaStore.Images.Media._ID
-        ) else
-            arrayOf(
                 MediaStore.Files.FileColumns._ID,
                 COLUMN_NAME_ID,
                 COLUMN_NAME_DISPLAY_NAME,
-                MediaStore.Images.Media._ID,
-                "COUNT(*) AS $COLUMN_NAME_COUNT"
+                MediaStore.Images.Media._ID
+        ) else
+            arrayOf(
+                    MediaStore.Files.FileColumns._ID,
+                    COLUMN_NAME_ID,
+                    COLUMN_NAME_DISPLAY_NAME,
+                    MediaStore.Images.Media._ID,
+                    "COUNT(*) AS $COLUMN_NAME_COUNT"
             )
         private val group = if (isNewerThanQ()) "" else ") GROUP BY ($COLUMN_NAME_ID"
         private val selection = "${MediaStore.Files.FileColumns.MEDIA_TYPE}=? AND ${MediaStore.MediaColumns.SIZE}>0$group"
@@ -119,18 +194,14 @@ class GalleryLoader(context: Context) :
          * @param cursor the [Cursor]
          * @return the [GalleryLib] object with the data from the [Cursor]
          */
-        fun convert(cursor: Cursor) = if (isNewerThanQ()) GalleryLib(
-            cursor.getString(cursor.getColumnIndex(GalleryLoader.COLUMN_NAME_ID)),
-            cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media._ID)),
-            cursor.getString(cursor.getColumnIndex(GalleryLoader.COLUMN_NAME_DISPLAY_NAME))
-        ) else GalleryLib(
-            cursor.getString(cursor.getColumnIndex(GalleryLoader.COLUMN_NAME_ID)),
-            cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media._ID)),
-            cursor.getString(cursor.getColumnIndex(GalleryLoader.COLUMN_NAME_DISPLAY_NAME)),
-            cursor.getLong(cursor.getColumnIndex(GalleryLoader.COLUMN_NAME_COUNT))
+        fun convert(cursor: Cursor) = GalleryLib(
+                cursor.getString(cursor.getColumnIndex(GalleryLoader.COLUMN_NAME_ID)),
+                cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media._ID)),
+                cursor.getString(cursor.getColumnIndex(GalleryLoader.COLUMN_NAME_DISPLAY_NAME)),
+                cursor.getLong(cursor.getColumnIndex(GalleryLoader.COLUMN_NAME_COUNT))
         )
 
-        private fun sortOrder() = if (isNewerThanQ()) null else "${MediaStore.Images.Media.DATE_TAKEN} DESC"
+        private fun sortOrder() = "${MediaStore.Images.Media.DATE_TAKEN} DESC"
 
         fun isNewerThanQ() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
     }
