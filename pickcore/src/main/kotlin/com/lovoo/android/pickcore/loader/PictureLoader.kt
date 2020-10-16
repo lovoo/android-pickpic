@@ -37,16 +37,17 @@ import com.lovoo.android.pickcore.model.PictureLib
  *
  * @see PictureLoader.convert
  */
-class PictureLoader(context: Context, private val gallery: GalleryLib) :
-
-    CursorLoader(
-        context,
-        query,
-        projection,
-        getSelection(gallery),
-        getSelectionArgs(gallery),
-        "${MediaStore.Images.Media.DATE_TAKEN} DESC"
-    ) {
+class PictureLoader(
+    context: Context,
+    private val gallery: GalleryLib
+) : CursorLoader(
+    context,
+    query,
+    projection,
+    getSelection(gallery),
+    getSelectionArgs(gallery),
+    "${MediaStore.Images.Media.DATE_TAKEN} DESC"
+) {
 
     private val cameraEngine: CameraEngine
         get() = PickPicProvider.cameraEngine

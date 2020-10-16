@@ -16,6 +16,7 @@
 package com.lovoo.android.pickcore.loader
 
 import android.app.Activity
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -25,6 +26,7 @@ import android.graphics.Matrix
 import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Build
+import android.os.Environment
 import android.provider.MediaStore
 import androidx.exifinterface.media.ExifInterface
 import androidx.fragment.app.Fragment
@@ -33,6 +35,7 @@ import com.lovoo.android.pickcore.contract.getUri
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
+import java.io.OutputStream
 
 /**
  * Object class that helps to start and finish a capture [Intent] on Android.
@@ -122,7 +125,7 @@ object CameraLoader {
             var bitmapHeight = bitmap.height
 
             if (bitmapWidth > maxSize || bitmapHeight > maxSize) {
-                scale = Math.max(bitmapWidth, bitmapHeight) / maxSize.toFloat()
+                scale = bitmapWidth.coerceAtLeast(bitmapHeight) / maxSize.toFloat()
             }
 
             val degree = ExifInterface(filePath).rotationDegrees
@@ -154,15 +157,24 @@ object CameraLoader {
             // create new file
             val file = File(filePath.replace(".jpg", "-2.jpg"))
 
-            var fos: FileOutputStream? = null
+            var fos: OutputStream? = null
             try {
-                fos = FileOutputStream(file)
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 85, fos)
-            } finally {
-                if (fos != null) {
-                    fos.flush()
-                    fos.close()
+                if (GalleryLoader.isNewerThanQ) {
+                    val values = ContentValues().apply {
+                        put(MediaStore.Images.Media.DISPLAY_NAME, file.name)
+                        put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
+                        put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
+                    }
+
+                    val uri: Uri? = context.contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+                    uri?.let { fos = context.contentResolver.openOutputStream(it) }
+                } else {
+                    fos = FileOutputStream(file)
                 }
+                fos?.let { bitmap.compress(Bitmap.CompressFormat.JPEG, 85, it) }
+            } finally {
+                fos?.flush()
+                fos?.close()
                 updateMediaScanner(context, arrayOf(filePath, file.absolutePath), listener)
             }
         } catch (e: IOException) {
@@ -174,11 +186,12 @@ object CameraLoader {
         MediaScannerConnection.scanFile(context, files, null) { path, uri ->
             listener.onScanCompleted(path, uri)
             context.sendBroadcast(Intent(INTENT_INVALIDATE_GALLERY))
-            if (uri != null) {
-                context.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri))
-            } else {
-                context.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse(path)))
-            }
+            context.sendBroadcast(
+                Intent(
+                    Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
+                    uri ?: Uri.parse(path)
+                )
+            )
         }
     }
 
