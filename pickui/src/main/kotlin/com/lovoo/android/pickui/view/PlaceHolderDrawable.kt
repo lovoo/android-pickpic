@@ -36,7 +36,7 @@ class PlaceHolderDrawable : Drawable() {
 
     override fun getIntrinsicHeight() = height
 
-    override fun draw(canvas: Canvas?) {
+    override fun draw(canvas: Canvas) {
         // no-op
     }
 

@@ -35,7 +35,7 @@ class PickPicAdapter(
     private val context: Context,
     manager: FragmentManager,
     private val dependencies: PickDependencies
-) : FragmentStatePagerAdapter(manager) {
+) : FragmentStatePagerAdapter(manager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     override fun getItem(position: Int) = buildFragment(getType(position))
 
