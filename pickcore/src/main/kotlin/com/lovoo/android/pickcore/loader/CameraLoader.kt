@@ -32,6 +32,7 @@ import androidx.exifinterface.media.ExifInterface
 import androidx.fragment.app.Fragment
 import com.lovoo.android.pickcore.contract.CameraDestination
 import com.lovoo.android.pickcore.contract.getUri
+import com.lovoo.android.pickcore.util.aboveQ
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -151,30 +152,51 @@ object CameraLoader {
 
             bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmapWidth, bitmapHeight, matrix, true)
 
-            // delete original
+            // Delete original
             File(filePath).delete()
 
-            // create new file
-            val file = File(filePath.replace(".jpg", "-2.jpg"))
+            // Get the app's name
+            val appName = context.getString(context.applicationInfo.labelRes)
+
+            // Calculate new relative path for Q and before Q
+            val newFilePath = if (aboveQ()) {
+                val tempPath = filePath.replace(".jpg", "-2.jpg")
+                val lastItem = tempPath.split("/").last()
+                tempPath.replaceAfterLast("/", "$appName/$lastItem")
+            } else {
+                filePath.replace(".jpg", "-2.jpg")
+            }
+
+            // Create the new file with specified path
+            val file = File(newFilePath)
 
             var fos: OutputStream? = null
             try {
-                if (GalleryLoader.isNewerThanQ) {
+                // Separate logic for Q and before Q
+                if (aboveQ()) {
+                    // Prepare file values for insertion
                     val values = ContentValues().apply {
                         put(MediaStore.Images.Media.DISPLAY_NAME, file.name)
                         put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
-                        put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
+                        put(MediaStore.Images.Media.RELATIVE_PATH, "${Environment.DIRECTORY_PICTURES}/$appName")
                     }
 
+                    // Prepare OutputStream for insertion
                     val uri: Uri? = context.contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
                     uri?.let { fos = context.contentResolver.openOutputStream(it) }
                 } else {
+                    // Create new FileOutputStream
                     fos = FileOutputStream(file)
                 }
+
+                // Insert file into gallery
                 fos?.let { bitmap.compress(Bitmap.CompressFormat.JPEG, 85, it) }
             } finally {
+                // Clear stream
                 fos?.flush()
                 fos?.close()
+
+                // Signal new image was added
                 updateMediaScanner(context, arrayOf(filePath, file.absolutePath), listener)
             }
         } catch (e: IOException) {
@@ -182,16 +204,18 @@ object CameraLoader {
         }
     }
 
+    // Notify listeners a new image was added
     private fun updateMediaScanner(context: Context, files: Array<String>, listener: MediaScannerConnection.OnScanCompletedListener) {
         MediaScannerConnection.scanFile(context, files, null) { path, uri ->
             listener.onScanCompleted(path, uri)
             context.sendBroadcast(Intent(INTENT_INVALIDATE_GALLERY))
-            context.sendBroadcast(
-                Intent(
-                    Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
-                    uri ?: Uri.parse(path)
+            if (!aboveQ()) {
+                context.sendBroadcast(Intent(
+                        Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri
+                        ?: Uri.parse(path)
                 )
-            )
+                )
+            }
         }
     }
 
