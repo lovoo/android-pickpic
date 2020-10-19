@@ -15,15 +15,18 @@
  */
 package com.lovoo.android.pickcore.loader
 
+import android.content.ContentUris
 import android.content.Context
 import android.database.Cursor
 import android.database.MatrixCursor
 import android.database.MergeCursor
 import android.database.sqlite.SQLiteDiskIOException
+import android.net.Uri
 import android.provider.MediaStore
 import androidx.loader.content.CursorLoader
 import com.lovoo.android.pickcore.Constants
 import com.lovoo.android.pickcore.model.GalleryLib
+import com.lovoo.android.pickcore.util.aboveQ
 
 /**
  * A [CursorLoader] implementation that fetch album information from external [MediaStore.Files]
@@ -33,18 +36,24 @@ import com.lovoo.android.pickcore.model.GalleryLib
  *
  * @see GalleryLoader.convert
  */
-class GalleryLoader(context: Context) :
+class GalleryLoader(
+    context: Context
+) : CursorLoader(
+    context,
+    query,
+    projection,
+    selection,
+    selectArguments,
+    "${MediaStore.Images.Media.DATE_TAKEN} DESC"
+) {
 
-    CursorLoader(
-        context,
-        query,
-        projection,
-        selection,
-        selectArguments,
-        "${MediaStore.Images.Media.DATE_TAKEN} DESC"
-    ) {
-
-    private val columns = arrayOf(
+    private val columns = if (aboveQ()) arrayOf(
+        MediaStore.Files.FileColumns._ID,
+        COLUMN_NAME_ID,
+        COLUMN_NAME_DISPLAY_NAME,
+        MediaStore.Images.Media._ID,
+        COLUMN_NAME_COUNT
+    ) else arrayOf(
         MediaStore.Files.FileColumns._ID,
         COLUMN_NAME_ID,
         COLUMN_NAME_DISPLAY_NAME,
@@ -53,26 +62,95 @@ class GalleryLoader(context: Context) :
     )
 
     override fun loadInBackground(): Cursor {
-        try {
+        return try {
             val galleries = super.loadInBackground()
             val allEntry = MatrixCursor(columns)
-
-            var totalCount = 0
-            var allAlbumCoverPath = ""
-
-            while (galleries?.moveToNext() == true) {
-                totalCount += galleries.getInt(galleries.getColumnIndex(COLUMN_NAME_COUNT))
+            if (aboveQ()) {
+                loadCursorPostQ(galleries, allEntry)
+            } else {
+                loadCursorPreQ(galleries, allEntry)
             }
-            if (galleries?.moveToFirst() == true) {
-                allAlbumCoverPath = galleries.getString(galleries.getColumnIndex(MediaStore.MediaColumns.DATA))
-            }
-
-            allEntry.addRow(arrayOf(-1, -1, Constants.All_FOLDER_NAME, allAlbumCoverPath, totalCount.toString()))
-
-            return MergeCursor(arrayOf(allEntry, galleries))
         } catch (brokenFileException: SQLiteDiskIOException) {
-            return MatrixCursor(columns)
+            MatrixCursor(columns)
         }
+    }
+
+    private fun loadCursorPreQ(galleries: Cursor?, allEntry: MatrixCursor): Cursor {
+        var totalCount = 0
+        var allAlbumCoverPath = ""
+
+        while (galleries?.moveToNext() == true) {
+            totalCount += galleries.getInt(galleries.getColumnIndex(COLUMN_NAME_COUNT))
+        }
+        if (galleries?.moveToFirst() == true) {
+            allAlbumCoverPath = galleries.getString(galleries.getColumnIndex(MediaStore.MediaColumns.DATA))
+        }
+
+        allEntry.addRow(arrayOf(-1, -1, Constants.All_FOLDER_NAME, allAlbumCoverPath, totalCount.toString()))
+
+        return MergeCursor(arrayOf(allEntry, galleries))
+    }
+
+    private fun loadCursorPostQ(galleries: Cursor?, allEntry: MatrixCursor): Cursor {
+        var totalCount = 0L
+        var allAlbumCoverUri: Uri? = null
+
+        // Pseudo GROUP BY
+        val countMap: MutableMap<Long, Long> = HashMap()
+        galleries?.let {
+            while (it.moveToNext()) {
+                val bucketId = it.getLong(it.getColumnIndex(COLUMN_NAME_ID))
+                var count = countMap[bucketId]
+                if (count == null) {
+                    count = 1L
+                } else {
+                    count++
+                }
+                countMap[bucketId] = count
+            }
+        }
+
+        val otherAlbums = MatrixCursor(columns)
+        galleries?.let {
+            if (it.moveToFirst()) {
+                allAlbumCoverUri = getUri(it)
+                val done: MutableSet<Long> = HashSet()
+                do {
+                    val bucketId = it.getLong(it.getColumnIndex(COLUMN_NAME_ID))
+                    if (done.contains(bucketId)) continue
+
+                    val fileId = it.getLong(it.getColumnIndex(MediaStore.Files.FileColumns._ID)).toString()
+                    val bucketDisplayName = it.getString(it.getColumnIndex(COLUMN_NAME_DISPLAY_NAME))
+                    val uri = getUri(it)
+                    val count = countMap[bucketId] ?: 0L
+
+                    otherAlbums.addRow(
+                        arrayOf(
+                            fileId,
+                            bucketId.toString(),
+                            bucketDisplayName,
+                            uri.toString(),
+                            count.toString()
+                        )
+                    )
+
+                    done.add(bucketId)
+                    totalCount += count
+                } while (it.moveToNext())
+            }
+        }
+
+        allEntry.addRow(
+            arrayOf(
+                -1,
+                -1,
+                Constants.All_FOLDER_NAME,
+                allAlbumCoverUri?.toString(),
+                totalCount
+            )
+        )
+
+        return MergeCursor(arrayOf<Cursor>(allEntry, otherAlbums))
     }
 
     companion object {
@@ -81,15 +159,21 @@ class GalleryLoader(context: Context) :
         private const val COLUMN_NAME_COUNT = "count"
 
         private val query = MediaStore.Files.getContentUri("external")
-        private val projection = arrayOf(
+        private val projection = if (aboveQ()) arrayOf(
             MediaStore.Files.FileColumns._ID,
             COLUMN_NAME_ID,
             COLUMN_NAME_DISPLAY_NAME,
-            MediaStore.MediaColumns.DATA,
-            "COUNT(*) AS $COLUMN_NAME_COUNT"
-        )
-        private const val group = ") GROUP BY ($COLUMN_NAME_ID"
-        private const val selection = "${MediaStore.Files.FileColumns.MEDIA_TYPE}=? AND ${MediaStore.MediaColumns.SIZE}>0$group"
+            MediaStore.Images.Media._ID
+        ) else
+            arrayOf(
+                MediaStore.Files.FileColumns._ID,
+                COLUMN_NAME_ID,
+                COLUMN_NAME_DISPLAY_NAME,
+                MediaStore.MediaColumns.DATA,
+                "COUNT(*) AS $COLUMN_NAME_COUNT"
+            )
+        private val group = if (aboveQ()) "" else ") GROUP BY ($COLUMN_NAME_ID"
+        private val selection = "${MediaStore.Files.FileColumns.MEDIA_TYPE}=? AND ${MediaStore.MediaColumns.SIZE}>0$group"
         private val selectArguments = arrayOf(MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE.toString())
 
         /**
@@ -106,11 +190,22 @@ class GalleryLoader(context: Context) :
          * @param cursor the [Cursor]
          * @return the [GalleryLib] object with the data from the [Cursor]
          */
-        fun convert(cursor: Cursor) = GalleryLib(
-            cursor.getString(cursor.getColumnIndex(GalleryLoader.COLUMN_NAME_ID)),
+        fun convert(cursor: Cursor) = if (aboveQ()) GalleryLib(
+            cursor.getString(cursor.getColumnIndex(COLUMN_NAME_ID)),
+            getUri(cursor)?.toString(),
+            cursor.getString(cursor.getColumnIndex(COLUMN_NAME_DISPLAY_NAME)),
+            cursor.getLong(cursor.getColumnIndex(COLUMN_NAME_COUNT))
+        ) else GalleryLib(
+            cursor.getString(cursor.getColumnIndex(COLUMN_NAME_ID)),
             cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DATA)),
-            cursor.getString(cursor.getColumnIndex(GalleryLoader.COLUMN_NAME_DISPLAY_NAME)),
-            cursor.getLong(cursor.getColumnIndex(GalleryLoader.COLUMN_NAME_COUNT))
+            cursor.getString(cursor.getColumnIndex(COLUMN_NAME_DISPLAY_NAME)),
+            cursor.getLong(cursor.getColumnIndex(COLUMN_NAME_COUNT))
         )
+
+        private fun getUri(cursor: Cursor): Uri? {
+            val id = cursor.getLong(cursor.getColumnIndex(MediaStore.Files.FileColumns._ID))
+            val contentUri: Uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+            return ContentUris.withAppendedId(contentUri, id)
+        }
     }
 }

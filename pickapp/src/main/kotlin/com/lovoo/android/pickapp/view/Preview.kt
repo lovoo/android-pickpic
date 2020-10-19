@@ -81,7 +81,7 @@ class Preview(
 
     private fun showPreview() {
         pager.let {
-            it.adapter = object : FragmentStatePagerAdapter(fragmentManager) {
+            it.adapter = object : FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
                 override fun getItem(position: Int) = PreviewFragment.createInstance(
                     position,
                     picker.getPickedUris().getOrNull(position)

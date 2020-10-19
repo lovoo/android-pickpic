@@ -17,6 +17,7 @@ package com.lovoo.android.pickapp.view
 
 import android.content.Context
 import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.graphics.Rect
 import android.net.Uri
 import android.os.Build
@@ -85,13 +86,13 @@ class Selectionbar(
             val color = getThemeColor(layout.context)
             var background = layout.selection_button_text.background.apply {
                 mutate()
-                setColorFilter(color, PorterDuff.Mode.SRC_IN)
+                colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN)
             }
             ViewCompat.setBackground(layout.selection_button_text, background)
 
             background = layout.selection_button_icon.background.apply {
                 mutate()
-                setColorFilter(color, PorterDuff.Mode.SRC_IN)
+                colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN)
             }
             ViewCompat.setBackground(layout.selection_button_icon, background)
         }
