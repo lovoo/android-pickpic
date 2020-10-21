@@ -210,10 +210,12 @@ object CameraLoader {
             listener.onScanCompleted(path, uri)
             context.sendBroadcast(Intent(INTENT_INVALIDATE_GALLERY))
             if (!aboveQ()) {
-                context.sendBroadcast(Intent(
-                        Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri
-                        ?: Uri.parse(path)
-                )
+                context.sendBroadcast(
+                    Intent(
+                        Intent.ACTION_MEDIA_SCANNER_SCAN_FILE,
+                        uri
+                            ?: Uri.parse(path)
+                    )
                 )
             }
         }

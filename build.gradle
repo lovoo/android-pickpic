@@ -29,7 +29,7 @@ buildscript {
     ext.orchestrator_version = "1.2.0"
     ext.androidX_test_version = "1.2.0"
 
-    ext.target_version = 29
+    ext.target_version = 30
     ext.min_version = 18
 
     def version = System.getenv("VERSION")
@@ -42,7 +42,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.3'
+        classpath 'com.android.tools.build:gradle:3.6.4'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'org.jetbrains.dokka:dokka-gradle-plugin:0.9.18'
         classpath 'com.diffplug.spotless:spotless-plugin-gradle:3.27.1'
