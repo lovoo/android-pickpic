@@ -20,6 +20,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
@@ -120,6 +121,15 @@ class PickPicCaptureFragment : DialogFragment() {
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == PERMISSION_REQUEST_CODE) {
+            val preferences = requireContext().getSharedPreferences(PREF_CATEGORY, Context.MODE_PRIVATE)
+            if (isR()) {
+                grantResults.forEach {
+                    preferences.edit().putBoolean(PREF_KEY_PERMISSION, it != PackageManager.PERMISSION_DENIED).apply()
+                }
+            } else {
+                preferences.edit().putBoolean(PREF_KEY_PERMISSION, false).apply()
+            }
+
             val deniedPermissions = Permission.getDeniedPermissions(requireActivity(), Permission.cameraPermissions.plus(Permission.galleryPermissions))
             if (deniedPermissions.isEmpty()) {
                 startCamera()
@@ -138,7 +148,6 @@ class PickPicCaptureFragment : DialogFragment() {
             if (!isFirstTime && deniedList.firstOrNull { it.second } != null) {
                 Permission.openSettings(requireActivity())
             } else {
-                preferences.edit().putBoolean(PREF_KEY_PERMISSION, false).apply()
                 val permissions = Array(deniedList.size) { i -> deniedList[i].first }
                 Permission.requestPermissions(this, PERMISSION_REQUEST_CODE, permissions)
             }
@@ -162,6 +171,8 @@ class PickPicCaptureFragment : DialogFragment() {
             CameraLoader.startCamera(requireContext(), this, CAMERA_REQUEST_CODE, it)
         }
     }
+
+    private fun isR() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
 
     companion object {
         private const val CAMERA_REQUEST_CODE = 2734
