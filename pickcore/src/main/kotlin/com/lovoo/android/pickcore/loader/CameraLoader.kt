@@ -28,6 +28,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
+import androidx.core.content.FileProvider
 import androidx.exifinterface.media.ExifInterface
 import androidx.fragment.app.Fragment
 import com.lovoo.android.pickcore.contract.CameraDestination
@@ -133,8 +134,8 @@ object CameraLoader {
 
             val shouldScale = scale < 0.9f
             val shouldRotate = degree % 360 != 0
-            if (!shouldScale && !shouldRotate) {
-                updateMediaScanner(context, arrayOf(filePath), listener)
+            if (!shouldScale && !shouldRotate && !aboveQ()) {
+                updateMediaScanner(context, arrayOf(filePath), null, listener)
                 return
             }
 
@@ -160,16 +161,17 @@ object CameraLoader {
 
             // Calculate new relative path for Q and before Q
             val newFilePath = if (aboveQ()) {
-                val tempPath = filePath.replace(".jpg", "-2.jpg")
+                val tempPath = filePath // .replace(".jpg", "-2.jpg")
                 val lastItem = tempPath.split("/").last()
                 tempPath.replaceAfterLast("/", "$appName/$lastItem")
             } else {
-                filePath.replace(".jpg", "-2.jpg")
+                filePath // .replace(".jpg", "-2.jpg")
             }
 
             // Create the new file with specified path
             val file = File(newFilePath)
 
+            var fileUri: Uri? = null
             var fos: OutputStream? = null
             try {
                 // Separate logic for Q and before Q
@@ -182,8 +184,8 @@ object CameraLoader {
                     }
 
                     // Prepare OutputStream for insertion
-                    val uri: Uri? = context.contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
-                    uri?.let { fos = context.contentResolver.openOutputStream(it) }
+                    fileUri = context.contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+                    fileUri?.let { fos = context.contentResolver.openOutputStream(it) }
                 } else {
                     // Create new FileOutputStream
                     fos = FileOutputStream(file)
@@ -197,7 +199,7 @@ object CameraLoader {
                 fos?.close()
 
                 // Signal new image was added
-                updateMediaScanner(context, arrayOf(filePath, file.absolutePath), listener)
+                updateMediaScanner(context, arrayOf(file.absolutePath), fileUri, listener)
             }
         } catch (e: IOException) {
             e.printStackTrace()
@@ -205,16 +207,13 @@ object CameraLoader {
     }
 
     // Notify listeners a new image was added
-    private fun updateMediaScanner(context: Context, files: Array<String>, listener: MediaScannerConnection.OnScanCompletedListener) {
+    private fun updateMediaScanner(context: Context, files: Array<String>, fileUri: Uri?, listener: MediaScannerConnection.OnScanCompletedListener) {
         MediaScannerConnection.scanFile(context, files, null) { path, uri ->
-            listener.onScanCompleted(path, uri)
+            val curUri = uri ?: fileUri ?: Uri.parse(path)
+            listener.onScanCompleted(path, curUri)
             context.sendBroadcast(Intent(INTENT_INVALIDATE_GALLERY))
             if (!aboveQ()) {
-                context.sendBroadcast(Intent(
-                        Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri
-                        ?: Uri.parse(path)
-                )
-                )
+                context.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, curUri))
             }
         }
     }
