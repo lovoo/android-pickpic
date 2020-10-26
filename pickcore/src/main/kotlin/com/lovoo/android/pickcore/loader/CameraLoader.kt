@@ -28,7 +28,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
-import androidx.core.content.FileProvider
 import androidx.exifinterface.media.ExifInterface
 import androidx.fragment.app.Fragment
 import com.lovoo.android.pickcore.contract.CameraDestination
@@ -178,8 +177,11 @@ object CameraLoader {
                 if (aboveQ()) {
                     // Prepare file values for insertion
                     val values = ContentValues().apply {
+                        val now = System.currentTimeMillis()
                         put(MediaStore.Images.Media.DISPLAY_NAME, file.name)
                         put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
+                        put(MediaStore.MediaColumns.DATE_ADDED, now)
+                        put(MediaStore.MediaColumns.DATE_TAKEN, now)
                         put(MediaStore.Images.Media.RELATIVE_PATH, "${Environment.DIRECTORY_PICTURES}/$appName")
                     }
 
