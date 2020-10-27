@@ -44,7 +44,7 @@ class GalleryLoader(
     projection,
     selection,
     selectArguments,
-    "${MediaStore.Images.Media.DATE_TAKEN} DESC"
+    "${MediaStore.Images.Media.DISPLAY_NAME} ASC"
 ) {
 
     private val columns = if (aboveQ()) arrayOf(
