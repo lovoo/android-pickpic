@@ -46,7 +46,7 @@ class PictureLoader(
     projection,
     getSelection(gallery),
     getSelectionArgs(gallery),
-    "${MediaStore.Images.Media.DATE_TAKEN} DESC"
+    "${MediaStore.Images.Media.DATE_ADDED} DESC"
 ) {
 
     private val cameraEngine: CameraEngine

@@ -34,7 +34,7 @@ buildscript {
 
     def version = System.getenv("VERSION")
     def code = System.getenv("VERSION_CODE")
-    ext.version_name = version == null ? "1.1.0" : version
+    ext.version_name = version == null ? "1.2.1" : version
     ext.version_code = code == null ? 10 : code.toInteger()
 
     repositories {
