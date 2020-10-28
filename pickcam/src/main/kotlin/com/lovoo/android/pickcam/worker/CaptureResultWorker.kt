@@ -30,7 +30,7 @@ import com.lovoo.android.pickcore.contract.CameraDestination
 import com.lovoo.android.pickcore.destination.PrivateDirectory
 import com.lovoo.android.pickcore.destination.moveToPublicDirectory
 import com.lovoo.android.pickcore.loader.CameraLoader
-import com.lovoo.android.pickcore.util.aboveQ
+import com.lovoo.android.pickcore.util.isMinimumQ
 import io.reactivex.Single
 import java.io.File
 
@@ -56,7 +56,7 @@ class CaptureResultWorker(
 
     override fun createWork(): Single<Result> {
         return Single.create<Result> { emitter ->
-            val file = if (isPublic || aboveQ()) inputFile else inputFile.moveToPublicDirectory().file
+            val file = if (isPublic || isMinimumQ()) inputFile else inputFile.moveToPublicDirectory().file
 
             if (file == null) {
                 context.sendBroadcast(Intent(INTENT_ACTION_ON_RESULT))

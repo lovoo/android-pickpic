@@ -39,6 +39,7 @@ import com.lovoo.android.pickcore.destination.PrivateDirectory
 import com.lovoo.android.pickcore.destination.PublicDirectory
 import com.lovoo.android.pickcore.loader.CameraLoader
 import com.lovoo.android.pickcore.permission.Permission
+import com.lovoo.android.pickcore.util.isMinimumR
 
 /**
  * Ready to use solution to handle Android Camera capture.
@@ -122,7 +123,7 @@ class PickPicCaptureFragment : DialogFragment() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == PERMISSION_REQUEST_CODE) {
             val preferences = requireContext().getSharedPreferences(PREF_CATEGORY, Context.MODE_PRIVATE)
-            if (isR()) {
+            if (isMinimumR()) {
                 grantResults.forEach {
                     preferences.edit().putBoolean(PREF_KEY_PERMISSION, it != PackageManager.PERMISSION_DENIED).apply()
                 }
@@ -171,8 +172,6 @@ class PickPicCaptureFragment : DialogFragment() {
             CameraLoader.startCamera(requireContext(), this, CAMERA_REQUEST_CODE, it)
         }
     }
-
-    private fun isR() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
 
     companion object {
         private const val CAMERA_REQUEST_CODE = 2734
