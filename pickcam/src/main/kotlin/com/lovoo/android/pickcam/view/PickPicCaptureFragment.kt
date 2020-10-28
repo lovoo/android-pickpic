@@ -20,6 +20,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
@@ -38,6 +39,7 @@ import com.lovoo.android.pickcore.destination.PrivateDirectory
 import com.lovoo.android.pickcore.destination.PublicDirectory
 import com.lovoo.android.pickcore.loader.CameraLoader
 import com.lovoo.android.pickcore.permission.Permission
+import com.lovoo.android.pickcore.util.isMinimumR
 
 /**
  * Ready to use solution to handle Android Camera capture.
@@ -120,6 +122,15 @@ class PickPicCaptureFragment : DialogFragment() {
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == PERMISSION_REQUEST_CODE) {
+            val preferences = requireContext().getSharedPreferences(PREF_CATEGORY, Context.MODE_PRIVATE)
+            if (isMinimumR()) {
+                grantResults.forEach {
+                    preferences.edit().putBoolean(PREF_KEY_PERMISSION, it != PackageManager.PERMISSION_DENIED).apply()
+                }
+            } else {
+                preferences.edit().putBoolean(PREF_KEY_PERMISSION, false).apply()
+            }
+
             val deniedPermissions = Permission.getDeniedPermissions(requireActivity(), Permission.cameraPermissions.plus(Permission.galleryPermissions))
             if (deniedPermissions.isEmpty()) {
                 startCamera()
@@ -138,7 +149,6 @@ class PickPicCaptureFragment : DialogFragment() {
             if (!isFirstTime && deniedList.firstOrNull { it.second } != null) {
                 Permission.openSettings(requireActivity())
             } else {
-                preferences.edit().putBoolean(PREF_KEY_PERMISSION, false).apply()
                 val permissions = Array(deniedList.size) { i -> deniedList[i].first }
                 Permission.requestPermissions(this, PERMISSION_REQUEST_CODE, permissions)
             }

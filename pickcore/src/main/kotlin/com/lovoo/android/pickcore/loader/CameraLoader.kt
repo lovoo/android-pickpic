@@ -32,7 +32,7 @@ import androidx.exifinterface.media.ExifInterface
 import androidx.fragment.app.Fragment
 import com.lovoo.android.pickcore.contract.CameraDestination
 import com.lovoo.android.pickcore.contract.getUri
-import com.lovoo.android.pickcore.util.aboveQ
+import com.lovoo.android.pickcore.util.isMinimumQ
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -133,7 +133,7 @@ object CameraLoader {
 
             val shouldScale = scale < 0.9f
             val shouldRotate = degree % 360 != 0
-            if (!shouldScale && !shouldRotate && !aboveQ()) {
+            if (!shouldScale && !shouldRotate && !isMinimumQ()) {
                 updateMediaScanner(context, arrayOf(filePath), null, listener)
                 return
             }
@@ -159,7 +159,7 @@ object CameraLoader {
             val appName = context.getString(context.applicationInfo.labelRes)
 
             // Calculate new relative path for Q and before Q
-            val newFilePath = if (aboveQ()) {
+            val newFilePath = if (isMinimumQ()) {
                 val tempPath = filePath // .replace(".jpg", "-2.jpg")
                 val lastItem = tempPath.split("/").last()
                 tempPath.replaceAfterLast("/", "$appName/$lastItem")
@@ -174,7 +174,7 @@ object CameraLoader {
             var fos: OutputStream? = null
             try {
                 // Separate logic for Q and before Q
-                if (aboveQ()) {
+                if (isMinimumQ()) {
                     // Prepare file values for insertion
                     val values = ContentValues().apply {
                         val now = System.currentTimeMillis()
@@ -214,7 +214,7 @@ object CameraLoader {
             val curUri = uri ?: fileUri ?: Uri.parse(path)
             listener.onScanCompleted(path, curUri)
             context.sendBroadcast(Intent(INTENT_INVALIDATE_GALLERY))
-            if (!aboveQ()) {
+            if (!isMinimumQ()) {
                 context.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, curUri))
             }
         }
