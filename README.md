@@ -20,6 +20,7 @@ What PickPic will not handle are animated pictures and videos.
 ## Screenshot
 
  <img src="/images/screenshot.png" width="50%" height="50%" alt="Screenshot">
+ <img src="/images/screenshot2.png" width="50%" height="50%" alt="Screenshot">
  
  ## Import 
  PickPic is hosted on Jcenter. Add this to your project's `build.gradle`.
