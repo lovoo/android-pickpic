@@ -32,7 +32,7 @@ import androidx.exifinterface.media.ExifInterface
 import androidx.fragment.app.Fragment
 import com.lovoo.android.pickcore.contract.CameraDestination
 import com.lovoo.android.pickcore.contract.getUri
-import com.lovoo.android.pickcore.util.aboveQ
+import com.lovoo.android.pickcore.util.isMinimumQ
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -133,8 +133,8 @@ object CameraLoader {
 
             val shouldScale = scale < 0.9f
             val shouldRotate = degree % 360 != 0
-            if (!shouldScale && !shouldRotate) {
-                updateMediaScanner(context, arrayOf(filePath), listener)
+            if (!shouldScale && !shouldRotate && !isMinimumQ()) {
+                updateMediaScanner(context, arrayOf(filePath), null, listener)
                 return
             }
 
@@ -159,31 +159,35 @@ object CameraLoader {
             val appName = context.getString(context.applicationInfo.labelRes)
 
             // Calculate new relative path for Q and before Q
-            val newFilePath = if (aboveQ()) {
-                val tempPath = filePath.replace(".jpg", "-2.jpg")
+            val newFilePath = if (isMinimumQ()) {
+                val tempPath = filePath // .replace(".jpg", "-2.jpg")
                 val lastItem = tempPath.split("/").last()
                 tempPath.replaceAfterLast("/", "$appName/$lastItem")
             } else {
-                filePath.replace(".jpg", "-2.jpg")
+                filePath // .replace(".jpg", "-2.jpg")
             }
 
             // Create the new file with specified path
             val file = File(newFilePath)
 
+            var fileUri: Uri? = null
             var fos: OutputStream? = null
             try {
                 // Separate logic for Q and before Q
-                if (aboveQ()) {
+                if (isMinimumQ()) {
                     // Prepare file values for insertion
                     val values = ContentValues().apply {
+                        val now = System.currentTimeMillis()
                         put(MediaStore.Images.Media.DISPLAY_NAME, file.name)
                         put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
+                        put(MediaStore.MediaColumns.DATE_ADDED, now)
+                        put(MediaStore.MediaColumns.DATE_TAKEN, now)
                         put(MediaStore.Images.Media.RELATIVE_PATH, "${Environment.DIRECTORY_PICTURES}/$appName")
                     }
 
                     // Prepare OutputStream for insertion
-                    val uri: Uri? = context.contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
-                    uri?.let { fos = context.contentResolver.openOutputStream(it) }
+                    fileUri = context.contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+                    fileUri?.let { fos = context.contentResolver.openOutputStream(it) }
                 } else {
                     // Create new FileOutputStream
                     fos = FileOutputStream(file)
@@ -197,7 +201,7 @@ object CameraLoader {
                 fos?.close()
 
                 // Signal new image was added
-                updateMediaScanner(context, arrayOf(filePath, file.absolutePath), listener)
+                updateMediaScanner(context, arrayOf(file.absolutePath), fileUri, listener)
             }
         } catch (e: IOException) {
             e.printStackTrace()
@@ -205,16 +209,13 @@ object CameraLoader {
     }
 
     // Notify listeners a new image was added
-    private fun updateMediaScanner(context: Context, files: Array<String>, listener: MediaScannerConnection.OnScanCompletedListener) {
+    private fun updateMediaScanner(context: Context, files: Array<String>, fileUri: Uri?, listener: MediaScannerConnection.OnScanCompletedListener) {
         MediaScannerConnection.scanFile(context, files, null) { path, uri ->
-            listener.onScanCompleted(path, uri)
+            val curUri = uri ?: fileUri ?: Uri.parse(path)
+            listener.onScanCompleted(path, curUri)
             context.sendBroadcast(Intent(INTENT_INVALIDATE_GALLERY))
-            if (!aboveQ()) {
-                context.sendBroadcast(Intent(
-                        Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri
-                        ?: Uri.parse(path)
-                )
-                )
+            if (!isMinimumQ()) {
+                context.sendBroadcast(Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, curUri))
             }
         }
     }

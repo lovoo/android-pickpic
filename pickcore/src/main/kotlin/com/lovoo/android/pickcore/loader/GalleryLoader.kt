@@ -26,7 +26,7 @@ import android.provider.MediaStore
 import androidx.loader.content.CursorLoader
 import com.lovoo.android.pickcore.Constants
 import com.lovoo.android.pickcore.model.GalleryLib
-import com.lovoo.android.pickcore.util.aboveQ
+import com.lovoo.android.pickcore.util.isMinimumQ
 
 /**
  * A [CursorLoader] implementation that fetch album information from external [MediaStore.Files]
@@ -44,10 +44,10 @@ class GalleryLoader(
     projection,
     selection,
     selectArguments,
-    "${MediaStore.Images.Media.DATE_TAKEN} DESC"
+    "${MediaStore.Images.Media.DISPLAY_NAME} ASC"
 ) {
 
-    private val columns = if (aboveQ()) arrayOf(
+    private val columns = if (isMinimumQ()) arrayOf(
         MediaStore.Files.FileColumns._ID,
         COLUMN_NAME_ID,
         COLUMN_NAME_DISPLAY_NAME,
@@ -65,7 +65,7 @@ class GalleryLoader(
         return try {
             val galleries = super.loadInBackground()
             val allEntry = MatrixCursor(columns)
-            if (aboveQ()) {
+            if (isMinimumQ()) {
                 loadCursorPostQ(galleries, allEntry)
             } else {
                 loadCursorPreQ(galleries, allEntry)
@@ -159,7 +159,7 @@ class GalleryLoader(
         private const val COLUMN_NAME_COUNT = "count"
 
         private val query = MediaStore.Files.getContentUri("external")
-        private val projection = if (aboveQ()) arrayOf(
+        private val projection = if (isMinimumQ()) arrayOf(
             MediaStore.Files.FileColumns._ID,
             COLUMN_NAME_ID,
             COLUMN_NAME_DISPLAY_NAME,
@@ -172,7 +172,7 @@ class GalleryLoader(
                 MediaStore.MediaColumns.DATA,
                 "COUNT(*) AS $COLUMN_NAME_COUNT"
             )
-        private val group = if (aboveQ()) "" else ") GROUP BY ($COLUMN_NAME_ID"
+        private val group = if (isMinimumQ()) "" else ") GROUP BY ($COLUMN_NAME_ID"
         private val selection = "${MediaStore.Files.FileColumns.MEDIA_TYPE}=? AND ${MediaStore.MediaColumns.SIZE}>0$group"
         private val selectArguments = arrayOf(MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE.toString())
 
@@ -190,7 +190,7 @@ class GalleryLoader(
          * @param cursor the [Cursor]
          * @return the [GalleryLib] object with the data from the [Cursor]
          */
-        fun convert(cursor: Cursor) = if (aboveQ()) GalleryLib(
+        fun convert(cursor: Cursor) = if (isMinimumQ()) GalleryLib(
             cursor.getString(cursor.getColumnIndex(COLUMN_NAME_ID)),
             getUri(cursor)?.toString(),
             cursor.getString(cursor.getColumnIndex(COLUMN_NAME_DISPLAY_NAME)),
