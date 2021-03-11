@@ -17,6 +17,12 @@ android {
         targetSdkVersion target_version
         versionCode version_code
         versionName version_name
+        multiDexEnabled true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     buildTypes {

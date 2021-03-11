@@ -20,5 +20,3 @@ import android.os.Build
 fun isMinimumQ() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
 
 fun isMinimumR() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
-
-
