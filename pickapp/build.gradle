@@ -2,10 +2,6 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-
-ext.moduleName = 'pickapp'
-ext.moduleDescription = 'A ready to use PickPicActivity that can be configured'
-apply from: '../submodules.gradle'
 apply from: '../spotless.gradle'
 
 
@@ -17,6 +13,12 @@ android {
         targetSdkVersion target_version
         versionCode version_code
         versionName version_name
+        multiDexEnabled true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     buildTypes {

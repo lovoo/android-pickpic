@@ -2,10 +2,6 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-
-ext.moduleName = 'pickcam'
-ext.moduleDescription = 'The camera capture implementation'
-apply from: '../submodules.gradle'
 apply from: '../spotless.gradle'
 
 android {
@@ -16,6 +12,7 @@ android {
         targetSdkVersion target_version
         versionCode version_code
         versionName version_name
+        multiDexEnabled true
     }
 
     compileOptions {
@@ -48,7 +45,6 @@ dependencies {
 
     implementation "androidx.appcompat:appcompat:$app_compat_version"
     implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
-    implementation "androidx.work:work-runtime:$arch_worker_version"
     implementation "androidx.work:work-runtime-ktx:$arch_worker_version"
     implementation "androidx.work:work-rxjava2:$arch_worker_version"
 

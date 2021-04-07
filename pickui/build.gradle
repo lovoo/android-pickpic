@@ -1,10 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-
-ext.moduleName = 'pickui'
-ext.moduleDescription = 'The basic UI implementation'
-apply from: '../submodules.gradle'
 apply from: '../spotless.gradle'
 
 android {
@@ -16,6 +12,12 @@ android {
         versionCode version_code
         versionName version_name
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     buildTypes {
@@ -41,7 +43,7 @@ dependencies {
     implementation "androidx.recyclerview:recyclerview:$recycler_view_version"
     implementation "androidx.vectordrawable:vectordrawable:$vector_drawable_version"
     implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
-    implementation "androidx.lifecycle:lifecycle-livedata:$arch_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$arch_version"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     api project(path: ':pickcore')

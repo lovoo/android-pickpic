@@ -1,9 +1,5 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-
-ext.moduleName = 'pickcore'
-ext.moduleDescription = 'The base of PickPick'
-apply from: '../submodules.gradle'
 apply from: '../spotless.gradle'
 
 android {
@@ -14,6 +10,12 @@ android {
         targetSdkVersion target_version
         versionCode version_code
         versionName version_name
+        multiDexEnabled true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     buildTypes {
@@ -38,7 +40,7 @@ dependencies {
     implementation "androidx.exifinterface:exifinterface:$exif_version"
     implementation "androidx.appcompat:appcompat:$app_compat_version"
     implementation "androidx.recyclerview:recyclerview:$recycler_view_version"
-    implementation "androidx.lifecycle:lifecycle-livedata:$arch_version"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$arch_version"
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
