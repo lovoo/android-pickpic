@@ -24,8 +24,6 @@ import android.os.Build
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AccelerateInterpolator
-import android.view.animation.DecelerateInterpolator
 import androidx.annotation.DrawableRes
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.ViewCompat
@@ -54,9 +52,8 @@ class Selectionbar(
     private val dependingViews: Array<View>
 ) {
 
-    private val adapter = SelectionAdapter()
+    private val adapter = SelectionAdapter(picker.config.maxCount)
     private val subscriptions = CompositeDisposable()
-    private var layoutManager: ReverseLayoutManager? = null
 
     init {
         adapter.onClickListener = { _, picture ->
@@ -64,8 +61,7 @@ class Selectionbar(
         }
 
         layout.selection_list.let {
-            layoutManager = ReverseLayoutManager(it.context, LinearLayoutManager.HORIZONTAL, true)
-            it.layoutManager = layoutManager
+            it.layoutManager = LinearLayoutManager(it.context, LinearLayoutManager.HORIZONTAL, false)
 
             it.addItemDecoration(object : RecyclerView.ItemDecoration() {
                 var padding: Int = -1
@@ -98,17 +94,11 @@ class Selectionbar(
         }
 
         layout.post {
-            // check if no one add a child in the meantime
-            if (adapter.itemCount == 0) {
-                // set start values for layout animation when layout cycle pass
-                layout.alpha = 0f
-                layout.y += layout.measuredHeight.toFloat()
-                layout.visibility = View.GONE
-            }
+            updateDependingViews(layout.measuredHeight)
         }
 
         registerPicker()
-        updateView()
+        updateSelectionText()
     }
 
     /**
@@ -167,22 +157,9 @@ class Selectionbar(
      * @param uri that should be added
      */
     private fun addThumbnail(uri: Uri) {
-        adapter.add(uri)
-        updateView()
-
-        if (layout.visibility == View.INVISIBLE) {
-            // triggered before layout pass --> visible without animation
-            layout.visibility = View.VISIBLE
-            layout.post { updateDependingViews(layout.measuredHeight) }
-        } else if (layout.visibility == View.GONE) {
-            layout.animate()
-                .alpha(1f)
-                .yBy(-layout.measuredHeight.toFloat())
-                .setInterpolator(DecelerateInterpolator(2f))
-                .withEndAction { updateDependingViews(layout.measuredHeight) }
-                .start()
-            layout.visibility = View.VISIBLE
-        }
+        val index = adapter.add(uri)
+        if (index >= 0) scrollTo(index)
+        updateSelectionText()
     }
 
     /**
@@ -194,17 +171,7 @@ class Selectionbar(
      */
     private fun removeThumbnail(uri: Uri) {
         adapter.remove(uri)
-        updateView()
-
-        if (adapter.itemCount == 0) {
-            updateDependingViews(0)
-            layout.animate()
-                .alpha(0f)
-                .yBy(layout.measuredHeight.toFloat())
-                .setInterpolator(AccelerateInterpolator(2f))
-                .withEndAction { layout.visibility = View.GONE }
-                .start()
-        }
+        updateSelectionText()
     }
 
     private fun scrollTo(position: Int?) {
@@ -219,14 +186,12 @@ class Selectionbar(
             picker.getObservable().subscribe(
                 { state ->
                     when (state) {
-                        is Picker.AddState -> addThumbnail(state.uri)
-                        is Picker.RemoveState -> removeThumbnail(state.uri)
-                        is Picker.SelectionState -> {
+                        is Picker.State.Add -> addThumbnail(state.uri)
+                        is Picker.State.Remove -> removeThumbnail(state.uri)
+                        is Picker.State.Select -> {
                             adapter.selectedUri = state.uri
-                            layoutManager?.scrollEnabled = state.uri == null
                             if (state.position != -1) {
-                                // scroll to reverse position
-                                scrollTo(adapter.itemCount - 1 - state.position)
+                                scrollTo(state.position)
                             }
                         }
                     }
@@ -236,15 +201,14 @@ class Selectionbar(
         )
     }
 
-    private fun updateView() {
+    private fun updateSelectionText() {
         val res = layout.resources
-        val selected = adapter.itemCount
+        val selected = adapter.getListCount()
         val requested = picker.config.minCount - selected
 
         val text = when {
-            selected >= picker.config.maxCount -> res.getQuantityString(R.plurals.pickpic_label_selection_max, picker.config.maxCount, picker.config.maxCount)
             requested > 0 -> res.getQuantityString(R.plurals.pickpic_label_selection_more, requested, requested)
-            else -> res.getQuantityString(R.plurals.pickpic_label_selection_count, selected, selected)
+            else -> res.getString(R.string.pickpic_label_count_of_max_selected, selected, picker.config.maxCount)
         }
 
         layout.selection_text.text = text

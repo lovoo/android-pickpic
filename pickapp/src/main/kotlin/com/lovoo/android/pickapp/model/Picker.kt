@@ -61,11 +61,11 @@ class Picker(
         if (map.remove(uri) == null) {
             if (verifyPicking()) {
                 map[uri] = gallery
-                pickState.onNext(AddState(uri, gallery))
+                pickState.onNext(State.Add(uri, gallery))
                 return true
             }
         } else {
-            pickState.onNext(RemoveState(uri, gallery))
+            pickState.onNext(State.Remove(uri, gallery))
             return true
         }
 
@@ -99,7 +99,7 @@ class Picker(
         val gallery = map.remove(uri)
 
         if (gallery != null) {
-            pickState.onNext(RemoveState(uri, gallery))
+            pickState.onNext(State.Remove(uri, gallery))
             return true
         }
 
@@ -125,7 +125,7 @@ class Picker(
     }
 
     private fun select(position: Int, uri: Uri?) {
-        pickState.onNext(SelectionState(position, uri))
+        pickState.onNext(State.Select(position, uri))
     }
 
     private fun verifyPicking() = map.size < config.maxCount
@@ -139,38 +139,38 @@ class Picker(
         val maxCount: Int = 1
     )
 
-    open class State
+    sealed class State {
+        /**
+         * State that notify over selection change within the picked items.
+         *
+         * @param position the item position within the selection or -1
+         * @param uri the selected [Uri] or null if selection is cleared
+         */
+        data class Select(
+            val position: Int,
+            val uri: Uri?
+        ) : State()
 
-    /**
-     * State that notify over selection change within the picked items.
-     *
-     * @param position the item position within the selection or -1
-     * @param uri the selected [Uri] or null if selection is cleared
-     */
-    data class SelectionState(
-        val position: Int,
-        val uri: Uri?
-    ) : State()
+        /**
+         * State that notifies that a new item was picked.
+         *
+         * @param uri the [Uri]
+         * @param gallery the [Gallery] of the picture
+         */
+        data class Add(
+            val uri: Uri,
+            val gallery: Gallery
+        ) : State()
 
-    /**
-     * State that notifies that a new item was picked.
-     *
-     * @param uri the [Uri]
-     * @param gallery the [Gallery] of the picture
-     */
-    data class AddState(
-        val uri: Uri,
-        val gallery: Gallery
-    ) : State()
-
-    /**
-     * State that notifies that a picked item was removed.
-     *
-     * @param uri the [Uri]
-     * @param gallery the [Gallery] of the picture
-     */
-    data class RemoveState(
-        val uri: Uri,
-        val gallery: Gallery
-    ) : State()
+        /**
+         * State that notifies that a picked item was removed.
+         *
+         * @param uri the [Uri]
+         * @param gallery the [Gallery] of the picture
+         */
+        data class Remove(
+            val uri: Uri,
+            val gallery: Gallery
+        ) : State()
+    }
 }

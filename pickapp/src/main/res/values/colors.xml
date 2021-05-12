@@ -8,11 +8,12 @@
     <color name="pickpic_subtext">#999</color>
     <color name="pickpic_text_actionbar">#777</color>
 
-    <color name="pickpic_background">#e6e6e6</color>
+    <color name="pickpic_background">#fff</color>
     <color name="pickpic_background_item">#777</color>
     <color name="pickpic_background_toolbar">#fff</color>
     <color name="pickpic_background_overlay">#fff</color>
     <color name="pickpic_selection_overlay">#bfff</color>
+    <color name="pickpic_selection_thumbnail_background">#f2f2f7</color>
 
     <color name="pickpic_stroke">#d7d7d7</color>
     <color name="pickpic_disabled">#e6e6e6</color>

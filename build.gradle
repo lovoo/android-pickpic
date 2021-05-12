@@ -54,13 +54,19 @@ buildscript {
             }
         }
         maven {
+            url 'https://jitpack.io'
+            content {
+                includeGroupByRegex "com\\.github\\.lovoo\\.android\\.pickpic.*"
+            }
+        }
+        maven {
             url 'https://lovoo.jfrog.io/artifactory/libs-snapshot'
             credentials {
                 username artifactory_user
                 password artifactory_pwd
             }
             content {
-                includeGroupByRegex "com\\.lovoo\\.android\\.pickpic.*"
+                excludeGroupByRegex "com\\.lovoo\\.android\\.pickpic.*"
             }
         }
     }
@@ -80,7 +86,7 @@ allprojects {
     apply plugin: 'com.jfrog.artifactory'
     apply plugin: 'maven-publish'
 
-    setGroup('com.lovoo.android.pickpic')
+    setGroup('com.github.lovoo.android.pickpic')
     setVersion(version_name)
 
     repositories {
