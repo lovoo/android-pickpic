@@ -2,7 +2,7 @@
 
 # galleries
 
-`var galleries: `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<Gallery>` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/adapter/FbGalleryAdapter.kt#L35)
+`var galleries: `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<Gallery>` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/adapter/FbGalleryAdapter.kt#L51)
 
 Non mutable list of [Gallery](#)s.
 Every set will notify adapter.

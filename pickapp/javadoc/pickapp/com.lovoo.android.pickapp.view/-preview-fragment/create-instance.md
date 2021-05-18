@@ -2,7 +2,7 @@
 
 # createInstance
 
-`fun createInstance(position: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`, uri: Uri?): `[`PreviewFragment`](index.md) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/src/main/kotlin/com/lovoo/android/pickapp/view/PreviewFragment.kt#L70)
+`fun createInstance(position: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`, uri: Uri?): `[`PreviewFragment`](index.md) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/pickapp/src/main/kotlin/com/lovoo/android/pickapp/view/PreviewFragment.kt#L86)
 
 Create a new instance of [PreviewFragment](index.md) and set argument.
 

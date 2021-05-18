@@ -2,7 +2,7 @@
 
 # CameraDestination
 
-`interface CameraDestination : Parcelable` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/src/main/kotlin/com/lovoo/android/pickcore/contract/CameraDestination.kt#L19)
+`interface CameraDestination : Parcelable` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/src/main/kotlin/com/lovoo/android/pickcore/contract/CameraDestination.kt#L35)
 
 Model class that represents a destination for captured images.
 

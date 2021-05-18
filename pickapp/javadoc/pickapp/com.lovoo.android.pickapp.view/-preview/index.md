@@ -2,10 +2,10 @@
 
 # Preview
 
-`class Preview` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/src/main/kotlin/com/lovoo/android/pickapp/view/Preview.kt#L20)
+`class Preview` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/pickapp/src/main/kotlin/com/lovoo/android/pickapp/view/Preview.kt#L35)
 
 UI extension to handle PickPicActivities Preview ViewPager.
-It observes [Picker.SelectionState](../../com.lovoo.android.pickapp.model/-picker/-selection-state/index.md) changes and show, update or hide the Preview.
+It observes [Picker.State](../../com.lovoo.android.pickapp.model/-picker/-state/index.md) changes and show, update or hide the Preview.
 You have to call destroy if the UI is removed.
 
 ### Parameters
@@ -20,7 +20,7 @@ You have to call destroy if the UI is removed.
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `Preview(pager: ViewPager, fragmentManager: FragmentManager, picker: `[`Picker`](../../com.lovoo.android.pickapp.model/-picker/index.md)`)`<br>UI extension to handle PickPicActivities Preview ViewPager. It observes [Picker.SelectionState](../../com.lovoo.android.pickapp.model/-picker/-selection-state/index.md) changes and show, update or hide the Preview. You have to call destroy if the UI is removed. |
+| [&lt;init&gt;](-init-.md) | `Preview(pager: ViewPager, fragmentManager: FragmentManager, picker: `[`Picker`](../../com.lovoo.android.pickapp.model/-picker/index.md)`)`<br>UI extension to handle PickPicActivities Preview ViewPager. It observes [Picker.State](../../com.lovoo.android.pickapp.model/-picker/-state/index.md) changes and show, update or hide the Preview. You have to call destroy if the UI is removed. |
 
 ### Properties
 

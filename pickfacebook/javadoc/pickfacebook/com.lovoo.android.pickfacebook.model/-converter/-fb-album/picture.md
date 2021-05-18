@@ -2,7 +2,7 @@
 
 # picture
 
-`val picture: `[`Converter.FbAlbumData`](../-fb-album-data/index.md)`?` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/model/Converter.kt#L71)
+`val picture: `[`Converter.FbAlbumData`](../-fb-album-data/index.md)`?` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/model/Converter.kt#L96)
 
 the album data
 

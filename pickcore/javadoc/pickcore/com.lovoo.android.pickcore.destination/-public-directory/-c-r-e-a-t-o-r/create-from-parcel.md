@@ -2,4 +2,4 @@
 
 # createFromParcel
 
-`fun createFromParcel(parcel: Parcel): `[`PublicDirectory`](../index.md) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/src/main/kotlin/com/lovoo/android/pickcore/destination/PublicDirectory.kt#L40)
+`fun createFromParcel(parcel: Parcel): `[`PublicDirectory`](../index.md) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/src/main/kotlin/com/lovoo/android/pickcore/destination/PublicDirectory.kt#L55)

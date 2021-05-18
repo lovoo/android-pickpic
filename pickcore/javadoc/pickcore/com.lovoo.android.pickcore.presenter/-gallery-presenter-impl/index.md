@@ -2,7 +2,7 @@
 
 # GalleryPresenterImpl
 
-`class GalleryPresenterImpl : `[`GalleryPresenter`](../../com.lovoo.android.pickcore.contract/-gallery-presenter/index.md) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/src/main/kotlin/com/lovoo/android/pickcore/presenter/GalleryPresenterImpl.kt#L23)
+`class GalleryPresenterImpl : `[`GalleryPresenter`](../../com.lovoo.android.pickcore.contract/-gallery-presenter/index.md) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/src/main/kotlin/com/lovoo/android/pickcore/presenter/GalleryPresenterImpl.kt#L38)
 
 Implementation of [GalleryPresenter](../../com.lovoo.android.pickcore.contract/-gallery-presenter/index.md) for Fragments to load the device galleries.
 Don't forget to forward these events:

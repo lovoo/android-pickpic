@@ -10,3 +10,4 @@ com.lovoo.android.pickcore.loader
 com.lovoo.android.pickcore.model
 com.lovoo.android.pickcore.permission
 com.lovoo.android.pickcore.presenter
+com.lovoo.android.pickcore.util

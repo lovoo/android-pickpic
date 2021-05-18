@@ -2,7 +2,7 @@
 
 # clear
 
-`fun clear(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/adapter/FbPictureAdapter.kt#L85)
+`fun clear(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/adapter/FbPictureAdapter.kt#L100)
 
 Clear the whole list of [FbPicture](../../com.lovoo.android.pickfacebook.model/-fb-picture/index.md)s
 

@@ -2,7 +2,7 @@
 
 # PickPicProvider
 
-`object PickPicProvider` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/src/main/kotlin/com/lovoo/android/pickcore/PickPicProvider.kt#L47)
+`object PickPicProvider` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/src/main/kotlin/com/lovoo/android/pickcore/PickPicProvider.kt#L62)
 
 Object that allows at runtime to change core feature from PickPic.
 If you use [com.lovoo.android.pickapp.view.PickPicActivity](#) you don`t need to provide anything on your own.

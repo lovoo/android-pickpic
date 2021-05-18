@@ -2,7 +2,7 @@
 
 # User
 
-`data class User` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/Facebook.kt#L204)
+`data class User` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/Facebook.kt#L222)
 
 ### Parameters
 

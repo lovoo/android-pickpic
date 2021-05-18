@@ -2,4 +2,4 @@
 
 # getLifeCycle
 
-`fun getLifeCycle(): `[`GalleryFragment`](index.md) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickui/src/main/kotlin/com/lovoo/android/pickui/view/GalleryFragment.kt#L111)
+`fun getLifeCycle(): `[`GalleryFragment`](index.md) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickui/pickui/src/main/kotlin/com/lovoo/android/pickui/view/GalleryFragment.kt#L132)

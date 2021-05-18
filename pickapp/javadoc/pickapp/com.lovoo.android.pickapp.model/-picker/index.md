@@ -2,7 +2,7 @@
 
 # Picker
 
-`class Picker` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/src/main/kotlin/com/lovoo/android/pickapp/model/Picker.kt#L17)
+`class Picker` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/pickapp/src/main/kotlin/com/lovoo/android/pickapp/model/Picker.kt#L32)
 
 The data source for PickPicActivity.
 It holds a map of picked Uris with the depending [Gallery](#).
@@ -16,11 +16,8 @@ It holds a map of picked Uris with the depending [Gallery](#).
 
 | Name | Summary |
 |---|---|
-| [AddState](-add-state/index.md) | `data class AddState : `[`Picker.State`](-state/index.md)<br>State that notifies that a new item was picked. |
 | [PickConfig](-pick-config/index.md) | `data class PickConfig` |
-| [RemoveState](-remove-state/index.md) | `data class RemoveState : `[`Picker.State`](-state/index.md)<br>State that notifies that a picked item was removed. |
-| [SelectionState](-selection-state/index.md) | `data class SelectionState : `[`Picker.State`](-state/index.md)<br>State that notify over selection change within the picked items. |
-| [State](-state/index.md) | `class State` |
+| [State](-state/index.md) | `sealed class State` |
 
 ### Constructors
 

@@ -2,7 +2,7 @@
 
 # CREATOR
 
-`companion object CREATOR : Creator<`[`PrivateDirectory`](../index.md)`>` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/src/main/kotlin/com/lovoo/android/pickcore/destination/PrivateDirectory.kt#L46)
+`companion object CREATOR : Creator<`[`PrivateDirectory`](../index.md)`>` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/src/main/kotlin/com/lovoo/android/pickcore/destination/PrivateDirectory.kt#L60)
 
 ### Companion Object Functions
 

@@ -2,5 +2,5 @@
 
 # VERSION_NAME
 
-`static val VERSION_NAME: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/build/generated/source/buildConfig/debug/com/lovoo/android/pickcore/BuildConfig.java#L17)
-`static val VERSION_NAME: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/build/generated/source/buildConfig/debug/com/lovoo/android/pickcore/BuildConfig.java#L17)
+`static val VERSION_NAME: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/build/generated/source/buildConfig/debug/com/lovoo/android/pickcore/BuildConfig.java#L17)
+`static val VERSION_NAME: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/build/generated/source/buildConfig/debug/com/lovoo/android/pickcore/BuildConfig.java#L17)

@@ -2,7 +2,7 @@
 
 # Selectionbar
 
-`class Selectionbar` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/src/main/kotlin/com/lovoo/android/pickapp/view/Selectionbar.kt#L36)
+`class Selectionbar` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/pickapp/src/main/kotlin/com/lovoo/android/pickapp/view/Selectionbar.kt#L49)
 
 UI extension to handle the PickPicActivities Selectionbar and RecyclerView.
 It observes changes emitted by [Picker](../../com.lovoo.android.pickapp.model/-picker/index.md) and add, removes or select the Thumbnails.

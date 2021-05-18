@@ -2,4 +2,4 @@
 
 # createFromParcel
 
-`fun createFromParcel(parcel: Parcel): `[`PickPicConfig`](index.md) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/src/main/kotlin/com/lovoo/android/pickapp/model/PickPicConfig.kt#L66)
+`fun createFromParcel(parcel: Parcel): `[`PickPicConfig`](index.md) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/pickapp/src/main/kotlin/com/lovoo/android/pickapp/model/PickPicConfig.kt#L82)

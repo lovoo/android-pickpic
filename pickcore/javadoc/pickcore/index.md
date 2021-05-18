@@ -13,6 +13,7 @@
 | [com.lovoo.android.pickcore.model](com.lovoo.android.pickcore.model/index.md) |  |
 | [com.lovoo.android.pickcore.permission](com.lovoo.android.pickcore.permission/index.md) |  |
 | [com.lovoo.android.pickcore.presenter](com.lovoo.android.pickcore.presenter/index.md) |  |
+| [com.lovoo.android.pickcore.util](com.lovoo.android.pickcore.util/index.md) |  |
 
 ### Index
 

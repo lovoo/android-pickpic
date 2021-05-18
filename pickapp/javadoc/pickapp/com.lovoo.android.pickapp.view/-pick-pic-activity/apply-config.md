@@ -2,7 +2,7 @@
 
 # applyConfig
 
-`fun applyConfig(intent: Intent, config: `[`PickPicConfig`](../../com.lovoo.android.pickapp.model/-pick-pic-config/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/src/main/kotlin/com/lovoo/android/pickapp/view/PickPicActivity.kt#L336)
+`fun applyConfig(intent: Intent, config: `[`PickPicConfig`](../../com.lovoo.android.pickapp.model/-pick-pic-config/index.md)`): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/pickapp/src/main/kotlin/com/lovoo/android/pickapp/view/PickPicActivity.kt#L360)
 
 Apply the [PickPicConfig](../../com.lovoo.android.pickapp.model/-pick-pic-config/index.md) to the [Intent](#) for [PickPicActivity](index.md).
 

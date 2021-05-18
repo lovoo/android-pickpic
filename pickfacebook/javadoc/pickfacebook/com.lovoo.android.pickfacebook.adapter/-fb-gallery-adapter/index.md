@@ -2,7 +2,7 @@
 
 # FbGalleryAdapter
 
-`class FbGalleryAdapter : Adapter<`[`FbGalleryAdapter.ViewHolder`](-view-holder/index.md)`>` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/adapter/FbGalleryAdapter.kt#L22)
+`class FbGalleryAdapter : Adapter<`[`FbGalleryAdapter.ViewHolder`](-view-holder/index.md)`>` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/adapter/FbGalleryAdapter.kt#L37)
 
 RecyclerView Adapter to present [Gallery](#)s.
 

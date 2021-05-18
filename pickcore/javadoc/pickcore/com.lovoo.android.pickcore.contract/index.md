@@ -8,6 +8,7 @@
 |---|---|
 | [CameraDestination](-camera-destination/index.md) | `interface CameraDestination : Parcelable`<br>Model class that represents a destination for captured images. |
 | [CameraEngine](-camera-engine/index.md) | `interface CameraEngine`<br>Engine interface responsible for setting up the PickPic camera. |
+| [CaptureCallback](-capture-callback/index.md) | `interface CaptureCallback`<br>The interface that the calling UI should implement to receive the captured file. |
 | [GalleryPresenter](-gallery-presenter/index.md) | `interface GalleryPresenter`<br>Contract to implement for Presenter. |
 | [GalleryView](-gallery-view/index.md) | `interface GalleryView`<br>Contract to implement for UI. |
 | [ImageEngine](-image-engine/index.md) | `interface ImageEngine`<br>Engine interface responsible for setting up the PickPic image loading. |

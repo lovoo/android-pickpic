@@ -2,7 +2,7 @@
 
 # GalleryView
 
-`interface GalleryView` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/src/main/kotlin/com/lovoo/android/pickcore/contract/GalleryView.kt#L11)
+`interface GalleryView` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/src/main/kotlin/com/lovoo/android/pickcore/contract/GalleryView.kt#L26)
 
 Contract to implement for UI.
 

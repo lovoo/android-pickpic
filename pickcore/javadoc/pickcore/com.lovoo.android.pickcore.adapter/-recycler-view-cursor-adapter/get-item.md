@@ -2,7 +2,7 @@
 
 # getItem
 
-`fun <T> getItem(position: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`, transform: (Cursor) -> `[`T`](get-item.md#T)`): `[`T`](get-item.md#T)`?` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/src/main/kotlin/com/lovoo/android/pickcore/adapter/RecyclerViewCursorAdapter.kt#L77)
+`fun <T> getItem(position: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`, transform: (Cursor) -> `[`T`](get-item.md#T)`): `[`T`](get-item.md#T)`?` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/src/main/kotlin/com/lovoo/android/pickcore/adapter/RecyclerViewCursorAdapter.kt#L92)
 
 ### Parameters
 

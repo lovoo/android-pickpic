@@ -2,7 +2,7 @@
 
 # Facebook
 
-`class Facebook` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/Facebook.kt#L18)
+`class Facebook` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/Facebook.kt#L39)
 
 Implementation of the Facebook SDK.
 

@@ -2,7 +2,7 @@
 
 # PreviewFragment
 
-`class PreviewFragment : Fragment` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/src/main/kotlin/com/lovoo/android/pickapp/view/PreviewFragment.kt#L20)
+`class PreviewFragment : Fragment` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/pickapp/src/main/kotlin/com/lovoo/android/pickapp/view/PreviewFragment.kt#L35)
 
 The [Fragment](#) that is used for the [Preview](../-preview/index.md) ViewPager.
 

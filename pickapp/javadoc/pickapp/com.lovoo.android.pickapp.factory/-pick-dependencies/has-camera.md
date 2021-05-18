@@ -2,7 +2,7 @@
 
 # hasCamera
 
-`val hasCamera: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/src/main/kotlin/com/lovoo/android/pickapp/factory/PickDependencies.kt#L23)
+`val hasCamera: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/pickapp/src/main/kotlin/com/lovoo/android/pickapp/factory/PickDependencies.kt#L38)
 
 Is true if PickPicCaptureFragment is packed within the dependencies.
 

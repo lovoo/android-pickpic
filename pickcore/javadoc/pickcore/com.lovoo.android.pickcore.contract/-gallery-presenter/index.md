@@ -2,7 +2,7 @@
 
 # GalleryPresenter
 
-`interface GalleryPresenter` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/src/main/kotlin/com/lovoo/android/pickcore/contract/GalleryPresenter.kt#L11)
+`interface GalleryPresenter` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/src/main/kotlin/com/lovoo/android/pickcore/contract/GalleryPresenter.kt#L26)
 
 Contract to implement for Presenter.
 

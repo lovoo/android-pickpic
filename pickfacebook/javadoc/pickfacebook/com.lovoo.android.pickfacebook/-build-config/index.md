@@ -2,5 +2,5 @@
 
 # BuildConfig
 
-`class BuildConfig` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/build/generated/source/buildConfig/debug/com/lovoo/android/pickfacebook/BuildConfig.java#L6)
-`class BuildConfig` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/build/generated/source/buildConfig/debug/com/lovoo/android/pickfacebook/BuildConfig.java#L6)
+`class BuildConfig` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/pickfacebook/build/generated/source/buildConfig/debug/com/lovoo/android/pickfacebook/BuildConfig.java#L6)
+`class BuildConfig` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/pickfacebook/build/generated/source/buildConfig/debug/com/lovoo/android/pickfacebook/BuildConfig.java#L6)

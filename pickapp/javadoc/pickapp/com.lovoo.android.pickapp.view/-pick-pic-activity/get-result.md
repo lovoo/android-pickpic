@@ -2,7 +2,7 @@
 
 # getResult
 
-`fun getResult(data: Intent?): `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<Uri>?` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/src/main/kotlin/com/lovoo/android/pickapp/view/PickPicActivity.kt#L346)
+`fun getResult(data: Intent?): `[`List`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html)`<Uri>?` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/pickapp/src/main/kotlin/com/lovoo/android/pickapp/view/PickPicActivity.kt#L370)
 
 Receive the [Uri](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-list/index.html) result from the [Intent](#).
 

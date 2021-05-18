@@ -82,6 +82,7 @@ buildscript {
     }
 }
 
+
 allprojects {
     apply plugin: 'com.jfrog.artifactory'
     apply plugin: 'maven-publish'
@@ -106,6 +107,7 @@ gradle.projectsEvaluated {
 }
 
 project('pickcore') {
+    apply from: '../documentation.gradle'
     artifactoryPublish.dependsOn('build')
     publishing {
         publications {
@@ -125,6 +127,7 @@ project('pickcore') {
 }
 
 project('pickui') {
+    apply from: '../documentation.gradle'
     artifactoryPublish.dependsOn('build')
     publishing {
         publications {
@@ -144,6 +147,7 @@ project('pickui') {
 }
 
 project('pickcam') {
+    apply from: '../documentation.gradle'
     artifactoryPublish.dependsOn('build')
     publishing {
         publications {
@@ -163,6 +167,7 @@ project('pickcam') {
 }
 
 project('pickfacebook') {
+    apply from: '../documentation.gradle'
     artifactoryPublish.dependsOn('build')
     publishing {
         publications {
@@ -182,6 +187,7 @@ project('pickfacebook') {
 }
 
 project('pickapp') {
+    apply from: '../documentation.gradle'
     artifactoryPublish.dependsOn('build')
     publishing {
         publications {

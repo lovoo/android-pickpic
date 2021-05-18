@@ -2,7 +2,7 @@
 
 # ViewHolder
 
-`abstract class ViewHolder<T> : ViewHolder` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickui/src/main/kotlin/com/lovoo/android/pickui/adapter/ViewHolder.kt#L25)
+`abstract class ViewHolder<T> : ViewHolder` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickui/pickui/src/main/kotlin/com/lovoo/android/pickui/adapter/ViewHolder.kt#L40)
 
 Typed [RecyclerView.ViewHolder](#) implementation that enforce its own width as height.
 

@@ -2,7 +2,7 @@
 
 # PickType
 
-`enum class PickType` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/src/main/kotlin/com/lovoo/android/pickapp/model/PickType.kt#L7)
+`enum class PickType` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/pickapp/src/main/kotlin/com/lovoo/android/pickapp/model/PickType.kt#L22)
 
 Simple enum class that contains all the types
 used by [com.lovoo.android.pickapp.adapter.PickPicAdapter](../../com.lovoo.android.pickapp.adapter/-pick-pic-adapter/index.md)

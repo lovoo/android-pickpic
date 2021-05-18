@@ -2,7 +2,7 @@
 
 # PickPicAdapter
 
-`class PickPicAdapter : FragmentStatePagerAdapter` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/src/main/kotlin/com/lovoo/android/pickapp/adapter/PickPicAdapter.kt#L19)
+`class PickPicAdapter : FragmentStatePagerAdapter` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/pickapp/src/main/kotlin/com/lovoo/android/pickapp/adapter/PickPicAdapter.kt#L34)
 
 [FragmentStatePagerAdapter](#) that contains [GalleryFragment](#) and optional [FbGalleryFragment](#).
 

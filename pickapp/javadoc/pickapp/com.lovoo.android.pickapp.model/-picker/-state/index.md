@@ -2,18 +2,20 @@
 
 # State
 
-`class State` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/src/main/kotlin/com/lovoo/android/pickapp/model/Picker.kt#L128)
+`sealed class State` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/pickapp/src/main/kotlin/com/lovoo/android/pickapp/model/Picker.kt#L142)
 
-### Constructors
+### Types
 
 | Name | Summary |
 |---|---|
-| [&lt;init&gt;](-init-.md) | `State()` |
+| [Add](-add/index.md) | `data class Add : `[`Picker.State`](./index.md)<br>State that notifies that a new item was picked. |
+| [Remove](-remove/index.md) | `data class Remove : `[`Picker.State`](./index.md)<br>State that notifies that a picked item was removed. |
+| [Select](-select/index.md) | `data class Select : `[`Picker.State`](./index.md)<br>State that notify over selection change within the picked items. |
 
 ### Inheritors
 
 | Name | Summary |
 |---|---|
-| [AddState](../-add-state/index.md) | `data class AddState : `[`Picker.State`](./index.md)<br>State that notifies that a new item was picked. |
-| [RemoveState](../-remove-state/index.md) | `data class RemoveState : `[`Picker.State`](./index.md)<br>State that notifies that a picked item was removed. |
-| [SelectionState](../-selection-state/index.md) | `data class SelectionState : `[`Picker.State`](./index.md)<br>State that notify over selection change within the picked items. |
+| [Add](-add/index.md) | `data class Add : `[`Picker.State`](./index.md)<br>State that notifies that a new item was picked. |
+| [Remove](-remove/index.md) | `data class Remove : `[`Picker.State`](./index.md)<br>State that notifies that a picked item was removed. |
+| [Select](-select/index.md) | `data class Select : `[`Picker.State`](./index.md)<br>State that notify over selection change within the picked items. |
