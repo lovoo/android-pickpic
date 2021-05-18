@@ -74,8 +74,8 @@ class SelectionAdapter(
     fun getListCount() = list.size
 
     /**
-     * @param uri the [Uri] that should be added to the selection at list start
-     * @return always true
+     * @param uri the [Uri] that should be added to the selection at list end
+     * @return position of the new item
      */
     fun add(uri: Uri): Int {
         val position = list.size
@@ -111,7 +111,7 @@ class SelectionAdapter(
         view: View,
         private val imageEngine: ImageEngine
     ) : RecyclerView.ViewHolder(view) {
-        private val width = view.context.resources.getDimensionPixelSize(R.dimen.pickpic_thumbnail_size)
+        private val size = view.context.resources.getDimensionPixelSize(R.dimen.pickpic_thumbnail_size)
         private val corner = view.context.resources.getDimensionPixelSize(R.dimen.pickpic_thumbnail_corner_size)
 
         fun bind(uri: Uri?, isSelected: Boolean, onClickListener: ((View, Uri) -> Unit)?) {
@@ -119,11 +119,9 @@ class SelectionAdapter(
             itemView.setOnClickListener { view ->
                 uri?.let { onClickListener?.invoke(view, it) }
             }
-            val imageView = itemView.findViewById<ImageView>(R.id.pickpic_thumbnail_image)
-            imageView?.setImageBitmap(null)
-            if (uri == null) return
-            imageView?.let {
-                imageEngine.loadThumbnail(it.context, width, uri, it, corner)
+            itemView.findViewById<ImageView>(R.id.pickpic_thumbnail_image)?.apply {
+                setImageBitmap(null)
+                if (uri != null) imageEngine.loadThumbnail(this.context, size, uri, this, corner)
             }
         }
 
