@@ -205,15 +205,15 @@ class Selectionbar(
     private fun updateSelectionText() {
         val res = layout.resources
         val selected = adapter.getListCount()
-        val requested = picker.config.minCount - selected
+        val required = picker.config.minCount - selected
 
         val text = when {
-            requested > 0 -> res.getQuantityString(R.plurals.pickpic_label_selection_more, requested, requested)
+            required > 0 -> res.getQuantityString(R.plurals.pickpic_label_selection_more, picker.config.minCount, picker.config.minCount)
             else -> res.getString(R.string.pickpic_label_count_of_max_selected, selected, picker.config.maxCount)
         }
 
         layout.selection_text.text = text
-        layout.selection_button.isEnabled = requested <= 0 && selected <= picker.config.maxCount
+        layout.selection_button.isEnabled = required <= 0 && selected <= picker.config.maxCount
     }
 
     private fun updateDependingViews(offset: Int) {
