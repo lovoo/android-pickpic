@@ -2,7 +2,7 @@
 
 # onAccessTokenChanged
 
-`fun onAccessTokenChanged(token: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`?): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/view/FbGalleryFragment.kt#L88)
+`fun onAccessTokenChanged(token: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`?): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/view/FbGalleryFragment.kt#L109)
 
 Overrides [FbGalleryView.onAccessTokenChanged](../../com.lovoo.android.pickfacebook.contract/-fb-gallery-view/on-access-token-changed.md)
 

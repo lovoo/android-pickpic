@@ -2,7 +2,7 @@
 
 # convert
 
-`fun convert(cursor: Cursor): `[`PictureLib`](../../com.lovoo.android.pickcore.model/-picture-lib/index.md) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/src/main/kotlin/com/lovoo/android/pickcore/loader/PictureLoader.kt#L96)
+`fun convert(cursor: Cursor): `[`PictureLib`](../../com.lovoo.android.pickcore.model/-picture-lib/index.md) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/src/main/kotlin/com/lovoo/android/pickcore/loader/PictureLoader.kt#L113)
 
 Converts the current [Cursor](#) entry to [PictureLib](../../com.lovoo.android.pickcore.model/-picture-lib/index.md) model.
 

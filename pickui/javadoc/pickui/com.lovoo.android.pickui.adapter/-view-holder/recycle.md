@@ -2,7 +2,7 @@
 
 # recycle
 
-`fun recycle(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickui/src/main/kotlin/com/lovoo/android/pickui/adapter/ViewHolder.kt#L57)
+`fun recycle(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickui/pickui/src/main/kotlin/com/lovoo/android/pickui/adapter/ViewHolder.kt#L72)
 
 Reset the view.
 

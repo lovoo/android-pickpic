@@ -2,7 +2,7 @@
 
 # onDestroy
 
-`fun onDestroy(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/src/main/kotlin/com/lovoo/android/pickcore/presenter/GalleryPresenterImpl.kt#L51)
+`fun onDestroy(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/src/main/kotlin/com/lovoo/android/pickcore/presenter/GalleryPresenterImpl.kt#L65)
 
 Overrides [GalleryPresenter.onDestroy](../../com.lovoo.android.pickcore.contract/-gallery-presenter/on-destroy.md)
 

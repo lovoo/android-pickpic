@@ -2,4 +2,4 @@
 
 # onCreateView
 
-`fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcam/src/main/kotlin/com/lovoo/android/pickcam/view/PickPicCaptureFragment.kt#L47)
+`fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcam/src/main/kotlin/com/lovoo/android/pickcam/view/PickPicCaptureFragment.kt#L67)

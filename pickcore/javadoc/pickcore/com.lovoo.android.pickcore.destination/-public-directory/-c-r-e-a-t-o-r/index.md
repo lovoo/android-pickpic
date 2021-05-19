@@ -2,7 +2,7 @@
 
 # CREATOR
 
-`companion object CREATOR : Creator<`[`PublicDirectory`](../index.md)`>` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/src/main/kotlin/com/lovoo/android/pickcore/destination/PublicDirectory.kt#L39)
+`companion object CREATOR : Creator<`[`PublicDirectory`](../index.md)`>` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/src/main/kotlin/com/lovoo/android/pickcore/destination/PublicDirectory.kt#L54)
 
 ### Companion Object Functions
 

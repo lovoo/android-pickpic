@@ -2,7 +2,7 @@
 
 # DisabledCameraEngine
 
-`class DisabledCameraEngine : `[`CameraEngine`](../../com.lovoo.android.pickcore.contract/-camera-engine/index.md) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/src/main/kotlin/com/lovoo/android/pickcore/engine/DisabledCameraEngine.kt#L14)
+`class DisabledCameraEngine : `[`CameraEngine`](../../com.lovoo.android.pickcore.contract/-camera-engine/index.md) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/src/main/kotlin/com/lovoo/android/pickcore/engine/DisabledCameraEngine.kt#L29)
 
 Default implementation of [CameraEngine](../../com.lovoo.android.pickcore.contract/-camera-engine/index.md) that disables PickPic camera support.
 

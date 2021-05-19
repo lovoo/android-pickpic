@@ -2,7 +2,7 @@
 
 # cursor
 
-`val cursor: MutableLiveData<Cursor?>` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/src/main/kotlin/com/lovoo/android/pickcore/loader/Collector.kt#L28)
+`val cursor: MutableLiveData<Cursor?>` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/src/main/kotlin/com/lovoo/android/pickcore/loader/Collector.kt#L43)
 
 Observable field that emit null or an [Cursor](#) with data from the [Loader](#).
 

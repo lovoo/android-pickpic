@@ -2,7 +2,7 @@
 
 # CaptureResultWorker
 
-`class CaptureResultWorker : RxWorker` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcam/src/main/kotlin/com/lovoo/android/pickcam/worker/CaptureResultWorker.kt#L28)
+`class CaptureResultWorker : RxWorker` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcam/src/main/kotlin/com/lovoo/android/pickcam/worker/CaptureResultWorker.kt#L49)
 
 Worker that handles all the tasks to finalize the captured image from the camera.
 When this worker is done it fires a BroadcastIntent with action CaptureResultWorker.INTENT_ACTION_ON_RESULT.

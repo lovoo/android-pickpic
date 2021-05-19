@@ -209,15 +209,15 @@ class PickPicActivity : AppCompatActivity(), SelectionHolder, CameraEngine, Capt
             picker.getObservable().subscribe(
                 { state ->
                     when (state) {
-                        is Picker.AddState ->
+                        is Picker.State.Add ->
                             externalToggleListener.forEach { (_, callback) ->
                                 callback.toggle(state.uri, state.gallery)
                             }
-                        is Picker.RemoveState ->
+                        is Picker.State.Remove ->
                             externalToggleListener.forEach { (_, callback) ->
                                 callback.toggle(state.uri, state.gallery)
                             }
-                        is Picker.SelectionState -> selectedUri = state.uri
+                        is Picker.State.Select -> selectedUri = state.uri
                     }
                 },
                 { error -> error.printStackTrace() }
@@ -229,7 +229,7 @@ class PickPicActivity : AppCompatActivity(), SelectionHolder, CameraEngine, Capt
         subscriptions.add(
             picker.getObservable().subscribe(
                 {
-                    if (it is Picker.AddState && picker.getPickedUris().size >= config.maxCount) {
+                    if (it is Picker.State.Add && picker.getPickedUris().size >= config.maxCount) {
                         Handler(Looper.getMainLooper()).postDelayed(
                             {
                                 finishSelection()

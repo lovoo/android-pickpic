@@ -2,7 +2,7 @@
 
 # PopUpGalleryAdapter
 
-`class PopUpGalleryAdapter : BaseAdapter` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickui/src/main/kotlin/com/lovoo/android/pickui/adapter/PopUpGalleryAdapter.kt#L25)
+`class PopUpGalleryAdapter : BaseAdapter` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickui/pickui/src/main/kotlin/com/lovoo/android/pickui/adapter/PopUpGalleryAdapter.kt#L40)
 
 Adapter for ListView or PopUpWindows.
 Create preview layout for [Gallery](#)s with a cover image,

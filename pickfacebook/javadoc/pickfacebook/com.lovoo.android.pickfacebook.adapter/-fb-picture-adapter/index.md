@@ -2,7 +2,7 @@
 
 # FbPictureAdapter
 
-`class FbPictureAdapter : Adapter<ViewHolder>` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/adapter/FbPictureAdapter.kt#L21)
+`class FbPictureAdapter : Adapter<ViewHolder>` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/adapter/FbPictureAdapter.kt#L36)
 
 RecyclerView Adapter to present [FbPicture](../../com.lovoo.android.pickfacebook.model/-fb-picture/index.md)s.
 

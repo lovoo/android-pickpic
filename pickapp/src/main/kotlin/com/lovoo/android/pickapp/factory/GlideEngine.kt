@@ -21,6 +21,8 @@ import android.net.Uri
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.lovoo.android.pickcore.contract.ImageEngine
 
@@ -36,11 +38,12 @@ class GlideEngine : ImageEngine {
      * @param size the requested image width and height, must be greater then 0
      * @param uri the requested local or remote [Uri] to the picture
      * @param target the [ImageView] that should receive the Bitmap
+     * @param corner the rounded corner in pixel
      * @param errorRes the optional resource as error fallback
      */
-    override fun loadThumbnail(context: Context, size: Int, uri: Uri, target: ImageView, errorRes: Int) {
+    override fun loadThumbnail(context: Context, size: Int, uri: Uri, target: ImageView, corner: Int, errorRes: Int) {
         // forward the request to the other method
-        loadImage(context, size, size, uri, target, errorRes)
+        loadImage(context, size, size, uri, target, corner, errorRes)
     }
 
     /**
@@ -51,9 +54,10 @@ class GlideEngine : ImageEngine {
      * @param height the requested image height, must be greater then 0
      * @param uri the requested local or remote [Uri] to the picture
      * @param target the [ImageView] that should receive the Bitmap
+     * @param corner the rounded corner in pixel
      * @param errorRes the optional resource as error fallback
      */
-    override fun loadImage(context: Context, width: Int, height: Int, uri: Uri, target: ImageView, @DrawableRes errorRes: Int) {
+    override fun loadImage(context: Context, width: Int, height: Int, uri: Uri, target: ImageView, corner: Int, @DrawableRes errorRes: Int) {
         // skip load call when context is finished activity
         if (context is Activity && (context.isFinishing || context.isDestroyed)) {
             return
@@ -65,7 +69,10 @@ class GlideEngine : ImageEngine {
             .apply(
                 RequestOptions()
                     .override(width, height)
-                    .centerCrop()
+                    .also {
+                        if (corner > 0) it.transform(CenterCrop(), RoundedCorners(corner))
+                        else it.centerCrop()
+                    }
             )
             .apply {
                 if (errorRes != 0) {

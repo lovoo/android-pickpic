@@ -2,7 +2,7 @@
 
 # loginWithPicturePermission
 
-`fun loginWithPicturePermission(fragment: Fragment): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/presenter/FbGalleryPresenterImpl.kt#L64)
+`fun loginWithPicturePermission(fragment: Fragment): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/presenter/FbGalleryPresenterImpl.kt#L79)
 
 Overrides [FbGalleryPresenter.loginWithPicturePermission](../../com.lovoo.android.pickfacebook.contract/-fb-gallery-presenter/login-with-picture-permission.md)
 

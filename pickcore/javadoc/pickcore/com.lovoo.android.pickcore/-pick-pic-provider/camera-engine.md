@@ -2,7 +2,7 @@
 
 # cameraEngine
 
-`var cameraEngine: `[`CameraEngine`](../../com.lovoo.android.pickcore.contract/-camera-engine/index.md) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/src/main/kotlin/com/lovoo/android/pickcore/PickPicProvider.kt#L61)
+`var cameraEngine: `[`CameraEngine`](../../com.lovoo.android.pickcore.contract/-camera-engine/index.md) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/src/main/kotlin/com/lovoo/android/pickcore/PickPicProvider.kt#L76)
 
 [CameraEngine](../../com.lovoo.android.pickcore.contract/-camera-engine/index.md) that defines if the camera will be available for a certain [Gallery](#).
 Please consider to keep the user flow consistent. Its a bad experience when the user

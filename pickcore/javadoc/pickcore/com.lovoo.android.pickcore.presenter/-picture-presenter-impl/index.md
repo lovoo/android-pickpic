@@ -2,7 +2,7 @@
 
 # PicturePresenterImpl
 
-`class PicturePresenterImpl : `[`PicturePresenter`](../../com.lovoo.android.pickcore.contract/-picture-presenter/index.md) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/src/main/kotlin/com/lovoo/android/pickcore/presenter/PicturePresenterImpl.kt#L21)
+`class PicturePresenterImpl : `[`PicturePresenter`](../../com.lovoo.android.pickcore.contract/-picture-presenter/index.md) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/src/main/kotlin/com/lovoo/android/pickcore/presenter/PicturePresenterImpl.kt#L36)
 
 Implementation of [PicturePresenter](../../com.lovoo.android.pickcore.contract/-picture-presenter/index.md) for Fragments to load the pictures from a [Gallery](../../com.lovoo.android.pickcore.model/-gallery/index.md).
 Don't forget to forward onDestroy().

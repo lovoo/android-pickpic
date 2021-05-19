@@ -2,7 +2,7 @@
 
 # PictureDecoration
 
-`class PictureDecoration : ItemDecoration` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickui/src/main/kotlin/com/lovoo/android/pickui/view/PictureDecoration.kt#L11)
+`class PictureDecoration : ItemDecoration` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickui/pickui/src/main/kotlin/com/lovoo/android/pickui/view/PictureDecoration.kt#L26)
 
 Custom decoration for items of an RecycleView that should get
 equal space between each other and its parent.

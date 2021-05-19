@@ -2,5 +2,5 @@
 
 # FLAVOR
 
-`static val FLAVOR: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/build/generated/source/buildConfig/debug/com/lovoo/android/pickapp/BuildConfig.java#L15)
-`static val FLAVOR: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/build/generated/source/buildConfig/debug/com/lovoo/android/pickapp/BuildConfig.java#L15)
+`static val FLAVOR: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/pickapp/build/generated/source/buildConfig/debug/com/lovoo/android/pickapp/BuildConfig.java#L15)
+`static val FLAVOR: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/pickapp/build/generated/source/buildConfig/debug/com/lovoo/android/pickapp/BuildConfig.java#L15)

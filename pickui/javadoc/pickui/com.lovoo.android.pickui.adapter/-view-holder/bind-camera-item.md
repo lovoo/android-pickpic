@@ -2,7 +2,7 @@
 
 # bindCameraItem
 
-`fun bindCameraItem(cameraEngine: CameraEngine): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickui/src/main/kotlin/com/lovoo/android/pickui/adapter/ViewHolder.kt#L99)
+`fun bindCameraItem(cameraEngine: CameraEngine): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickui/pickui/src/main/kotlin/com/lovoo/android/pickui/adapter/ViewHolder.kt#L116)
 
 Set display text an click listener for the camera button.
 

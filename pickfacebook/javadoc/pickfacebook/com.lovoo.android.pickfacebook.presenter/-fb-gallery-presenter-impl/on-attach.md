@@ -2,7 +2,7 @@
 
 # onAttach
 
-`fun onAttach(activity: FragmentActivity): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/presenter/FbGalleryPresenterImpl.kt#L30)
+`fun onAttach(activity: FragmentActivity): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/presenter/FbGalleryPresenterImpl.kt#L45)
 
 Overrides [FbGalleryPresenter.onAttach](../../com.lovoo.android.pickfacebook.contract/-fb-gallery-presenter/on-attach.md)
 

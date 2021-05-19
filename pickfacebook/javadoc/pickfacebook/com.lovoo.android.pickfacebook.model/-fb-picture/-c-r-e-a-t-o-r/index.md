@@ -2,7 +2,7 @@
 
 # CREATOR
 
-`companion object CREATOR : Creator<`[`FbPicture`](../index.md)`>` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/model/FbPicture.kt#L37)
+`companion object CREATOR : Creator<`[`FbPicture`](../index.md)`>` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/model/FbPicture.kt#L53)
 
 ### Companion Object Functions
 

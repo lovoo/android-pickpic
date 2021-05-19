@@ -2,7 +2,7 @@
 
 # FbPicturePresenter
 
-`interface FbPicturePresenter` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/contract/FbPicturePresenter.kt#L12)
+`interface FbPicturePresenter` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/contract/FbPicturePresenter.kt#L27)
 
 Contract to implement for Presenter.
 

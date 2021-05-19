@@ -43,24 +43,13 @@ buildscript {
     ext.artifactory_pwd = artifactory_pwd
 
     repositories {
-        google {
-            content {
-                excludeGroupByRegex "com\\.lovoo\\.android\\.pickpic.*"
-            }
-        }
-        jcenter {
-            content {
-                excludeGroupByRegex "com\\.lovoo\\.android\\.pickpic.*"
-            }
-        }
+        google()
+        jcenter()
         maven {
             url 'https://lovoo.jfrog.io/artifactory/libs-snapshot'
             credentials {
                 username artifactory_user
                 password artifactory_pwd
-            }
-            content {
-                includeGroupByRegex "com\\.lovoo\\.android\\.pickpic.*"
             }
         }
     }
@@ -76,16 +65,27 @@ buildscript {
     }
 }
 
+
 allprojects {
     apply plugin: 'com.jfrog.artifactory'
     apply plugin: 'maven-publish'
 
-    setGroup('com.lovoo.android.pickpic')
+    setGroup('com.github.lovoo.android.pickpic')
     setVersion(version_name)
 
     repositories {
         google()
         jcenter()
+        maven {
+            url 'https://lovoo.jfrog.io/artifactory/libs-snapshot'
+            credentials {
+                username artifactory_user
+                password artifactory_pwd
+            }
+            content {
+                includeGroupByRegex "com\\.github\\.lovoo\\.android\\.pick.*"
+            }
+        }
     }
 
     tasks.withType(Javadoc).all {
@@ -100,6 +100,7 @@ gradle.projectsEvaluated {
 }
 
 project('pickcore') {
+    apply from: '../documentation.gradle'
     artifactoryPublish.dependsOn('build')
     publishing {
         publications {
@@ -119,6 +120,7 @@ project('pickcore') {
 }
 
 project('pickui') {
+    apply from: '../documentation.gradle'
     artifactoryPublish.dependsOn('build')
     publishing {
         publications {
@@ -138,6 +140,7 @@ project('pickui') {
 }
 
 project('pickcam') {
+    apply from: '../documentation.gradle'
     artifactoryPublish.dependsOn('build')
     publishing {
         publications {
@@ -157,6 +160,7 @@ project('pickcam') {
 }
 
 project('pickfacebook') {
+    apply from: '../documentation.gradle'
     artifactoryPublish.dependsOn('build')
     publishing {
         publications {
@@ -176,6 +180,7 @@ project('pickfacebook') {
 }
 
 project('pickapp') {
+    apply from: '../documentation.gradle'
     artifactoryPublish.dependsOn('build')
     publishing {
         publications {

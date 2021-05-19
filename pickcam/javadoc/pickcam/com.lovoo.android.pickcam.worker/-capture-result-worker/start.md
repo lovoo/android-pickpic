@@ -2,7 +2,7 @@
 
 # start
 
-`fun start(destination: CameraDestination, name: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)` = "CaptureResultWorker"): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcam/src/main/kotlin/com/lovoo/android/pickcam/worker/CaptureResultWorker.kt#L68)
+`fun start(destination: CameraDestination, name: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)` = "CaptureResultWorker"): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcam/src/main/kotlin/com/lovoo/android/pickcam/worker/CaptureResultWorker.kt#L99)
 
 Enqueue the unique [Worker](#) with REPLACE policy.
 

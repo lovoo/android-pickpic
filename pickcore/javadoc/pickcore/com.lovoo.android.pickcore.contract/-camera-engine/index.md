@@ -2,7 +2,7 @@
 
 # CameraEngine
 
-`interface CameraEngine` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/src/main/kotlin/com/lovoo/android/pickcore/contract/CameraEngine.kt#L8)
+`interface CameraEngine` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/src/main/kotlin/com/lovoo/android/pickcore/contract/CameraEngine.kt#L23)
 
 Engine interface responsible for setting up the PickPic camera.
 

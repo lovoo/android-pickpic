@@ -2,19 +2,13 @@
 
 # ViewHolder
 
-`class ViewHolder : ViewHolder` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/src/main/kotlin/com/lovoo/android/pickapp/adapter/SelectionAdapter.kt#L92)
+`class ViewHolder : ViewHolder` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/pickapp/src/main/kotlin/com/lovoo/android/pickapp/adapter/SelectionAdapter.kt#L110)
 
 ### Constructors
 
 | Name | Summary |
 |---|---|
 | [&lt;init&gt;](-init-.md) | `ViewHolder(view: View, imageEngine: ImageEngine)` |
-
-### Properties
-
-| Name | Summary |
-|---|---|
-| [size](size.md) | `val size: MutableLiveData<`[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`>` |
 
 ### Functions
 

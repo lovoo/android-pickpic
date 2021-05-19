@@ -2,7 +2,7 @@
 
 # Permission
 
-`object Permission` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/src/main/kotlin/com/lovoo/android/pickcore/permission/Permission.kt#L18)
+`object Permission` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/src/main/kotlin/com/lovoo/android/pickcore/permission/Permission.kt#L33)
 
 A small solution for Android Permission handle.
 

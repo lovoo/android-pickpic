@@ -30,11 +30,11 @@ import java.io.InputStream
  * Be aware that this should never be used in production, because of OutOfMemory-Exceptions.
  */
 class DefaultImageEngine : ImageEngine {
-    override fun loadThumbnail(context: Context, size: Int, uri: Uri, target: ImageView, errorRes: Int) {
-        loadImage(context, size, size, uri, target, errorRes)
+    override fun loadThumbnail(context: Context, size: Int, uri: Uri, target: ImageView, corner: Int, errorRes: Int) {
+        loadImage(context, size, size, uri, target, corner, errorRes)
     }
 
-    override fun loadImage(context: Context, width: Int, height: Int, uri: Uri, target: ImageView, errorRes: Int) {
+    override fun loadImage(context: Context, width: Int, height: Int, uri: Uri, target: ImageView, corner: Int, errorRes: Int) {
         target.setImageDrawable(getDrawableFromUri(context, uri, errorRes))
     }
 

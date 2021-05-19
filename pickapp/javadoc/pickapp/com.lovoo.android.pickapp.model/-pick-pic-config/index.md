@@ -2,7 +2,7 @@
 
 # PickPicConfig
 
-`data class PickPicConfig : Parcelable` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/src/main/kotlin/com/lovoo/android/pickapp/model/PickPicConfig.kt#L23)
+`data class PickPicConfig : Parcelable` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/pickapp/src/main/kotlin/com/lovoo/android/pickapp/model/PickPicConfig.kt#L38)
 
 The configuration for [com.lovoo.android.pickapp.view.PickPicActivity](../../com.lovoo.android.pickapp.view/-pick-pic-activity/index.md) behaviour.
 

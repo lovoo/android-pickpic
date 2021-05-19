@@ -10,14 +10,10 @@
     <string name="pickpic_menu_faq">FAQ</string>
     <string name="pickpic_menu_delete">entfernen</string>
 
-
+    <string name="pickpic_label_count_of_max_selected">%1$d / %2$d ausgewählt</string>
     <plurals name="pickpic_label_selection_more">
         <item quantity="one">Wähle noch ein Foto aus</item>
         <item quantity="other">Wähle mindestens noch %d Fotos aus</item>
-    </plurals>
-    <plurals name="pickpic_label_selection_count">
-        <item quantity="one">%d Foto ausgewählt</item>
-        <item quantity="other">%d Fotos ausgewählt</item>
     </plurals>
     <plurals name="pickpic_label_selection_max">
         <item quantity="one">Du kannst maximal ein Foto auswählen</item>

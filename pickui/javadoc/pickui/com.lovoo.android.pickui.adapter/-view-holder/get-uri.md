@@ -2,7 +2,7 @@
 
 # getUri
 
-`abstract fun getUri(item: `[`T`](index.md#T)`): Uri` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickui/src/main/kotlin/com/lovoo/android/pickui/adapter/ViewHolder.kt#L40)
+`abstract fun getUri(item: `[`T`](index.md#T)`): Uri` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickui/pickui/src/main/kotlin/com/lovoo/android/pickui/adapter/ViewHolder.kt#L55)
 
 Determine the [Uri](#) that should be used for the [ImageEngine](#).
 

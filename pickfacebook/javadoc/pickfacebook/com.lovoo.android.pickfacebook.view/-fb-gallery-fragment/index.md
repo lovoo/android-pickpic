@@ -2,7 +2,7 @@
 
 # FbGalleryFragment
 
-`class FbGalleryFragment : Fragment, `[`FbGalleryView`](../../com.lovoo.android.pickfacebook.contract/-fb-gallery-view/index.md) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/view/FbGalleryFragment.kt#L31)
+`class FbGalleryFragment : Fragment, `[`FbGalleryView`](../../com.lovoo.android.pickfacebook.contract/-fb-gallery-view/index.md) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/view/FbGalleryFragment.kt#L46)
 
 Fragment that offers a predefined solution to load and present Facebook [Gallery](#) and there
 containing pictures. It also request the Facebook user-photos Permission.
@@ -26,7 +26,7 @@ containing pictures. It also request the Facebook user-photos Permission.
 | [getLifeCycle](get-life-cycle.md) | `fun getLifeCycle(): `[`FbGalleryFragment`](./index.md) |
 | [onAccessTokenChanged](on-access-token-changed.md) | `fun onAccessTokenChanged(token: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html)`?): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html)<br>Called when a Facebook session was created or updated. |
 | [onActivityResult](on-activity-result.md) | `fun onActivityResult(requestCode: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`, resultCode: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html)`, data: Intent?): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
-| [onAttach](on-attach.md) | `fun onAttach(context: Context?): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [onAttach](on-attach.md) | `fun onAttach(context: Context): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 | [onCreate](on-create.md) | `fun onCreate(savedInstanceState: Bundle?): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 | [onCreateView](on-create-view.md) | `fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?` |
 | [onDestroy](on-destroy.md) | `fun onDestroy(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
@@ -41,4 +41,4 @@ containing pictures. It also request the Facebook user-photos Permission.
 
 | Name | Summary |
 |---|---|
-| [newInstance](new-instance.md) | `fun newInstance(): `[`FbGalleryFragment`](./index.md) |
+| [newInstance](new-instance.md) | `fun newInstance(allowNestedScroll: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)` = true): `[`FbGalleryFragment`](./index.md) |

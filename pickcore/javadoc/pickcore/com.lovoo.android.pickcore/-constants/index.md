@@ -2,7 +2,7 @@
 
 # Constants
 
-`object Constants` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/src/main/kotlin/com/lovoo/android/pickcore/Constants.kt#L6)
+`object Constants` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/src/main/kotlin/com/lovoo/android/pickcore/Constants.kt#L21)
 
 Collection of non changing values.
 

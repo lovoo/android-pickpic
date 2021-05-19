@@ -2,7 +2,7 @@
 
 # SelectionHolder
 
-`interface SelectionHolder` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/src/main/kotlin/com/lovoo/android/pickcore/contract/SelectionHolder.kt#L11)
+`interface SelectionHolder` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/src/main/kotlin/com/lovoo/android/pickcore/contract/SelectionHolder.kt#L26)
 
 Contract for the selection implementation.
 

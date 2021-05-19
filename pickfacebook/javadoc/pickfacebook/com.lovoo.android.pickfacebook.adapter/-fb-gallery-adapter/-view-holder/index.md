@@ -2,7 +2,7 @@
 
 # ViewHolder
 
-`class ViewHolder : ViewHolder` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/adapter/FbGalleryAdapter.kt#L61)
+`class ViewHolder : ViewHolder` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/adapter/FbGalleryAdapter.kt#L77)
 
 [RecyclerView.ViewHolder](#) implementation that enforce its own width as height.
 

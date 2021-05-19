@@ -2,7 +2,7 @@
 
 # onAttach
 
-`fun onAttach(activity: FragmentActivity): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/src/main/kotlin/com/lovoo/android/pickcore/presenter/GalleryPresenterImpl.kt#L34)
+`fun onAttach(activity: FragmentActivity): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/src/main/kotlin/com/lovoo/android/pickcore/presenter/GalleryPresenterImpl.kt#L48)
 
 Overrides [GalleryPresenter.onAttach](../../com.lovoo.android.pickcore.contract/-gallery-presenter/on-attach.md)
 

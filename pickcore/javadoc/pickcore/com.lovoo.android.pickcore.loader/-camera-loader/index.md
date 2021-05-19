@@ -2,7 +2,7 @@
 
 # CameraLoader
 
-`object CameraLoader` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/src/main/kotlin/com/lovoo/android/pickcore/loader/CameraLoader.kt#L25)
+`object CameraLoader` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/src/main/kotlin/com/lovoo/android/pickcore/loader/CameraLoader.kt#L44)
 
 Object class that helps to start and finish a capture [Intent](#) on Android.
 

@@ -2,7 +2,7 @@
 
 # CREATOR
 
-`companion object CREATOR : Creator<`[`PickPicConfig`](../index.md)`>` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/src/main/kotlin/com/lovoo/android/pickapp/model/PickPicConfig.kt#L65)
+`companion object CREATOR : Creator<`[`PickPicConfig`](../index.md)`>` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/pickapp/src/main/kotlin/com/lovoo/android/pickapp/model/PickPicConfig.kt#L81)
 
 ### Companion Object Functions
 

@@ -2,7 +2,7 @@
 
 # PickPicFileProvider
 
-`class PickPicFileProvider : FileProvider` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcam/src/main/kotlin/com/lovoo/android/pickcam/factory/PickPicFileProvider.kt#L9)
+`class PickPicFileProvider : FileProvider` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcam/src/main/kotlin/com/lovoo/android/pickcam/factory/PickPicFileProvider.kt#L24)
 
 Custom class to avoid double registration from Manifest merge.
 When client app also register a FileProvider.

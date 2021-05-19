@@ -1,5 +1,5 @@
 # android-pickpic (Pick a Picture)
-[ ![Download](https://api.bintray.com/packages/lovoo/maven/PickPic/images/download.svg) ](https://bintray.com/lovoo/maven/PickPic/_latestVersion)
+[![](https://jitpack.io/v/lovoo/android-pickpic.svg)](https://jitpack.io/#lovoo/android-pickpic)
 
 ## Description
 Ready to use library that allows people to select pictures from their device and Facebook account. It's designed to unify multiple picture sources in one flow.
@@ -22,8 +22,11 @@ What PickPic will not handle are animated pictures and videos.
  <img src="/images/screenshot.png" width="50%" height="50%" alt="Screenshot">
  <img src="/images/screenshot2.png" width="50%" height="50%" alt="Screenshot">
  
- ## Import 
- PickPic is hosted on Jcenter. Add this to your project's `build.gradle`.
+ ## Import
+ We have to find a new host. Since Bintray shuts down we do not deploy to any repository since 1.4.0.
+ We are sorry and try to find time to setup a new repository as host soon.
+
+ PickPic was hosted on Jcenter. Add this to your project's `build.gradle`.
  
  ```groovy
  repositories {

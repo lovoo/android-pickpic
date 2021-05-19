@@ -2,7 +2,7 @@
 
 # GalleryLoader
 
-`class GalleryLoader : CursorLoader` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/src/main/kotlin/com/lovoo/android/pickcore/loader/GalleryLoader.kt#L21)
+`class GalleryLoader : CursorLoader` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/src/main/kotlin/com/lovoo/android/pickcore/loader/GalleryLoader.kt#L39)
 
 A [CursorLoader](#) implementation that fetch album information from external [MediaStore.Files](#)
 database. The current [Cursor](#) should be converted to [GalleryLib](../../com.lovoo.android.pickcore.model/-gallery-lib/index.md) model.
