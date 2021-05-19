@@ -43,30 +43,13 @@ buildscript {
     ext.artifactory_pwd = artifactory_pwd
 
     repositories {
-        google {
-            content {
-                excludeGroupByRegex "com\\.lovoo\\.android\\.pickpic.*"
-            }
-        }
-        jcenter {
-            content {
-                excludeGroupByRegex "com\\.lovoo\\.android\\.pickpic.*"
-            }
-        }
-        maven {
-            url 'https://jitpack.io'
-            content {
-                includeGroupByRegex "com\\.github\\.lovoo\\.android\\.pickpic.*"
-            }
-        }
+        google()
+        jcenter()
         maven {
             url 'https://lovoo.jfrog.io/artifactory/libs-snapshot'
             credentials {
                 username artifactory_user
                 password artifactory_pwd
-            }
-            content {
-                excludeGroupByRegex "com\\.lovoo\\.android\\.pickpic.*"
             }
         }
     }
@@ -93,6 +76,16 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven {
+            url 'https://lovoo.jfrog.io/artifactory/libs-snapshot'
+            credentials {
+                username artifactory_user
+                password artifactory_pwd
+            }
+            content {
+                includeGroupByRegex "com\\.github\\.lovoo\\.android\\.pick.*"
+            }
+        }
     }
 
     tasks.withType(Javadoc).all {

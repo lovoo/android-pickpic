@@ -170,7 +170,8 @@ class Selectionbar(
      * @param uri that should be removed
      */
     private fun removeThumbnail(uri: Uri) {
-        adapter.remove(uri)
+        val index = 0.coerceAtLeast(adapter.remove(uri) - 1)
+        scrollTo(index)
         updateSelectionText()
     }
 
