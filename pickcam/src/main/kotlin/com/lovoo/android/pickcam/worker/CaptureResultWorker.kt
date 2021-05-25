@@ -33,6 +33,7 @@ import com.lovoo.android.pickcore.loader.CameraLoader
 import com.lovoo.android.pickcore.util.isMinimumQ
 import io.reactivex.Single
 import java.io.File
+import android.content.Context
 
 /**
  * Worker that handles all the tasks to finalize the captured image from the camera.
@@ -96,7 +97,7 @@ class CaptureResultWorker(
          * @param destination the [CameraDestination] that was used to capture the picture
          * @param name optional unique name for the [Worker] (default: CaptureResultWorker)
          */
-        fun start(destination: CameraDestination, name: String = "CaptureResultWorker") {
+        fun start(context: Context, destination: CameraDestination, name: String = "CaptureResultWorker") {
             val data = workDataOf(
                 INPUT_IS_PUBLIC to (destination !is PrivateDirectory),
                 INPUT_FILE to (destination.file?.path ?: "")
@@ -106,7 +107,7 @@ class CaptureResultWorker(
                 .setInputData(data)
                 .build()
 
-            WorkManager.getInstance().enqueueUniqueWork(name, ExistingWorkPolicy.REPLACE, request)
+            WorkManager.getInstance(context).enqueueUniqueWork(name, ExistingWorkPolicy.REPLACE, request)
         }
     }
 }
