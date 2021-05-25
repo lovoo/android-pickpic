@@ -7,7 +7,7 @@
 Ready to use solution to handle Android Camera capture.
 
 Use PickPicCaptureFragment.start() and let your [Activity](#)
-or parent [Fragment](#) implement [CaptureCallback](-capture-callback/index.md).
+or parent [Fragment](#) implement [CaptureCallback](#).
 
 It is based on [DialogFragment](#) and will be visible
 shortly as an overlay.

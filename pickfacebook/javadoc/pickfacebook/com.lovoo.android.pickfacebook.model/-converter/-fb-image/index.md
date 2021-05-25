@@ -2,7 +2,7 @@
 
 # FbImage
 
-`data class FbImage` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/model/Converter.kt#L104)
+`data class FbImage` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/model/Converter.kt#L129)
 
 ### Parameters
 

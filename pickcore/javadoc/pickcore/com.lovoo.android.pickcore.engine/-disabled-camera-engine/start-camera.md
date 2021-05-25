@@ -2,7 +2,7 @@
 
 # startCamera
 
-`fun startCamera(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/src/main/kotlin/com/lovoo/android/pickcore/engine/DisabledCameraEngine.kt#L17)
+`fun startCamera(): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/src/main/kotlin/com/lovoo/android/pickcore/engine/DisabledCameraEngine.kt#L32)
 
 Overrides [CameraEngine.startCamera](../../com.lovoo.android.pickcore.contract/-camera-engine/start-camera.md)
 

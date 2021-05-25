@@ -2,7 +2,7 @@
 
 # getLifeCycle
 
-`abstract fun getLifeCycle(): LifecycleOwner` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/contract/FbGalleryView.kt#L17)
+`abstract fun getLifeCycle(): LifecycleOwner` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/contract/FbGalleryView.kt#L32)
 
 **Return**
 [LifecycleOwner](#) of the view for subscription handle

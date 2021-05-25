@@ -2,5 +2,5 @@
 
 # LIBRARY_PACKAGE_NAME
 
-`static val LIBRARY_PACKAGE_NAME: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/build/generated/source/buildConfig/debug/com/lovoo/android/pickapp/BuildConfig.java#L8)
-`static val LIBRARY_PACKAGE_NAME: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/build/generated/source/buildConfig/debug/com/lovoo/android/pickapp/BuildConfig.java#L8)
+`static val LIBRARY_PACKAGE_NAME: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/pickapp/build/generated/source/buildConfig/debug/com/lovoo/android/pickapp/BuildConfig.java#L8)
+`static val LIBRARY_PACKAGE_NAME: `[`String`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/pickapp/build/generated/source/buildConfig/debug/com/lovoo/android/pickapp/BuildConfig.java#L8)

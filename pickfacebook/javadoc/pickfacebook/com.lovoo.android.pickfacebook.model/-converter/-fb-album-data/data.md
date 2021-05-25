@@ -2,7 +2,7 @@
 
 # data
 
-`val data: `[`Converter.FbCover`](../-fb-cover/index.md)`?` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/model/Converter.kt#L78)
+`val data: `[`Converter.FbCover`](../-fb-cover/index.md)`?` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/model/Converter.kt#L103)
 
 the album cover
 

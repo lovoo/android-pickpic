@@ -19,10 +19,7 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewTreeObserver
 import android.widget.ImageView
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.lovoo.android.pickapp.R
 import com.lovoo.android.pickcore.PickPicProvider
@@ -32,7 +29,9 @@ import kotlin.properties.Delegates
 /**
  * [RecyclerView.Adapter] for the selection bar.
  */
-class SelectionAdapter : RecyclerView.Adapter<SelectionAdapter.ViewHolder>() {
+class SelectionAdapter(
+    private val slots: Int,
+) : RecyclerView.Adapter<SelectionAdapter.ViewHolder>() {
     private val imageLoader: ImageEngine
         get() = PickPicProvider.imageEngine
 
@@ -46,7 +45,7 @@ class SelectionAdapter : RecyclerView.Adapter<SelectionAdapter.ViewHolder>() {
     /**
      * Set the selected item to notify the adapter to update the ui state.
      */
-    var selectedUri: Uri? by Delegates.observable<Uri?>(null) { _, old, new ->
+    var selectedUri: Uri? by Delegates.observable(null) { _, old, new ->
         val oldPos = list.indexOf(old)
         val newPos = list.indexOf(new)
         if (oldPos >= 0) {
@@ -59,11 +58,11 @@ class SelectionAdapter : RecyclerView.Adapter<SelectionAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder.create(parent, imageLoader)
 
-    override fun getItemCount() = list.size
+    override fun getItemCount() = slots
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val uri = list.getOrNull(position)
-        holder.bind(uri, uri == selectedUri, onClickListener)
+        holder.bind(uri, uri != null && uri == selectedUri, onClickListener)
     }
 
     /**
@@ -72,14 +71,17 @@ class SelectionAdapter : RecyclerView.Adapter<SelectionAdapter.ViewHolder>() {
      */
     fun get(index: Int) = list.getOrNull(index)
 
+    fun getListCount() = list.size
+
     /**
-     * @param uri the [Uri] that should be added to the selection at list start
-     * @return always true
+     * @param uri the [Uri] that should be added to the selection at list end
+     * @return position of the new item
      */
-    fun add(uri: Uri): Boolean {
-        list.add(0, uri)
-        notifyItemInserted(0)
-        return true
+    fun add(uri: Uri): Int {
+        val position = list.size
+        list.add(uri)
+        notifyItemChanged(position)
+        return position
     }
 
     /**
@@ -88,9 +90,10 @@ class SelectionAdapter : RecyclerView.Adapter<SelectionAdapter.ViewHolder>() {
      */
     fun remove(uri: Uri): Int {
         val position = list.indexOf(uri)
+        val count = list.size - position
         if (position >= 0) {
             list.removeAt(position)
-            notifyItemRemoved(position)
+            notifyItemRangeChanged(position, count)
             return position
         }
         return -1
@@ -108,40 +111,17 @@ class SelectionAdapter : RecyclerView.Adapter<SelectionAdapter.ViewHolder>() {
         view: View,
         private val imageEngine: ImageEngine
     ) : RecyclerView.ViewHolder(view) {
-
-        val size = MutableLiveData<Int>()
-
-        init {
-            view.viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
-                override fun onPreDraw(): Boolean {
-                    view.viewTreeObserver.removeOnPreDrawListener(this)
-                    size.postValue(view.measuredWidth)
-                    return true
-                }
-            })
-        }
+        private val size = view.context.resources.getDimensionPixelSize(R.dimen.pickpic_thumbnail_size)
+        private val corner = view.context.resources.getDimensionPixelSize(R.dimen.pickpic_thumbnail_corner_size)
 
         fun bind(uri: Uri?, isSelected: Boolean, onClickListener: ((View, Uri) -> Unit)?) {
             itemView.isSelected = isSelected
             itemView.setOnClickListener { view ->
                 uri?.let { onClickListener?.invoke(view, it) }
             }
-            (itemView as? ImageView)?.setImageBitmap(null)
-            if (uri == null) return
-
-            val width = size.value ?: 0
-            if (width == 0) {
-                size.observeForever(object : Observer<Int> {
-                    override fun onChanged(width: Int?) {
-                        size.removeObserver(this)
-                        bind(uri, isSelected, onClickListener)
-                    }
-                })
-                return
-            }
-
-            (itemView as? ImageView)?.let {
-                imageEngine.loadThumbnail(it.context, width, uri, it, 0)
+            itemView.findViewById<ImageView>(R.id.pickpic_thumbnail_image)?.apply {
+                setImageBitmap(null)
+                if (uri != null) imageEngine.loadThumbnail(this.context, size, uri, this, corner)
             }
         }
 

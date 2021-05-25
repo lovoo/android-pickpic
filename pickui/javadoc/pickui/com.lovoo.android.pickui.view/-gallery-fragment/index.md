@@ -2,7 +2,7 @@
 
 # GalleryFragment
 
-`class GalleryFragment : Fragment, GalleryView` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickui/src/main/kotlin/com/lovoo/android/pickui/view/GalleryFragment.kt#L37)
+`class GalleryFragment : Fragment, GalleryView` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickui/pickui/src/main/kotlin/com/lovoo/android/pickui/view/GalleryFragment.kt#L52)
 
 Fragment that offers a predefined solution to load and present [Gallery](#)s and there
 containing pictures. It also request the Android Storage Permission.
@@ -22,7 +22,7 @@ containing pictures. It also request the Android Storage Permission.
 | Name | Summary |
 |---|---|
 | [getLifeCycle](get-life-cycle.md) | `fun getLifeCycle(): `[`GalleryFragment`](./index.md) |
-| [onAttach](on-attach.md) | `fun onAttach(context: Context?): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
+| [onAttach](on-attach.md) | `fun onAttach(context: Context): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 | [onCreate](on-create.md) | `fun onCreate(savedInstanceState: Bundle?): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
 | [onCreateView](on-create-view.md) | `fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?` |
 | [onCursorLoaded](on-cursor-loaded.md) | `fun onCursorLoaded(cursor: Cursor?): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) |
@@ -36,4 +36,4 @@ containing pictures. It also request the Android Storage Permission.
 
 | Name | Summary |
 |---|---|
-| [newInstance](new-instance.md) | `fun newInstance(): `[`GalleryFragment`](./index.md) |
+| [newInstance](new-instance.md) | `fun newInstance(allowNestedScroll: `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)` = true): `[`GalleryFragment`](./index.md) |

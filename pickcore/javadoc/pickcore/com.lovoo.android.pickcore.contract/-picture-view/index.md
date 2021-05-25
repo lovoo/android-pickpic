@@ -2,7 +2,7 @@
 
 # PictureView
 
-`interface PictureView` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/src/main/kotlin/com/lovoo/android/pickcore/contract/PictureView.kt#L11)
+`interface PictureView` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/src/main/kotlin/com/lovoo/android/pickcore/contract/PictureView.kt#L26)
 
 Contract to implement for UI.
 

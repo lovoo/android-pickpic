@@ -107,7 +107,7 @@ class PickPicCaptureFragment : DialogFragment() {
 
         val destination = captureDestination
         if (resultCode == Activity.RESULT_OK && destination != null) {
-            CaptureResultWorker.start(destination, WORKER_NAME)
+            CaptureResultWorker.start(requireContext().applicationContext, destination, WORKER_NAME)
         } else {
             captureCallback?.onCapture(null)
             dismissAllowingStateLoss()

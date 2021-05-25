@@ -2,7 +2,7 @@
 
 # getUri
 
-`fun getUri(intent: Intent?): Uri?` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcam/src/main/kotlin/com/lovoo/android/pickcam/worker/CaptureResultWorker.kt#L60)
+`fun getUri(intent: Intent?): Uri?` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcam/src/main/kotlin/com/lovoo/android/pickcam/worker/CaptureResultWorker.kt#L91)
 
 Receive the [Uri](#) from the [Intent](#) provided by the [BroadcastReceiver](#)
 

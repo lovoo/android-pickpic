@@ -2,7 +2,7 @@
 
 # PrivateDirectory
 
-`class PrivateDirectory : `[`CameraDestination`](../../com.lovoo.android.pickcore.contract/-camera-destination/index.md) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/src/main/kotlin/com/lovoo/android/pickcore/destination/PrivateDirectory.kt#L15)
+`class PrivateDirectory : `[`CameraDestination`](../../com.lovoo.android.pickcore.contract/-camera-destination/index.md) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/src/main/kotlin/com/lovoo/android/pickcore/destination/PrivateDirectory.kt#L29)
 
 Implementation of [CameraDestination](../../com.lovoo.android.pickcore.contract/-camera-destination/index.md) for pictures that should be stored in private app directory.
 Keep in mind that other apps does not have access to this directory / file

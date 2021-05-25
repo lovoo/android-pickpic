@@ -2,4 +2,4 @@
 
 # createFromParcel
 
-`fun createFromParcel(parcel: Parcel): `[`Picture`](../index.md) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/src/main/kotlin/com/lovoo/android/pickcore/model/Picture.kt#L36)
+`fun createFromParcel(parcel: Parcel): `[`Picture`](../index.md) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/src/main/kotlin/com/lovoo/android/pickcore/model/Picture.kt#L52)

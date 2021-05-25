@@ -2,7 +2,7 @@
 
 # indexOf
 
-`fun indexOf(filter: (`[`FbPicture`](../../com.lovoo.android.pickfacebook.model/-fb-picture/index.md)`) -> `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`): `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/adapter/FbPictureAdapter.kt#L63)
+`fun indexOf(filter: (`[`FbPicture`](../../com.lovoo.android.pickfacebook.model/-fb-picture/index.md)`) -> `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html)`): `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/adapter/FbPictureAdapter.kt#L78)
 
 ### Parameters
 

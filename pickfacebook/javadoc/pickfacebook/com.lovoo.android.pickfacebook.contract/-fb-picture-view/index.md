@@ -2,7 +2,7 @@
 
 # FbPictureView
 
-`interface FbPictureView` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/contract/FbPictureView.kt#L12)
+`interface FbPictureView` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/contract/FbPictureView.kt#L27)
 
 Contract to implement for UI.
 

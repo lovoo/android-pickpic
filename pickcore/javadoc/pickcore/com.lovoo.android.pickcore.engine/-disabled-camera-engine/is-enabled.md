@@ -2,7 +2,7 @@
 
 # isEnabled
 
-`fun isEnabled(gallery: `[`GalleryLib`](../../com.lovoo.android.pickcore.model/-gallery-lib/index.md)`): `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/src/main/kotlin/com/lovoo/android/pickcore/engine/DisabledCameraEngine.kt#L15)
+`fun isEnabled(gallery: `[`GalleryLib`](../../com.lovoo.android.pickcore.model/-gallery-lib/index.md)`): `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/src/main/kotlin/com/lovoo/android/pickcore/engine/DisabledCameraEngine.kt#L30)
 
 Overrides [CameraEngine.isEnabled](../../com.lovoo.android.pickcore.contract/-camera-engine/is-enabled.md)
 

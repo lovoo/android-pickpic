@@ -33,9 +33,10 @@ interface ImageEngine {
      * @param size the requested width and height of the image
      * @param uri the image [Uri]
      * @param target the image view that show the bitmap
+     * @param corner the rounded corner in pixel
      * @param errorRes the error drawable if request failed or 0
      */
-    fun loadThumbnail(context: Context, size: Int, uri: Uri, target: ImageView, errorRes: Int = 0)
+    fun loadThumbnail(context: Context, size: Int, uri: Uri, target: ImageView, corner: Int = 0, errorRes: Int = 0)
 
     /**
      * Load an image.
@@ -45,7 +46,8 @@ interface ImageEngine {
      * @param height the requested height of the image
      * @param uri the image [Uri]
      * @param target the image view that show the bitmap
+     * @param corner the rounded corner in pixel
      * @param errorRes the error drawable if request failed or 0
      */
-    fun loadImage(context: Context, width: Int, height: Int, uri: Uri, target: ImageView, errorRes: Int = 0)
+    fun loadImage(context: Context, width: Int, height: Int, uri: Uri, target: ImageView, corner: Int = 0, errorRes: Int = 0)
 }

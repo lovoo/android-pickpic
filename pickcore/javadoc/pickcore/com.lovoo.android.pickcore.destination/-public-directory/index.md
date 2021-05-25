@@ -2,7 +2,7 @@
 
 # PublicDirectory
 
-`class PublicDirectory : `[`CameraDestination`](../../com.lovoo.android.pickcore.contract/-camera-destination/index.md) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/src/main/kotlin/com/lovoo/android/pickcore/destination/PublicDirectory.kt#L13)
+`class PublicDirectory : `[`CameraDestination`](../../com.lovoo.android.pickcore.contract/-camera-destination/index.md) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/src/main/kotlin/com/lovoo/android/pickcore/destination/PublicDirectory.kt#L28)
 
 Implementation of [CameraDestination](../../com.lovoo.android.pickcore.contract/-camera-destination/index.md) for pictures that should be stored in public directory.
 

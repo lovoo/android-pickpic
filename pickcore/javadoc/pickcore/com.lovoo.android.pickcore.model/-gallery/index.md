@@ -2,7 +2,7 @@
 
 # Gallery
 
-`data class Gallery : Parcelable` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/src/main/kotlin/com/lovoo/android/pickcore/model/Gallery.kt#L14)
+`data class Gallery : Parcelable` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/src/main/kotlin/com/lovoo/android/pickcore/model/Gallery.kt#L29)
 
 Model class that represents an PickPic Gallery Folder.
 

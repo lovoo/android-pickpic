@@ -2,7 +2,7 @@
 
 # FbGalleryPresenterImpl
 
-`class FbGalleryPresenterImpl : `[`FbGalleryPresenter`](../../com.lovoo.android.pickfacebook.contract/-fb-gallery-presenter/index.md) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/presenter/FbGalleryPresenterImpl.kt#L26)
+`class FbGalleryPresenterImpl : `[`FbGalleryPresenter`](../../com.lovoo.android.pickfacebook.contract/-fb-gallery-presenter/index.md) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/presenter/FbGalleryPresenterImpl.kt#L41)
 
 Implementation of [FbGalleryPresenter](../../com.lovoo.android.pickfacebook.contract/-fb-gallery-presenter/index.md) for Fragments to load Facebook galleries.
 Don't forget to forward these events:

@@ -2,4 +2,4 @@
 
 # GALLERY
 
-`GALLERY` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/src/main/kotlin/com/lovoo/android/pickapp/model/PickType.kt#L8)
+`GALLERY` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/pickapp/src/main/kotlin/com/lovoo/android/pickapp/model/PickType.kt#L23)

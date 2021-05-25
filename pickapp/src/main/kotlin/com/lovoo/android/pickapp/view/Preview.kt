@@ -25,7 +25,7 @@ import io.reactivex.disposables.CompositeDisposable
 
 /**
  * UI extension to handle PickPicActivities Preview ViewPager.
- * It observes [Picker.SelectionState] changes and show, update or hide the Preview.
+ * It observes [Picker.State] changes and show, update or hide the Preview.
  * You have to call destroy if the UI is removed.
  *
  * @param pager the view pager from the layout
@@ -56,13 +56,16 @@ class Preview(
             picker.getObservable().subscribe(
                 { state ->
                     when (state) {
-                        is Picker.RemoveState -> {
+                        is Picker.State.Add -> {
+                            // no-op
+                        }
+                        is Picker.State.Remove -> {
                             pager.adapter?.let {
                                 it.notifyDataSetChanged()
                                 picker.select(Math.min(pager.currentItem, it.count - 1))
                             }
                         }
-                        is Picker.SelectionState -> {
+                        is Picker.State.Select -> {
                             if (state.uri == null) {
                                 hidePreview()
                             } else {

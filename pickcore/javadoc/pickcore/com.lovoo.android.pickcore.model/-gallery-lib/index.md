@@ -2,7 +2,7 @@
 
 # GalleryLib
 
-`data class GalleryLib` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/src/main/kotlin/com/lovoo/android/pickcore/model/GalleryLib.kt#L12)
+`data class GalleryLib` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/src/main/kotlin/com/lovoo/android/pickcore/model/GalleryLib.kt#L26)
 
 Model class that represents an Android GalleryLib Folder loaded from the Database.
 

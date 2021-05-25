@@ -2,7 +2,7 @@
 
 # getLifeCycle
 
-`fun getLifeCycle(): `[`FbPictureFragment`](index.md) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/view/FbPictureFragment.kt#L109)
+`fun getLifeCycle(): `[`FbPictureFragment`](index.md) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/view/FbPictureFragment.kt#L130)
 
 Overrides [FbPictureView.getLifeCycle](../../com.lovoo.android.pickfacebook.contract/-fb-picture-view/get-life-cycle.md)
 

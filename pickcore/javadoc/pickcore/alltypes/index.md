@@ -9,6 +9,7 @@
 | [com.lovoo.android.pickcore.contract.CameraDestination](../com.lovoo.android.pickcore.contract/-camera-destination/index.md) | Model class that represents a destination for captured images. |
 | [com.lovoo.android.pickcore.contract.CameraEngine](../com.lovoo.android.pickcore.contract/-camera-engine/index.md) | Engine interface responsible for setting up the PickPic camera. |
 | [com.lovoo.android.pickcore.loader.CameraLoader](../com.lovoo.android.pickcore.loader/-camera-loader/index.md) | Object class that helps to start and finish a capture [Intent](#) on Android. |
+| [com.lovoo.android.pickcore.contract.CaptureCallback](../com.lovoo.android.pickcore.contract/-capture-callback/index.md) | The interface that the calling UI should implement to receive the captured file. |
 | [com.lovoo.android.pickcore.loader.Collector](../com.lovoo.android.pickcore.loader/-collector/index.md) | An [LoaderManager.LoaderCallbacks](#) implementation that load a cursor and set the [MutableLiveData](#) cursor. Others can observe this. |
 | [com.lovoo.android.pickcore.Constants](../com.lovoo.android.pickcore/-constants/index.md) | Collection of non changing values. |
 | [com.lovoo.android.pickcore.engine.DefaultImageEngine](../com.lovoo.android.pickcore.engine/-default-image-engine/index.md) | Default implementation of [ImageEngine](../com.lovoo.android.pickcore.contract/-image-engine/index.md) that loads images without any strategy or cache. Be aware that this should never be used in production, because of OutOfMemory-Exceptions. |

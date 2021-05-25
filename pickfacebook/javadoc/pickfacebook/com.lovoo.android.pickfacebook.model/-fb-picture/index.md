@@ -2,7 +2,7 @@
 
 # FbPicture
 
-`data class FbPicture : Parcelable` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/model/FbPicture.kt#L15)
+`data class FbPicture : Parcelable` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/model/FbPicture.kt#L30)
 
 Model class that represents Facebook Picture.
 

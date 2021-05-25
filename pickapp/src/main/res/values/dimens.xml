@@ -2,5 +2,8 @@
     <dimen name="pickpic_actionbar_headline_margin">20dp</dimen>
     <dimen name="pickpic_thumbnail_size">48dp</dimen>
     <dimen name="pickpic_thumbnail_padding_right">8dp</dimen>
+    <dimen name="pickpic_thumbnail_corner_size">4dp</dimen>
+    <dimen name="pickpic_thumbnail_border_corner_size">3dp</dimen>
+    <dimen name="pickpic_thumbnail_stroke_size">2dp</dimen>
     <dimen name="pickpic_gallery_title_height">?actionBarSize</dimen>
 </resources>

@@ -2,7 +2,7 @@
 
 # selectedUri
 
-`var selectedUri: Uri?` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/src/main/kotlin/com/lovoo/android/pickapp/adapter/SelectionAdapter.kt#L34)
+`var selectedUri: Uri?` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/pickapp/src/main/kotlin/com/lovoo/android/pickapp/adapter/SelectionAdapter.kt#L48)
 
 Set the selected item to notify the adapter to update the ui state.
 

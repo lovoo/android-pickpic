@@ -2,7 +2,7 @@
 
 # RecyclerViewCursorAdapter
 
-`abstract class RecyclerViewCursorAdapter<VH : ViewHolder> : Adapter<`[`VH`](index.md#VH)`>` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/src/main/kotlin/com/lovoo/android/pickcore/adapter/RecyclerViewCursorAdapter.kt#L15)
+`abstract class RecyclerViewCursorAdapter<VH : ViewHolder> : Adapter<`[`VH`](index.md#VH)`>` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/src/main/kotlin/com/lovoo/android/pickcore/adapter/RecyclerViewCursorAdapter.kt#L30)
 
 An [RecyclerView.Adapter](#) implementation that handle [Cursor](#) as data source.
 

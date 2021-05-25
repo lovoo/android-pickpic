@@ -2,7 +2,7 @@
 
 # onUserChanged
 
-`fun onUserChanged(user: `[`Facebook.User`](../../com.lovoo.android.pickfacebook/-facebook/-user/index.md)`?): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/view/FbGalleryFragment.kt#L93)
+`fun onUserChanged(user: `[`Facebook.User`](../../com.lovoo.android.pickfacebook/-facebook/-user/index.md)`?): `[`Unit`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/view/FbGalleryFragment.kt#L114)
 
 Overrides [FbGalleryView.onUserChanged](../../com.lovoo.android.pickfacebook.contract/-fb-gallery-view/on-user-changed.md)
 

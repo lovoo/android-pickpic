@@ -2,5 +2,5 @@
 
 # VERSION_CODE
 
-`static val VERSION_CODE: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/build/generated/source/buildConfig/debug/com/lovoo/android/pickcore/BuildConfig.java#L16)
-`static val VERSION_CODE: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/build/generated/source/buildConfig/debug/com/lovoo/android/pickcore/BuildConfig.java#L16)
+`static val VERSION_CODE: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/build/generated/source/buildConfig/debug/com/lovoo/android/pickcore/BuildConfig.java#L16)
+`static val VERSION_CODE: `[`Int`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/build/generated/source/buildConfig/debug/com/lovoo/android/pickcore/BuildConfig.java#L16)

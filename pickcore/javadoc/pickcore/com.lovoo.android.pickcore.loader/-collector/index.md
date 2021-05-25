@@ -2,7 +2,7 @@
 
 # Collector
 
-`class Collector : LoaderCallbacks<Cursor>` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/src/main/kotlin/com/lovoo/android/pickcore/loader/Collector.kt#L19)
+`class Collector : LoaderCallbacks<Cursor>` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/src/main/kotlin/com/lovoo/android/pickcore/loader/Collector.kt#L34)
 
 An [LoaderManager.LoaderCallbacks](#) implementation that load a cursor
 and set the [MutableLiveData](#) cursor. Others can observe this.

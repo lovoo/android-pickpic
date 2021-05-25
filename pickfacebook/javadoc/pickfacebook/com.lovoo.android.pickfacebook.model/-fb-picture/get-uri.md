@@ -2,7 +2,7 @@
 
 # getUri
 
-`fun getUri(): Uri` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/model/FbPicture.kt#L45)
+`fun getUri(): Uri` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/model/FbPicture.kt#L61)
 
 **Return**
 the [Uri](#) for this picture

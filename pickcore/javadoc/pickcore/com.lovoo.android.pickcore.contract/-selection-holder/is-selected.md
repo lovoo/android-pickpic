@@ -2,7 +2,7 @@
 
 # isSelected
 
-`abstract fun isSelected(uri: Uri): `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/src/main/kotlin/com/lovoo/android/pickcore/contract/SelectionHolder.kt#L24)
+`abstract fun isSelected(uri: Uri): `[`Boolean`](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/src/main/kotlin/com/lovoo/android/pickcore/contract/SelectionHolder.kt#L39)
 
 **Return**
 true if this [Uri](#) is selected right now

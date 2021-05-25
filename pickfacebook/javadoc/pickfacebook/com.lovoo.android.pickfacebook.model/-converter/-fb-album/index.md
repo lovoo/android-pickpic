@@ -2,7 +2,7 @@
 
 # FbAlbum
 
-`data class FbAlbum` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/model/Converter.kt#L67)
+`data class FbAlbum` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/model/Converter.kt#L92)
 
 Model class that represents Facebook Album.
 

@@ -2,7 +2,7 @@
 
 # FbPicturePresenterImpl
 
-`class FbPicturePresenterImpl : `[`FbPicturePresenter`](../../com.lovoo.android.pickfacebook.contract/-fb-picture-presenter/index.md) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/presenter/FbPicturePresenterImpl.kt#L18)
+`class FbPicturePresenterImpl : `[`FbPicturePresenter`](../../com.lovoo.android.pickfacebook.contract/-fb-picture-presenter/index.md) [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/presenter/FbPicturePresenterImpl.kt#L33)
 
 Implementation of [FbPicturePresenter](../../com.lovoo.android.pickfacebook.contract/-fb-picture-presenter/index.md) to load the pictures from Facebook.
 Don't forget to forward onDestroy().

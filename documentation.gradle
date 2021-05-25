@@ -12,7 +12,7 @@ dokka {
         dir = "./"
 
         // URL showing where the source code can be accessed through the web browser
-        url = "https://github.com/lovoo/android-pickpic/blob/master"
+        url = "https://github.com/lovoo/android-pickpic/blob/master/${project.getName()}"
 
         // Suffix which is used to append the line number to the URL. Use #L for GitHub
         suffix = "#L"

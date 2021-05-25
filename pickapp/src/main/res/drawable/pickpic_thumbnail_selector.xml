@@ -3,7 +3,8 @@
     <item android:state_selected="true">
         <shape android:shape="rectangle">
             <solid android:color="@android:color/transparent" />
-            <stroke android:width="2dp" android:color="?attr/colorPrimary" />
+            <corners android:radius="@dimen/pickpic_thumbnail_border_corner_size" />
+            <stroke android:width="@dimen/pickpic_thumbnail_stroke_size" android:color="?attr/colorAccent" />
         </shape>
     </item>
 

@@ -2,7 +2,7 @@
 
 # fragmentManager
 
-`val fragmentManager: FragmentManager` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/src/main/kotlin/com/lovoo/android/pickapp/view/Preview.kt#L22)
+`val fragmentManager: FragmentManager` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickapp/pickapp/src/main/kotlin/com/lovoo/android/pickapp/view/Preview.kt#L37)
 
 the FragmentManager
 

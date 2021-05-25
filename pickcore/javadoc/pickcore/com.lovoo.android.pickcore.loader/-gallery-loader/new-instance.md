@@ -2,7 +2,7 @@
 
 # newInstance
 
-`fun newInstance(context: Context): CursorLoader` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/src/main/kotlin/com/lovoo/android/pickcore/loader/GalleryLoader.kt#L84)
+`fun newInstance(context: Context): CursorLoader` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickcore/pickcore/src/main/kotlin/com/lovoo/android/pickcore/loader/GalleryLoader.kt#L185)
 
 Creates a new instance of [GalleryLoader](index.md).
 

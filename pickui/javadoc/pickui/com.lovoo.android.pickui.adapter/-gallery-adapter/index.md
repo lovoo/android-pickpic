@@ -2,7 +2,7 @@
 
 # GalleryAdapter
 
-`class GalleryAdapter : RecyclerViewCursorAdapter<ViewHolder>` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickui/src/main/kotlin/com/lovoo/android/pickui/adapter/GalleryAdapter.kt#L28)
+`class GalleryAdapter : RecyclerViewCursorAdapter<ViewHolder>` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickui/pickui/src/main/kotlin/com/lovoo/android/pickui/adapter/GalleryAdapter.kt#L43)
 
 RecyclerView Adapter to present [Gallery](#)s.
 

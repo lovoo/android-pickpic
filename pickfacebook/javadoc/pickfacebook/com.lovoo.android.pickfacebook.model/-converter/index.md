@@ -2,7 +2,7 @@
 
 # Converter
 
-`object Converter` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/model/Converter.kt#L12)
+`object Converter` [(source)](https://github.com/lovoo/android-pickpic/blob/master/pickfacebook/pickfacebook/src/main/kotlin/com/lovoo/android/pickfacebook/model/Converter.kt#L27)
 
 Collection of methods to convert Facebook Response data to own Data Models.
 
