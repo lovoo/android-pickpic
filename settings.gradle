@@ -1,1 +1,2 @@
+include ':pickml'
 include ':app', ':pickui', ':pickcore', ':pickfacebook', ':pickapp', ':pickcam'
