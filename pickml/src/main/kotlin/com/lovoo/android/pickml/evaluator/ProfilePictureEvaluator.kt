@@ -17,6 +17,7 @@ package com.lovoo.android.pickml.evaluator
 
 import android.graphics.Bitmap
 import android.graphics.Rect
+import android.util.Log
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.face.FaceDetector
 import com.lovoo.android.pickcore.contract.PictureEvaluatorEngine
@@ -48,7 +49,7 @@ class ProfilePictureEvaluator(
                     face.boundingBox.right,
                     face.boundingBox.bottom
                 )
-                face.smilingProbability
+                Log.d("mktest", "$face")
                 val faceArea = rect.width() * rect.height()
                 FaceData(faceArea / imageArea.toFloat(), face.smilingProbability ?: 0f)
             }.sortedBy { it.area }

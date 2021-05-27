@@ -115,7 +115,9 @@ abstract class ViewHolder<T>(
                 (PickPicProvider.pictureEvaluatorEngine as? ProfilePictureEvaluator)?.let { evaluator ->
                     evaluator.categorizePicture(bitmap) { data ->
                         val value = evaluator.rateCategory(data)
-                        textView.text = "$value"
+                        textView.text = "faces: ${data.numberOfFaces}\n" +
+                            "area: ${data.faceSizeRatio}\n" +
+                            "smile: ${data.smileFactor}"
                     }
                 }
             }

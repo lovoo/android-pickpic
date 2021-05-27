@@ -74,7 +74,11 @@ class PickPicActivity : AppCompatActivity(), SelectionHolder, CameraEngine, Capt
         }
 
     init {
-        val faceDetector = FaceDetection.getClient(FaceDetectorOptions.Builder().build())
+        val faceDetector = FaceDetection.getClient(
+            FaceDetectorOptions.Builder()
+                .setClassificationMode(FaceDetectorOptions.CLASSIFICATION_MODE_ALL)
+                .build()
+        )
         PickPicProvider.apply {
             imageEngine = GlideEngine()
             pictureEvaluatorEngine = ProfilePictureEvaluator(faceDetector)
