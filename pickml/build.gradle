@@ -43,8 +43,9 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation 'com.google.firebase:firebase-core:17.2.0'
-    implementation 'com.google.mlkit:vision-common:16.0.0'
+    implementation 'com.google.firebase:firebase-core:19.0.0'
+    implementation 'com.google.mlkit:vision-common:16.4.0'
+    implementation 'com.google.mlkit:face-detection:16.1.0'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9'
 
     api project(path: ':pickcore')

@@ -13,11 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.lovoo.android.pickml.model
+package com.lovoo.android.pickcore.engine
 
-data class ProfilePictureData(
-    val numberOfFaces: Int = 0,
-    val faceSizeRatio: Float = 0f,
-    val smileFactor: Float = 0f,
-    val isOutDoor: Boolean = false
-)
+import android.graphics.Bitmap
+import com.lovoo.android.pickcore.contract.PictureEvaluatorEngine
+
+class DisabledPictureEvaluatorEngine : PictureEvaluatorEngine<Unit> {
+
+    override fun categorizePicture(bitmap: Bitmap, callback: (Unit) -> Unit) {
+    }
+
+    override fun rateCategory(item: Unit) = 1f
+}

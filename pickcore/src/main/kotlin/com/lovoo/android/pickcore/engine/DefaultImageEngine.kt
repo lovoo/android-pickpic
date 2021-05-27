@@ -17,6 +17,7 @@ package com.lovoo.android.pickcore.engine
 
 import android.content.ContentResolver
 import android.content.Context
+import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.widget.ImageView
@@ -30,6 +31,10 @@ import java.io.InputStream
  * Be aware that this should never be used in production, because of OutOfMemory-Exceptions.
  */
 class DefaultImageEngine : ImageEngine {
+    override fun loadBitmap(context: Context, size: Int, uri: Uri, corner: Int, errorRes: Int, callback: (Bitmap?) -> Unit) {
+        // no op
+    }
+
     override fun loadThumbnail(context: Context, size: Int, uri: Uri, target: ImageView, corner: Int, errorRes: Int) {
         loadImage(context, size, size, uri, target, corner, errorRes)
     }

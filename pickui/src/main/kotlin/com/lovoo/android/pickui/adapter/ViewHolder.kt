@@ -24,8 +24,10 @@ import androidx.appcompat.widget.AppCompatCheckBox
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
+import com.lovoo.android.pickcore.PickPicProvider
 import com.lovoo.android.pickcore.contract.CameraEngine
 import com.lovoo.android.pickcore.contract.ImageEngine
+import com.lovoo.android.pickml.evaluator.ProfilePictureEvaluator
 import com.lovoo.android.pickui.R
 import com.lovoo.android.pickui.view.PlaceHolderDrawable
 
@@ -100,12 +102,25 @@ abstract class ViewHolder<T>(
         val isSelected = selectionLookUp.invoke(item)
         val uri = getUri(item)
         val imageView = itemView.findViewById<ImageView>(R.id.picture)
+        val textView = itemView.findViewById<TextView>(R.id.pictureRate)
         itemView.isSelected = isSelected
         itemView.findViewById<AppCompatCheckBox>(R.id.picture_selected).isChecked = isSelected
         itemView.setOnClickListener {
             onClick.invoke(it, item)
         }
-        engine.loadThumbnail(imageView.context, width, uri, imageView, 0)
+        textView.text = " ... "
+        imageView.setImageBitmap(null)
+        engine.loadBitmap(imageView.context, width, uri, 0) { bitmap ->
+            if (bitmap != null) {
+                (PickPicProvider.pictureEvaluatorEngine as? ProfilePictureEvaluator)?.let { evaluator ->
+                    evaluator.categorizePicture(bitmap) { data ->
+                        val value = evaluator.rateCategory(data)
+                        textView.text = "$value"
+                    }
+                }
+            }
+            imageView.setImageBitmap(bitmap)
+        }
     }
 
     /**

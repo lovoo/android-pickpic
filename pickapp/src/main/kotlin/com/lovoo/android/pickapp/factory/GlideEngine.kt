@@ -17,6 +17,8 @@ package com.lovoo.android.pickapp.factory
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
@@ -24,6 +26,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.lovoo.android.pickcore.contract.ImageEngine
 
 /**
@@ -41,8 +45,42 @@ class GlideEngine : ImageEngine {
      * @param corner the rounded corner in pixel
      * @param errorRes the optional resource as error fallback
      */
-    override fun loadThumbnail(context: Context, size: Int, uri: Uri, target: ImageView, corner: Int, errorRes: Int) {
+    override fun loadBitmap(context: Context, size: Int, uri: Uri, corner: Int, errorRes: Int, callback: (Bitmap?) -> Unit) {
         // forward the request to the other method
+        // skip load call when context is finished activity
+        if (context is Activity && (context.isFinishing || context.isDestroyed)) {
+            return
+        }
+
+        // load the image for the requested size and handle error case
+        Glide.with(context)
+            .asBitmap()
+            .load(uri)
+            .apply(
+                RequestOptions()
+                    .override(size, size)
+                    .also {
+                        if (corner > 0) it.transform(CenterCrop(), RoundedCorners(corner))
+                        else it.centerCrop()
+                    }
+            )
+            .apply {
+                if (errorRes != 0) {
+                    error(errorRes)
+                }
+            }.into(object : CustomTarget<Bitmap?>() {
+
+                override fun onLoadCleared(placeholder: Drawable?) {
+                    callback.invoke(null)
+                }
+
+                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap?>?) {
+                    callback.invoke(resource)
+                }
+            })
+    }
+
+    override fun loadThumbnail(context: Context, size: Int, uri: Uri, target: ImageView, corner: Int, errorRes: Int) {
         loadImage(context, size, size, uri, target, corner, errorRes)
     }
 

@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:animateLayoutChanges="true"
     android:clickable="true"
-    android:focusable="true">
+    android:focusable="true"
+    tools:layout_width="100dp"
+    tools:layout_height="100dp">
 
     <ImageView
         android:id="@+id/picture"
@@ -13,7 +16,17 @@
         android:layout_height="match_parent"
         android:duplicateParentState="true"
         android:foreground="@drawable/pickpic_picture_selector"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        tools:src="@tools:sample/backgrounds/scenic"/>
+
+    <TextView
+        android:id="@+id/pictureRate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="@android:color/white"
+        android:background="@android:color/black"
+        android:text="0.75" />
 
     <CheckBox
         android:id="@+id/picture_selected"

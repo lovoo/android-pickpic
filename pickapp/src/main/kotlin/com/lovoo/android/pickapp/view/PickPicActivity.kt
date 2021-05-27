@@ -29,6 +29,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.android.material.appbar.CollapsingToolbarLayout
+import com.google.mlkit.vision.face.FaceDetection
+import com.google.mlkit.vision.face.FaceDetectorOptions
 import com.lovoo.android.pickapp.R
 import com.lovoo.android.pickapp.adapter.PickPicAdapter
 import com.lovoo.android.pickapp.factory.GlideEngine
@@ -46,6 +48,7 @@ import com.lovoo.android.pickcore.engine.DisabledCameraEngine
 import com.lovoo.android.pickcore.model.Gallery
 import com.lovoo.android.pickcore.model.convertToUi
 import com.lovoo.android.pickcore.permission.Permission
+import com.lovoo.android.pickml.evaluator.ProfilePictureEvaluator
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.pickpic_activity.*
 import kotlinx.android.synthetic.main.pickpic_layout_toolbar.*
@@ -71,8 +74,10 @@ class PickPicActivity : AppCompatActivity(), SelectionHolder, CameraEngine, Capt
         }
 
     init {
+        val faceDetector = FaceDetection.getClient(FaceDetectorOptions.Builder().build())
         PickPicProvider.apply {
             imageEngine = GlideEngine()
+            pictureEvaluatorEngine = ProfilePictureEvaluator(faceDetector)
             cameraEngine = this@PickPicActivity
             selectionHolder = this@PickPicActivity
         }

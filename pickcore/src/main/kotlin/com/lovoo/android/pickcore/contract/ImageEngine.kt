@@ -16,6 +16,7 @@
 package com.lovoo.android.pickcore.contract
 
 import android.content.Context
+import android.graphics.Bitmap
 import android.net.Uri
 import android.widget.ImageView
 
@@ -26,6 +27,18 @@ import android.widget.ImageView
  * @see com.lovoo.android.pickapp.factory.GlideEngine
  */
 interface ImageEngine {
+    /**
+     * Load a small image.
+     *
+     * @param context app [Context]
+     * @param size the requested width and height of the image
+     * @param uri the image [Uri]
+     * @param target the image view that show the bitmap
+     * @param corner the rounded corner in pixel
+     * @param errorRes the error drawable if request failed or 0
+     */
+    fun loadBitmap(context: Context, size: Int, uri: Uri, corner: Int = 0, errorRes: Int = 0, callback: (Bitmap?) -> Unit)
+
     /**
      * Load a small image.
      *

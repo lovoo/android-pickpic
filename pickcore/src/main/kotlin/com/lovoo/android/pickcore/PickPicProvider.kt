@@ -17,9 +17,11 @@ package com.lovoo.android.pickcore
 
 import com.lovoo.android.pickcore.contract.CameraEngine
 import com.lovoo.android.pickcore.contract.ImageEngine
+import com.lovoo.android.pickcore.contract.PictureEvaluatorEngine
 import com.lovoo.android.pickcore.contract.SelectionHolder
 import com.lovoo.android.pickcore.engine.DefaultImageEngine
 import com.lovoo.android.pickcore.engine.DisabledCameraEngine
+import com.lovoo.android.pickcore.engine.DisabledPictureEvaluatorEngine
 
 /**
  * Object that allows at runtime to change core feature from PickPic.
@@ -80,4 +82,6 @@ object PickPicProvider {
      * the option to listen for changes.
      */
     var selectionHolder: SelectionHolder? = null
+
+    var pictureEvaluatorEngine: PictureEvaluatorEngine<*> = DisabledPictureEvaluatorEngine()
 }
