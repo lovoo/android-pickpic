@@ -30,11 +30,9 @@ import com.lovoo.android.pickfacebook.R
 import com.lovoo.android.pickfacebook.adapter.FbGalleryAdapter
 import com.lovoo.android.pickfacebook.contract.FbGalleryPresenter
 import com.lovoo.android.pickfacebook.contract.FbGalleryView
+import com.lovoo.android.pickfacebook.databinding.PickfacebookFragmentGalleryBinding
 import com.lovoo.android.pickfacebook.presenter.FbGalleryPresenterImpl
 import com.lovoo.android.pickui.adapter.PopUpGalleryAdapter
-import kotlinx.android.synthetic.main.pickfacebook_fragment_gallery.*
-import kotlinx.android.synthetic.main.pickfacebook_gallery_error.*
-import kotlinx.android.synthetic.main.pickfacebook_gallery_permission_denied.*
 
 /**
  * Fragment that offers a predefined solution to load and present Facebook [Gallery] and there
@@ -46,9 +44,10 @@ import kotlinx.android.synthetic.main.pickfacebook_gallery_permission_denied.*
 class FbGalleryFragment : Fragment(), FbGalleryView {
 
     private val presenter: FbGalleryPresenter = FbGalleryPresenterImpl(this)
-
     private var adapter: FbGalleryAdapter? = null
     private var restoredGallery: Gallery? = null
+    private var _binding: PickfacebookFragmentGalleryBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,14 +62,18 @@ class FbGalleryFragment : Fragment(), FbGalleryView {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.pickfacebook_fragment_gallery, container, false)
+        super.onCreateView(inflater, container, savedInstanceState)
+        _binding = PickfacebookFragmentGalleryBinding.inflate(inflater, container, false)
+        return _binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        permission_layout.visibility = View.GONE
-        error_layout.visibility = View.GONE
+        binding.apply {
+            permissionInclude.permissionLayout.visibility = View.GONE
+            errorInclude.errorLayout.visibility = View.GONE
+        }
 
         if (childFragmentManager.findFragmentByTag(FbPictureFragment.TAG) == null) {
             val allowNestedScroll = (arguments?.getBoolean(ARGUMENT_NESTED_SCROLL) ?: true)
@@ -107,7 +110,7 @@ class FbGalleryFragment : Fragment(), FbGalleryView {
     override fun getLifeCycle() = this
 
     override fun onAccessTokenChanged(token: String?) {
-        error_layout.visibility = View.GONE
+        binding.errorInclude.errorLayout.visibility = View.GONE
         checkPermissions()
     }
 
@@ -130,12 +133,13 @@ class FbGalleryFragment : Fragment(), FbGalleryView {
             !error.message.isNullOrEmpty() -> error.message
             else -> context.getString(R.string.pickfacebook_default_error_message)
         }
-        error_message?.text = message
-        error_button?.setOnClickListener {
-            presenter.handleError(error)
+        binding.errorInclude.apply {
+            errorMessage.text = message
+            errorButton.setOnClickListener {
+                presenter.handleError(error)
+            }
+            errorLayout.visibility = View.VISIBLE
         }
-
-        error_layout?.visibility = View.VISIBLE
 
         adapter?.galleries = emptyList()
         adapter = null
@@ -143,25 +147,24 @@ class FbGalleryFragment : Fragment(), FbGalleryView {
 
     private fun onGallerySwitch(gallery: Gallery) {
         restoredGallery = gallery
-        folder_text.text = gallery.name
+        binding.folderText.text = gallery.name
         initMenu()
         (childFragmentManager.findFragmentByTag(FbPictureFragment.TAG) as? FbPictureFragment)?.swap(gallery)
     }
 
     private fun checkPermissions() {
         val isValid = presenter.isLoggedIn() && presenter.isPicturePermissionGranted()
-
-        permission_layout?.visibility = when (!isValid) {
-            true -> View.VISIBLE
-            false -> View.GONE
+        binding.permissionInclude.apply {
+            permissionLayout.visibility = when (!isValid) {
+                true -> View.VISIBLE
+                false -> View.GONE
+            }
+            permissionButton.setOnClickListener {
+                presenter.loginWithPicturePermission(this@FbGalleryFragment)
+            }
         }
-
         if (isValid && adapter == null) {
             presenter.loadGalleries()
-        }
-
-        permission_button?.setOnClickListener {
-            presenter.loginWithPicturePermission(this)
         }
     }
 
@@ -178,17 +181,16 @@ class FbGalleryFragment : Fragment(), FbGalleryView {
     private fun initMenu() {
         val items = adapter?.galleries ?: return
 
-        if (items.size <= 1) {
-            folder_button.visibility = View.GONE
-            return
-        }
-
-        folder_button?.let { view ->
+        binding.folderButton.let { view ->
+            if (items.size <= 1) {
+                view.visibility = View.GONE
+                return
+            }
             val popup = ListPopupWindow(view.context).apply {
                 val adapterItems = items.filter { it != restoredGallery }
                 setAdapter(PopUpGalleryAdapter(view.context, adapterItems) { it.name })
                 anchorView = view
-                setContentWidth(view.resources.getDimensionPixelSize(R.dimen.pickpic_gallery_item_width))
+                setContentWidth(resources.getDimensionPixelSize(R.dimen.pickpic_gallery_item_width))
                 setDropDownGravity(Gravity.END)
                 setOnItemClickListener { _, _, position, _ ->
                     adapterItems.getOrNull(position)?.let {
@@ -204,6 +206,11 @@ class FbGalleryFragment : Fragment(), FbGalleryView {
             }
             view.visibility = View.VISIBLE
         }
+    }
+
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
     }
 
     companion object {

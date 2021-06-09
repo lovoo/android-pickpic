@@ -40,8 +40,7 @@ import com.lovoo.android.pickcore.presenter.GalleryPresenterImpl
 import com.lovoo.android.pickui.R
 import com.lovoo.android.pickui.adapter.GalleryAdapter
 import com.lovoo.android.pickui.adapter.PopUpGalleryAdapter
-import kotlinx.android.synthetic.main.pickpic_fragment_gallery.*
-import kotlinx.android.synthetic.main.pickpic_gallery_permission_denied.*
+import com.lovoo.android.pickui.databinding.PickpicFragmentGalleryBinding
 
 /**
  * Fragment that offers a predefined solution to load and present [Gallery]s and there
@@ -67,6 +66,8 @@ class GalleryFragment : Fragment(), GalleryView {
             }
         }
     }
+    private var _binding: PickpicFragmentGalleryBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,7 +86,8 @@ class GalleryFragment : Fragment(), GalleryView {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.pickpic_fragment_gallery, container, false)
+        _binding = PickpicFragmentGalleryBinding.inflate(inflater, container, false)
+        return _binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -94,7 +96,7 @@ class GalleryFragment : Fragment(), GalleryView {
         val context = view.context
         allFolderName = context.getString(R.string.pickpic_label_all_folder)
 
-        adapter = GalleryAdapter(context, allFolderName) { _, _ -> }
+        adapter = GalleryAdapter(allFolderName) { _, _ -> }
 
         if (childFragmentManager.findFragmentByTag(PictureFragment.TAG) == null) {
             val allowNestedScroll = (arguments?.getBoolean(ARGUMENT_NESTED_SCROLL) ?: true)
@@ -138,7 +140,7 @@ class GalleryFragment : Fragment(), GalleryView {
 
     private fun onGallerySwitch(gallery: Gallery) {
         restoredGallery = gallery
-        folder_text.text = getFolderName(gallery)
+        binding.folderText.text = getFolderName(gallery)
         initMenu()
         (childFragmentManager.findFragmentByTag(PictureFragment.TAG) as? PictureFragment)?.swap(gallery)
     }
@@ -153,22 +155,21 @@ class GalleryFragment : Fragment(), GalleryView {
     private fun checkPermissions() {
         val activity = activity ?: return
         val deniedList = Permission.getDeniedPermissions(activity, Permission.galleryPermissions)
-
-        permission_layout.visibility = when (deniedList.isNotEmpty()) {
-            true -> View.VISIBLE
-
-            false -> {
-                if (permission_layout.visibility == View.VISIBLE) {
-                    presenter.load()
+        binding.permissionInclude.apply {
+            permissionLayout.visibility = when (deniedList.isNotEmpty()) {
+                true -> View.VISIBLE
+                false -> {
+                    if (permissionLayout.visibility == View.VISIBLE) {
+                        presenter.load()
+                    }
+                    View.GONE
                 }
-                View.GONE
             }
-        }
-
-        permission_button?.setOnClickListener { _ ->
-            deniedList.firstOrNull { it.second }?.let {
-                Permission.openSettings(activity)
-            } ?: requestPermissions(activity)
+            permissionButton.setOnClickListener { _ ->
+                deniedList.firstOrNull { it.second }?.let {
+                    Permission.openSettings(activity)
+                } ?: requestPermissions(activity)
+            }
         }
     }
 
@@ -189,18 +190,16 @@ class GalleryFragment : Fragment(), GalleryView {
 
     private fun initMenu() {
         val items = adapter.getItems { GalleryLoader.convert(it).convertToUi() }
-
-        if (items.size <= 1) {
-            folder_button.visibility = View.GONE
-            return
-        }
-
-        folder_button?.let { view ->
+        binding.folderButton.let { view ->
+            if (items.size <= 1) {
+                view.visibility = View.GONE
+                return
+            }
             val popup = ListPopupWindow(view.context).apply {
                 val adapterItems = items.filter { it != restoredGallery }
                 setAdapter(PopUpGalleryAdapter(view.context, adapterItems) { getFolderName(it) })
                 anchorView = view
-                setContentWidth(view.resources.getDimensionPixelSize(R.dimen.pickpic_gallery_item_width))
+                setContentWidth(resources.getDimensionPixelSize(R.dimen.pickpic_gallery_item_width))
                 setDropDownGravity(Gravity.END)
                 setOnItemClickListener { _, _, position, _ ->
                     adapterItems.getOrNull(position)?.let {

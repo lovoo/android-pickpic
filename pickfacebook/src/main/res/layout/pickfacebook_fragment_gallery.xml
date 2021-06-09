@@ -41,6 +41,7 @@
         app:layout_constraintTop_toBottomOf="@id/header" />
 
     <include
+        android:id="@+id/errorInclude"
         layout="@layout/pickfacebook_gallery_error"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -52,6 +53,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <include
+        android:id="@+id/permissionInclude"
         layout="@layout/pickfacebook_gallery_permission_denied"
         android:layout_width="0dp"
         android:layout_height="0dp"

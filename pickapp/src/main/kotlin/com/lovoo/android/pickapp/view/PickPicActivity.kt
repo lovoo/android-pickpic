@@ -24,13 +24,13 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.lovoo.android.pickapp.R
 import com.lovoo.android.pickapp.adapter.PickPicAdapter
+import com.lovoo.android.pickapp.databinding.PickpicActivityBinding
 import com.lovoo.android.pickapp.factory.GlideEngine
 import com.lovoo.android.pickapp.factory.PickDependencies
 import com.lovoo.android.pickapp.model.PickPicConfig
@@ -47,8 +47,6 @@ import com.lovoo.android.pickcore.model.Gallery
 import com.lovoo.android.pickcore.model.convertToUi
 import com.lovoo.android.pickcore.permission.Permission
 import io.reactivex.disposables.CompositeDisposable
-import kotlinx.android.synthetic.main.pickpic_activity.*
-import kotlinx.android.synthetic.main.pickpic_layout_toolbar.*
 
 /**
  * Ready to use PickPic implementation. Configurable with [PickPicConfig].
@@ -57,6 +55,7 @@ class PickPicActivity : AppCompatActivity(), SelectionHolder, CameraEngine, Capt
 
     private lateinit var config: PickPicConfig
     private lateinit var picker: Picker
+    private lateinit var binding: PickpicActivityBinding
     private val subscriptions = CompositeDisposable()
     private val dependencies = PickDependencies()
     private var externalToggleListener: MutableMap<Any, ToggleCallback> = mutableMapOf()
@@ -94,8 +93,8 @@ class PickPicActivity : AppCompatActivity(), SelectionHolder, CameraEngine, Capt
         if (config.style != 0) {
             theme.applyStyle(config.style, true)
         }
-
-        setContentView(R.layout.pickpic_activity)
+        binding = PickpicActivityBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         picker = Picker(Picker.PickConfig(config.minCount, config.maxCount))
 
@@ -107,7 +106,7 @@ class PickPicActivity : AppCompatActivity(), SelectionHolder, CameraEngine, Capt
             initSelectionBar()
             initPreview()
         } else {
-            selection_bar.visibility = View.GONE
+            binding.selectionBar.selectionBar.visibility = View.GONE
         }
 
         if (!config.isPreviewEnabled()) {
@@ -244,74 +243,78 @@ class PickPicActivity : AppCompatActivity(), SelectionHolder, CameraEngine, Capt
     }
 
     private fun initToolbar() {
-        toolbar.let {
-            it.title = config.title
-            it.inflateMenu(R.menu.menu_pickpic)
-            it.setOnMenuItemClickListener {
-                when (it.itemId) {
-                    R.id.pickpic_menu_faq -> onFaqClick()
-                    R.id.pickpic_menu_remove -> {
-                        selectedUri?.let {
-                            return@setOnMenuItemClickListener picker.remove(it)
-                        } ?: return@setOnMenuItemClickListener false
+        binding.toolbarInclude.apply {
+            toolbar.apply {
+                title = config.title
+                inflateMenu(R.menu.menu_pickpic)
+                setOnMenuItemClickListener {
+                    when (it.itemId) {
+                        R.id.pickpic_menu_faq -> onFaqClick()
+                        R.id.pickpic_menu_remove -> {
+                            selectedUri?.let { uri ->
+                                return@setOnMenuItemClickListener picker.remove(uri)
+                            } ?: return@setOnMenuItemClickListener false
+                        }
+                        else -> false
                     }
-                    else -> false
+                }
+                setNavigationOnClickListener { onBackPressed() }
+                navigationIcon = navigationIcon?.mutate()?.apply {
+                    val color = ContextCompat.getColor(context, R.color.pickpic_text_actionbar)
+                    colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN)
                 }
             }
-            it.setNavigationOnClickListener { onBackPressed() }
-            it.navigationIcon = it.navigationIcon?.mutate()?.apply {
-                val color = ContextCompat.getColor(it.context, R.color.pickpic_text_actionbar)
-                colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN)
-            }
-        }
-        toolbar_text.let {
-            if (config.header.isNullOrEmpty()) {
-                it.visibility = View.GONE
-            } else {
-                it.text = config.header
-                it.visibility = View.VISIBLE
+            toolbarText.apply {
+                if (config.header.isNullOrEmpty()) {
+                    visibility = View.GONE
+                } else {
+                    text = config.header
+                    visibility = View.VISIBLE
+                }
             }
         }
     }
 
     private fun updateToolbar() {
-        toolbar?.menu?.let {
-            it.findItem(R.id.pickpic_menu_faq)?.isVisible = selectedUri == null && !config.faqUrl.isNullOrEmpty()
-            it.findItem(R.id.pickpic_menu_remove)?.isVisible = selectedUri != null
-        }
+        binding.toolbarInclude.apply {
+            toolbar.menu?.let {
+                it.findItem(R.id.pickpic_menu_faq)?.isVisible = selectedUri == null && !config.faqUrl.isNullOrEmpty()
+                it.findItem(R.id.pickpic_menu_remove)?.isVisible = selectedUri != null
+            }
 
-        // hide tab layout when preview picture is selected or adapter has only one item
-        tab_layout?.visibility = if (selectedUri == null && fragment_pager.adapter?.count ?: 0 > 1) View.VISIBLE else View.GONE
+            // hide tab layout when preview picture is selected or adapter has only one item
+            tabLayout.visibility = if (selectedUri == null && binding.fragmentPager.adapter?.count ?: 0 > 1) View.VISIBLE else View.GONE
+        }
     }
 
     private fun initPickerFragments() {
-        fragment_pager.adapter = PickPicAdapter(this, supportFragmentManager, dependencies)
-
-        // hide tab layout when adapter has only one item
-        if (fragment_pager.adapter?.count ?: 0 <= 1) {
-            tab_layout.visibility = View.GONE
-
-            val paddingBottom = resources.getDimensionPixelOffset(R.dimen.pickpic_actionbar_headline_margin)
-            toolbar_text.setPadding(
-                toolbar_text.paddingStart,
-                toolbar_text.paddingTop,
-                toolbar_text.paddingEnd,
-                paddingBottom
-            )
-
-            val mode = CollapsingToolbarLayout.LayoutParams.COLLAPSE_MODE_PIN
-            (toolbar.layoutParams as CollapsingToolbarLayout.LayoutParams).collapseMode = mode
-        } else {
-            tab_layout.setupWithViewPager(fragment_pager)
+        binding.apply {
+            fragmentPager.adapter = PickPicAdapter(root.context, supportFragmentManager, dependencies)
+            toolbarInclude.apply {
+                if (fragmentPager.adapter?.count ?: 0 <= 1) {
+                    tabLayout.visibility = View.GONE
+                    toolbarText.apply {
+                        setPadding(
+                            this.paddingStart,
+                            this.paddingTop,
+                            this.paddingEnd,
+                            resources.getDimensionPixelOffset(R.dimen.pickpic_actionbar_headline_margin)
+                        )
+                    }
+                    (toolbar.layoutParams as CollapsingToolbarLayout.LayoutParams).collapseMode =
+                        CollapsingToolbarLayout.LayoutParams.COLLAPSE_MODE_PIN
+                } else {
+                    tabLayout.setupWithViewPager(binding.fragmentPager)
+                }
+            }
         }
     }
 
     private fun initSelectionBar() {
-        val selectionView = findViewById<ViewGroup>(R.id.selection_bar)
         selectionbar = Selectionbar(
             picker,
-            selectionView,
-            arrayOf(fragment_pager, preview_pager)
+            binding.selectionBar,
+            arrayOf(binding.fragmentPager, binding.previewPager)
         ).apply {
 
             setButtonText(this@PickPicActivity.config.sendText)
@@ -321,7 +324,7 @@ class PickPicActivity : AppCompatActivity(), SelectionHolder, CameraEngine, Capt
     }
 
     private fun initPreview() {
-        preview = Preview(preview_pager, supportFragmentManager, picker)
+        preview = Preview(binding.previewPager, supportFragmentManager, picker)
     }
 
     private fun finishSelection() {

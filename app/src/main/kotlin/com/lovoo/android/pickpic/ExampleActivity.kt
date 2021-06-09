@@ -21,19 +21,22 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lovoo.android.pickapp.model.PickPicConfig
 import com.lovoo.android.pickapp.view.PickPicActivity
-import kotlinx.android.synthetic.main.activity_example.*
+import com.lovoo.android.pickpic.databinding.ActivityExampleBinding
 
 /**
  * Demo Activity to show how to use PickPic
  */
 class ExampleActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityExampleBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_example)
+        binding = ActivityExampleBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        button.setOnClickListener { view ->
+        binding.button.setOnClickListener { view ->
             // create an Intent, apply the configuration and start for result
             Intent(view.context, PickPicActivity::class.java).let {
                 val config = PickPicConfig(
@@ -51,10 +54,10 @@ class ExampleActivity : AppCompatActivity() {
             }
         }
 
-        result_list.let {
-            it.layoutManager = LinearLayoutManager(it.context)
-            it.addItemDecoration(ExampleDecorator())
-            it.adapter = ExampleAdapter(it.context)
+        binding.resultList.apply {
+            layoutManager = LinearLayoutManager(this.context)
+            addItemDecoration(ExampleDecorator())
+            adapter = ExampleAdapter(this.context)
         }
     }
 
@@ -70,7 +73,7 @@ class ExampleActivity : AppCompatActivity() {
         } else {
             supportActionBar?.hide()
         }
-        (result_list?.adapter as? ExampleAdapter)?.list = result
+        (binding.resultList.adapter as? ExampleAdapter)?.list = result
     }
 
     companion object {
