@@ -120,6 +120,11 @@ class PictureFragment : Fragment(), PictureView {
         super.onDetach()
     }
 
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
+    }
+
     override fun onDestroy() {
         gallery = null
         presenter.onDestroy()

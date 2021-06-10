@@ -131,6 +131,11 @@ class GalleryFragment : Fragment(), GalleryView {
         presenter.onDestroy()
     }
 
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
+    }
+
     override fun getLifeCycle() = this
 
     override fun onCursorLoaded(cursor: Cursor?) {

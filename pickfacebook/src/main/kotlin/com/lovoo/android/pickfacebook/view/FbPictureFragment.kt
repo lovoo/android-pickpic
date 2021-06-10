@@ -115,6 +115,11 @@ class FbPictureFragment : Fragment(), FbPictureView {
         super.onDestroy()
     }
 
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
+    }
+
     override fun onError(error: Throwable) {
         context?.let {
             val message = error.message ?: it.getString(R.string.pickfacebook_default_error_message)
