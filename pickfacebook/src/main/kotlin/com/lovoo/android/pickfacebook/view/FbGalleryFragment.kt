@@ -110,7 +110,7 @@ class FbGalleryFragment : Fragment(), FbGalleryView {
     override fun getLifeCycle() = this
 
     override fun onAccessTokenChanged(token: String?) {
-        binding.errorInclude.errorLayout.visibility = View.GONE
+        _binding?.errorInclude?.errorLayout?.visibility = View.GONE
         checkPermissions()
     }
 
@@ -154,7 +154,7 @@ class FbGalleryFragment : Fragment(), FbGalleryView {
 
     private fun checkPermissions() {
         val isValid = presenter.isLoggedIn() && presenter.isPicturePermissionGranted()
-        binding.permissionInclude.apply {
+        _binding?.permissionInclude?.apply {
             permissionLayout.visibility = when (!isValid) {
                 true -> View.VISIBLE
                 false -> View.GONE

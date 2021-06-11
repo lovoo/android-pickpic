@@ -160,7 +160,7 @@ class GalleryFragment : Fragment(), GalleryView {
     private fun checkPermissions() {
         val activity = activity ?: return
         val deniedList = Permission.getDeniedPermissions(activity, Permission.galleryPermissions)
-        binding.permissionInclude.apply {
+        _binding?.permissionInclude?.apply {
             permissionLayout.visibility = when (deniedList.isNotEmpty()) {
                 true -> View.VISIBLE
                 false -> {

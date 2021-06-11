@@ -94,7 +94,7 @@ class PictureFragment : Fragment(), PictureView {
             tag,
             object : ToggleCallback {
                 override fun toggle(uri: Uri, gallery: Gallery) {
-                    (binding.listView.adapter as? PictureAdapter)?.let { adapter ->
+                    (_binding?.listView?.adapter as? PictureAdapter)?.let { adapter ->
                         val position = adapter
                             .getItems { PictureLoader.convert(it).convertToUi() }
                             .indexOfFirst { it.getUri() == uri }
@@ -132,9 +132,9 @@ class PictureFragment : Fragment(), PictureView {
     }
 
     override fun onCursorLoaded(cursor: Cursor?) {
-        (binding.listView.adapter as? PictureAdapter)?.apply {
+        (_binding?.listView?.adapter as? PictureAdapter)?.apply {
             changeCursor(cursor)
-            binding.loadingView.visibility = View.GONE
+            _binding?.loadingView?.visibility = View.GONE
         }
     }
 
