@@ -36,7 +36,7 @@ buildscript {
     def code = System.getenv("VERSION_CODE")
     def artifactory_user = project.hasProperty('lovoo.repo.username') ? project.property('lovoo.repo.username') : System.getenv("ARTIFACTORY_USER")
     def artifactory_pwd = project.hasProperty('lovoo.repo.password') ? project.property('lovoo.repo.password') : System.getenv("ARTIFACTORY_PWD")
-    ext.version_name = version == null ? "1.6.0-SNAPSHOT" : version
+    ext.version_name = version == null ? "1.6.1-SNAPSHOT" : version
     ext.version_code = code == null ? 10 : code.toInteger()
     ext.repository_name = version_name.endsWith("-SNAPSHOT") ? "libs-snapshot" : "libs-release"
     ext.artifactory_user = artifactory_user

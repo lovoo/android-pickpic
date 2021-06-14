@@ -28,7 +28,6 @@ import com.lovoo.android.pickcore.adapter.RecyclerViewCursorAdapter
 import com.lovoo.android.pickcore.loader.GalleryLoader
 import com.lovoo.android.pickcore.model.Gallery
 import com.lovoo.android.pickcore.model.convertToUi
-import com.lovoo.android.pickui.R
 import com.lovoo.android.pickui.databinding.PickpicListItemGalleryBinding
 import java.io.File
 
@@ -47,25 +46,23 @@ class GalleryAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): RecyclerView.ViewHolder = ViewHolder(
-        parent, R.layout.pickpic_list_item_gallery, allFolderName, onClick
-    )
+    ): ViewHolder {
+        val binding = PickpicListItemGalleryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding, allFolderName, onClick)
+    }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, cursor: Cursor) {
         (holder as ViewHolder).bind(GalleryLoader.convert(cursor).convertToUi())
     }
 
-    private class ViewHolder(
-        parent: ViewGroup,
-        view: Int,
+    class ViewHolder(
+        private val binding: PickpicListItemGalleryBinding,
         private val allFolderName: String,
-        private val onClick: (View, Gallery) -> Unit
-    ) : RecyclerView.ViewHolder(
-        LayoutInflater.from(parent.context).inflate(view, parent, false)
-    ) {
+        private val onClick: (View, Gallery) -> Unit,
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(gallery: Gallery) {
-            PickpicListItemGalleryBinding.bind(itemView).apply {
+            binding.apply {
                 galleryName.text = gallery.name
                 galleryCount.text = gallery.count.toString()
                 itemView.setOnClickListener { onClick.invoke(itemView, gallery) }

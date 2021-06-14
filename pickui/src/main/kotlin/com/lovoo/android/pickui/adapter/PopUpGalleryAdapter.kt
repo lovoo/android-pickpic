@@ -50,7 +50,8 @@ class PopUpGalleryAdapter(
         container: ViewGroup
     ): View {
         val item = getItem(position) ?: return View(context)
-        return convertView ?: PickpicListItemGalleryBinding.inflate(inflater, container, false).apply {
+        val binding = convertView?.let { PickpicListItemGalleryBinding.bind(it) } ?: PickpicListItemGalleryBinding.inflate(inflater, container, false)
+        return binding.apply {
             galleryCover.viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
                 override fun onPreDraw(): Boolean {
                     galleryCover.viewTreeObserver.removeOnPreDrawListener(this)
