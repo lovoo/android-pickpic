@@ -36,7 +36,7 @@ buildscript {
     def code = System.getenv("VERSION_CODE")
     def artifactory_user = project.hasProperty('lovoo.repo.username') ? project.property('lovoo.repo.username') : System.getenv("ARTIFACTORY_USER")
     def artifactory_pwd = project.hasProperty('lovoo.repo.password') ? project.property('lovoo.repo.password') : System.getenv("ARTIFACTORY_PWD")
-    ext.version_name = version == null ? "1.3.0" : version
+    ext.version_name = version == null ? "1.6.1-SNAPSHOT" : version
     ext.version_code = code == null ? 10 : code.toInteger()
     ext.repository_name = version_name.endsWith("-SNAPSHOT") ? "libs-snapshot" : "libs-release"
     ext.artifactory_user = artifactory_user
@@ -54,7 +54,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.6.4'
+        classpath 'com.android.tools.build:gradle:4.2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'org.jetbrains.dokka:dokka-gradle-plugin:0.9.18'
         classpath 'com.diffplug.spotless:spotless-plugin-gradle:3.27.1'

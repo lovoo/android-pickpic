@@ -34,10 +34,10 @@ import com.lovoo.android.pickfacebook.R
 import com.lovoo.android.pickfacebook.adapter.FbPictureAdapter
 import com.lovoo.android.pickfacebook.contract.FbPicturePresenter
 import com.lovoo.android.pickfacebook.contract.FbPictureView
+import com.lovoo.android.pickfacebook.databinding.PickfacebookFragmentPictureBinding
 import com.lovoo.android.pickfacebook.model.FbPicture
 import com.lovoo.android.pickfacebook.presenter.FbPicturePresenterImpl
 import com.lovoo.android.pickui.view.PictureDecoration
-import kotlinx.android.synthetic.main.pickfacebook_fragment_picture.*
 
 /**
  * Fragment that offers a predefined solution to load and present Facebook pictures from a certain [Gallery].
@@ -55,14 +55,18 @@ class FbPictureFragment : Fragment(), FbPictureView {
     private val selectionHolder: SelectionHolder?
         get() = PickPicProvider.selectionHolder
 
+    private var _binding: PickfacebookFragmentPictureBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.pickfacebook_fragment_picture, container, false)
+        _binding = PickfacebookFragmentPictureBinding.inflate(inflater, container, false)
+        return _binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        list_view.apply {
+        binding.listView.apply {
             setHasFixedSize(true)
             isNestedScrollingEnabled = arguments?.getBoolean(ARGUMENT_NESTED_SCROLL) ?: true
             addItemDecoration(PictureDecoration(3, resources.getDimensionPixelOffset(R.dimen.pickpic_picture_item_space)))
@@ -81,7 +85,7 @@ class FbPictureFragment : Fragment(), FbPictureView {
             tag,
             object : ToggleCallback {
                 override fun toggle(uri: Uri, gallery: Gallery) {
-                    (list_view?.adapter as? FbPictureAdapter)?.let { adapter ->
+                    (_binding?.listView?.adapter as? FbPictureAdapter)?.let { adapter ->
                         val position = adapter.indexOf { it.getUri() == uri }
                         if (position >= 0) {
                             adapter.notifyItemChanged(position)
@@ -111,6 +115,11 @@ class FbPictureFragment : Fragment(), FbPictureView {
         super.onDestroy()
     }
 
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
+    }
+
     override fun onError(error: Throwable) {
         context?.let {
             val message = error.message ?: it.getString(R.string.pickfacebook_default_error_message)
@@ -122,8 +131,10 @@ class FbPictureFragment : Fragment(), FbPictureView {
         val gallery = gallery ?: return
         if (gallery.id != galleryId) return
 
-        (list_view?.adapter as? FbPictureAdapter)?.add(pictures)
-        loading_view?.visibility = View.GONE
+         _binding?.let {
+             (it.listView.adapter as? FbPictureAdapter)?.add(pictures)
+              it.loadingView.visibility = View.GONE
+         }
         next?.let { presenter.next(gallery, it) }
     }
 
@@ -136,8 +147,10 @@ class FbPictureFragment : Fragment(), FbPictureView {
      */
     fun swap(gallery: Gallery) {
         this.gallery = gallery
-        (list_view?.adapter as? FbPictureAdapter)?.clear()
-        loading_view?.visibility = View.VISIBLE
+         _binding?.let {
+            (it.listView.adapter as? FbPictureAdapter)?.clear()
+            it.loadingView.visibility = View.VISIBLE
+        }
         presenter.swap(gallery)
     }
 

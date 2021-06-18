@@ -33,7 +33,6 @@ import com.lovoo.android.pickcore.loader.CameraLoader
 import com.lovoo.android.pickcore.util.isMinimumQ
 import io.reactivex.Single
 import java.io.File
-import android.content.Context
 
 /**
  * Worker that handles all the tasks to finalize the captured image from the camera.

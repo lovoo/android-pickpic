@@ -40,7 +40,7 @@ import com.lovoo.android.pickcore.model.convertToUi
 import com.lovoo.android.pickcore.presenter.PicturePresenterImpl
 import com.lovoo.android.pickui.R
 import com.lovoo.android.pickui.adapter.PictureAdapter
-import kotlinx.android.synthetic.main.pickpic_fragment_picture.*
+import com.lovoo.android.pickui.databinding.PickpicFragmentPictureBinding
 
 /**
  * Fragment that offers a predefined solution to load and present [Picture]s from a certain [Gallery].
@@ -64,14 +64,18 @@ class PictureFragment : Fragment(), PictureView {
         }
     }
 
+    private var _binding: PickpicFragmentPictureBinding? = null
+    private val binding get() = _binding!!
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.pickpic_fragment_picture, container, false)
+        _binding = PickpicFragmentPictureBinding.inflate(inflater, container, false)
+        return _binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        list_view.apply {
+        binding.listView.apply {
             setHasFixedSize(true)
             isNestedScrollingEnabled = arguments?.getBoolean(ARGUMENT_NESTED_SCROLL) ?: true
             addItemDecoration(PictureDecoration(3, resources.getDimensionPixelOffset(R.dimen.pickpic_picture_item_space)))
@@ -90,7 +94,7 @@ class PictureFragment : Fragment(), PictureView {
             tag,
             object : ToggleCallback {
                 override fun toggle(uri: Uri, gallery: Gallery) {
-                    (list_view.adapter as? PictureAdapter)?.let { adapter ->
+                    (_binding?.listView?.adapter as? PictureAdapter)?.let { adapter ->
                         val position = adapter
                             .getItems { PictureLoader.convert(it).convertToUi() }
                             .indexOfFirst { it.getUri() == uri }
@@ -116,6 +120,11 @@ class PictureFragment : Fragment(), PictureView {
         super.onDetach()
     }
 
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
+    }
+
     override fun onDestroy() {
         gallery = null
         presenter.onDestroy()
@@ -123,9 +132,9 @@ class PictureFragment : Fragment(), PictureView {
     }
 
     override fun onCursorLoaded(cursor: Cursor?) {
-        (list_view.adapter as? PictureAdapter)?.apply {
+        (_binding?.listView?.adapter as? PictureAdapter)?.apply {
             changeCursor(cursor)
-            loading_view.visibility = View.GONE
+            _binding?.loadingView?.visibility = View.GONE
         }
     }
 
@@ -139,7 +148,7 @@ class PictureFragment : Fragment(), PictureView {
     fun swap(gallery: Gallery) {
         this.gallery = gallery
         activity?.let {
-            loading_view.visibility = View.VISIBLE
+            binding.loadingView.visibility = View.VISIBLE
             presenter.swap(it, gallery)
         }
     }

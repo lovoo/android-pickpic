@@ -24,8 +24,7 @@ import android.view.ViewTreeObserver
 import android.widget.BaseAdapter
 import com.lovoo.android.pickcore.PickPicProvider
 import com.lovoo.android.pickcore.model.Gallery
-import com.lovoo.android.pickui.R
-import kotlinx.android.synthetic.main.pickpic_list_item_gallery.view.*
+import com.lovoo.android.pickui.databinding.PickpicListItemGalleryBinding
 import java.io.File
 
 /**
@@ -45,32 +44,31 @@ class PopUpGalleryAdapter(
 
     private val inflater = LayoutInflater.from(context)
 
-    override fun getView(position: Int, convertView: View?, container: ViewGroup?): View {
+    override fun getView(
+        position: Int,
+        convertView: View?,
+        container: ViewGroup
+    ): View {
         val item = getItem(position) ?: return View(context)
-        val view = convertView ?: inflater.inflate(R.layout.pickpic_list_item_gallery, container, false)
-
-        view.gallery_cover.viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
-            override fun onPreDraw(): Boolean {
-                view.gallery_cover.viewTreeObserver.removeOnPreDrawListener(this)
-                val file = File(item.coverPath)
-                val uri = when (file.exists()) {
-                    true -> Uri.fromFile(file)
-                    false -> Uri.parse(item.coverPath)
+        val binding = convertView?.let { PickpicListItemGalleryBinding.bind(it) } ?: PickpicListItemGalleryBinding.inflate(inflater, container, false)
+        return binding.apply {
+            galleryCover.viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
+                override fun onPreDraw(): Boolean {
+                    galleryCover.viewTreeObserver.removeOnPreDrawListener(this)
+                    val file = File(item.coverPath)
+                    val uri = when (file.exists()) {
+                        true -> Uri.fromFile(file)
+                        false -> Uri.parse(item.coverPath)
+                    }
+                    PickPicProvider.imageEngine.loadThumbnail(
+                        context, galleryCover.measuredHeight, uri, galleryCover, 0
+                    )
+                    return true
                 }
-                PickPicProvider.imageEngine.loadThumbnail(
-                    context,
-                    view.gallery_cover.measuredHeight,
-                    uri,
-                    view.gallery_cover,
-                    0
-                )
-                return true
-            }
-        })
-        view.gallery_name.text = folderNameLookUp.invoke(item)
-        view.gallery_count.text = item.count.toString()
-
-        return view
+            })
+            galleryName.text = folderNameLookUp.invoke(item)
+            galleryCount.text = item.count.toString()
+        }.root
     }
 
     override fun getItem(position: Int) = items.getOrNull(position)

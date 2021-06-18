@@ -8,16 +8,7 @@
     android:background="@color/pickpic_background_toolbar"
     tools:context="com.lovoo.android.pickapp.view.PickPicActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/pickpic_background_toolbar"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-        <include layout="@layout/pickpic_layout_toolbar" />
-
-    </com.google.android.material.appbar.AppBarLayout>
+    <include android:id="@+id/toolbarInclude" layout="@layout/pickpic_layout_toolbar" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/fragment_pager"

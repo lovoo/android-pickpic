@@ -15,7 +15,6 @@
  */
 package com.lovoo.android.pickui.adapter
 
-import android.content.Context
 import android.database.Cursor
 import android.net.Uri
 import android.view.LayoutInflater
@@ -29,8 +28,7 @@ import com.lovoo.android.pickcore.adapter.RecyclerViewCursorAdapter
 import com.lovoo.android.pickcore.loader.GalleryLoader
 import com.lovoo.android.pickcore.model.Gallery
 import com.lovoo.android.pickcore.model.convertToUi
-import com.lovoo.android.pickui.R
-import kotlinx.android.synthetic.main.pickpic_list_item_gallery.view.*
+import com.lovoo.android.pickui.databinding.PickpicListItemGalleryBinding
 import java.io.File
 
 /**
@@ -41,49 +39,50 @@ import java.io.File
  * @param onClick the callback when an entry was clicked
  */
 class GalleryAdapter(
-    context: Context,
     private val allFolderName: String,
     private val onClick: (View, Gallery) -> Unit
 ) : RecyclerViewCursorAdapter<RecyclerView.ViewHolder>(null) {
 
-    private val inflater = LayoutInflater.from(context)
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val view = inflater.inflate(R.layout.pickpic_list_item_gallery, parent, false)
-        return ViewHolder(view, allFolderName, onClick)
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): ViewHolder {
+        val binding = PickpicListItemGalleryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding, allFolderName, onClick)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, cursor: Cursor) {
         (holder as ViewHolder).bind(GalleryLoader.convert(cursor).convertToUi())
     }
 
-    private class ViewHolder(
-        view: View,
+    class ViewHolder(
+        private val binding: PickpicListItemGalleryBinding,
         private val allFolderName: String,
-        private val onClick: (View, Gallery) -> Unit
-    ) : RecyclerView.ViewHolder(view) {
+        private val onClick: (View, Gallery) -> Unit,
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(gallery: Gallery) {
-            itemView.gallery_name.text = gallery.name
-            itemView.gallery_count.text = gallery.count.toString()
-            itemView.setOnClickListener { onClick.invoke(itemView, gallery) }
+            binding.apply {
+                galleryName.text = gallery.name
+                galleryCount.text = gallery.count.toString()
+                itemView.setOnClickListener { onClick.invoke(itemView, gallery) }
+                itemView.viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
+                    override fun onPreDraw(): Boolean {
+                        itemView.viewTreeObserver.removeOnPreDrawListener(this)
+                        PickPicProvider.imageEngine.loadThumbnail(
+                            itemView.context,
+                            itemView.measuredWidth,
+                            Uri.fromFile(File(gallery.coverPath)),
+                            galleryCover,
+                            0
+                        )
+                        return true
+                    }
+                })
 
-            itemView.viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
-                override fun onPreDraw(): Boolean {
-                    itemView.viewTreeObserver.removeOnPreDrawListener(this)
-                    PickPicProvider.imageEngine.loadThumbnail(
-                        itemView.context,
-                        itemView.measuredWidth,
-                        Uri.fromFile(File(gallery.coverPath)),
-                        itemView.gallery_cover,
-                        0
-                    )
-                    return true
+                if (gallery.name == Constants.All_FOLDER_NAME) {
+                    galleryName.text = allFolderName
                 }
-            })
-
-            if (gallery.name == Constants.All_FOLDER_NAME) {
-                itemView.gallery_name?.text = allFolderName
             }
         }
     }
