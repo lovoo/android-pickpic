@@ -36,9 +36,11 @@ object Permission {
      * List of permissions that are needed to load images from the device.
      */
     @SuppressLint("InlinedApi")
-    val galleryPermissions = when (isM()) {
-        true -> arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE)
-        false -> emptyArray()
+    val galleryPermissions = when {
+        isT() -> arrayOf(Manifest.permission.READ_MEDIA_IMAGES)
+        isQ() -> arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
+        isM() -> arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        else -> emptyArray()
     }
 
     /**
@@ -113,6 +115,8 @@ object Permission {
     }
 
     private fun isM() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+    private fun isQ() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
+    private fun isT() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
 
     // check if the Manifest declares to use the camera permission
     private fun isCameraManifestPermission(context: Context) = context.packageManager
