@@ -2,11 +2,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.lovoo.android.pickcore">
 
-
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- Required to maintain app compatibility. -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         tools:remove="android:maxSdkVersion" />
+
+    <!-- Required only if your app targets Android 13. -->
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
     <queries>
         <intent>

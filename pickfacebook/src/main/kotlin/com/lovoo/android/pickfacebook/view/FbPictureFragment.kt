@@ -131,10 +131,10 @@ class FbPictureFragment : Fragment(), FbPictureView {
         val gallery = gallery ?: return
         if (gallery.id != galleryId) return
 
-         _binding?.let {
-             (it.listView.adapter as? FbPictureAdapter)?.add(pictures)
-              it.loadingView.visibility = View.GONE
-         }
+        _binding?.let {
+            (it.listView.adapter as? FbPictureAdapter)?.add(pictures)
+            it.loadingView.visibility = View.GONE
+        }
         next?.let { presenter.next(gallery, it) }
     }
 
@@ -147,7 +147,7 @@ class FbPictureFragment : Fragment(), FbPictureView {
      */
     fun swap(gallery: Gallery) {
         this.gallery = gallery
-         _binding?.let {
+        _binding?.let {
             (it.listView.adapter as? FbPictureAdapter)?.clear()
             it.loadingView.visibility = View.VISIBLE
         }

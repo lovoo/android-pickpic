@@ -1,5 +1,4 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 buildscript {
     ext.kotlin_version = '1.4.10'
     ext.multidex_version = "2.0.1"
@@ -15,7 +14,7 @@ buildscript {
     ext.exif_version = "1.2.0"
     ext.media_version = "1.1.0"
     ext.arch_version = "2.2.0"
-    ext.arch_worker_version = "2.3.4"
+    ext.arch_worker_version = "2.7.1"
     ext.lifecycle_version = "2.2.0"
 
     ext.rx_java_version = '2.2.15'
@@ -24,19 +23,19 @@ buildscript {
     ext.gson_version = '2.8.6'
     ext.facebook_version = '5.11.2'
 
-    ext.espresso_version = "3.2.0"
+    ext.espresso_version = "3.4.0"
     ext.uiautomator_version = "2.2.0"
     ext.orchestrator_version = "1.2.0"
     ext.androidX_test_version = "1.2.0"
 
-    ext.target_version = 30
+    ext.target_version = 33
     ext.min_version = 18
 
     def version = System.getenv("VERSION")
     def code = System.getenv("VERSION_CODE")
     def artifactory_user = project.hasProperty('lovoo.repo.username') ? project.property('lovoo.repo.username') : System.getenv("ARTIFACTORY_USER")
     def artifactory_pwd = project.hasProperty('lovoo.repo.password') ? project.property('lovoo.repo.password') : System.getenv("ARTIFACTORY_PWD")
-    ext.version_name = version == null ? "1.6.1-SNAPSHOT" : version
+    ext.version_name = version == null ? "1.7.0-SNAPSHOT" : version
     ext.version_code = code == null ? 10 : code.toInteger()
     ext.repository_name = version_name.endsWith("-SNAPSHOT") ? "libs-snapshot" : "libs-release"
     ext.artifactory_user = artifactory_user
@@ -54,7 +53,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.2.1'
+        classpath 'com.android.tools.build:gradle:4.2.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'org.jetbrains.dokka:dokka-gradle-plugin:0.9.18'
         classpath 'com.diffplug.spotless:spotless-plugin-gradle:3.27.1'
@@ -64,7 +63,6 @@ buildscript {
         // in the individual module build.gradle files
     }
 }
-
 
 allprojects {
     apply plugin: 'com.jfrog.artifactory'
