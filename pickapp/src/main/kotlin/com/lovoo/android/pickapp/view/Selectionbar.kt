@@ -31,9 +31,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lovoo.android.pickapp.R
 import com.lovoo.android.pickapp.adapter.SelectionAdapter
+import com.lovoo.android.pickapp.databinding.PickpicLayoutSelectionbarBinding
 import com.lovoo.android.pickapp.model.Picker
 import io.reactivex.disposables.CompositeDisposable
-import kotlinx.android.synthetic.main.pickpic_layout_selectionbar.view.*
 
 /**
  * UI extension to handle the PickPicActivities Selectionbar and RecyclerView.
@@ -43,12 +43,12 @@ import kotlinx.android.synthetic.main.pickpic_layout_selectionbar.view.*
  * The action button text and click handle is customizable via setters.
  *
  * @param picker the Picker instance
- * @param layout the bottom sheet layout.
+ * @param binding selectionbar binding.
  * @param dependingViews the views that should dodge the sheet
  */
 class Selectionbar(
     private val picker: Picker,
-    private val layout: View,
+    private val binding: PickpicLayoutSelectionbarBinding,
     private val dependingViews: Array<View>
 ) {
 
@@ -60,58 +60,60 @@ class Selectionbar(
             picker.select(picture)
         }
 
-        layout.selection_list.let {
-            it.layoutManager = LinearLayoutManager(it.context, LinearLayoutManager.HORIZONTAL, false)
-
-            it.addItemDecoration(object : RecyclerView.ItemDecoration() {
-                var padding: Int = -1
-                override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-                    super.getItemOffsets(outRect, view, parent, state)
-                    if (padding < 0) {
-                        padding = view.resources.getDimensionPixelOffset(R.dimen.pickpic_thumbnail_padding_right)
+        binding.apply {
+            selectionList.apply {
+                layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                addItemDecoration(object : RecyclerView.ItemDecoration() {
+                    var padding: Int = -1
+                    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+                        super.getItemOffsets(outRect, view, parent, state)
+                        if (padding < 0) {
+                            padding = resources.getDimensionPixelOffset(R.dimen.pickpic_thumbnail_padding_right)
+                        }
+                        outRect.right = padding
                     }
-                    outRect.right = padding
+                })
+                adapter = this@Selectionbar.adapter
+            }
+
+            if (Build.VERSION.SDK_INT < 21) {
+                // set theme color only on devices without xml tint
+                val color = getThemeColor(root.context)
+                var background = selectionButtonText.background.apply {
+                    mutate()
+                    colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN)
                 }
-            })
+                ViewCompat.setBackground(selectionButtonText, background)
 
-            it.adapter = adapter
-        }
-
-        if (Build.VERSION.SDK_INT < 21) {
-            // set theme color only on devices without xml tint
-            val color = getThemeColor(layout.context)
-            var background = layout.selection_button_text.background.apply {
-                mutate()
-                colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN)
+                background = selectionButtonIcon.background.apply {
+                    mutate()
+                    colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN)
+                }
+                ViewCompat.setBackground(selectionButtonIcon, background)
             }
-            ViewCompat.setBackground(layout.selection_button_text, background)
 
-            background = layout.selection_button_icon.background.apply {
-                mutate()
-                colorFilter = PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN)
+            root.post {
+                updateDependingViews(root.measuredHeight)
             }
-            ViewCompat.setBackground(layout.selection_button_icon, background)
-        }
 
-        layout.post {
-            updateDependingViews(layout.measuredHeight)
+            registerPicker()
+            updateSelectionText()
         }
-
-        registerPicker()
-        updateSelectionText()
     }
 
     /**
      * @param text the button label or null
      */
     fun setButtonText(text: String?) {
-        if (text.isNullOrEmpty()) {
-            layout.selection_button_text.visibility = View.GONE
-        } else {
-            layout.selection_button_text.text = text
-            layout.selection_button_text.visibility = View.VISIBLE
-            layout.selection_fade.visibility = View.VISIBLE
-            setButtonIcon(null)
+        binding.apply {
+            if (text.isNullOrEmpty()) {
+                selectionButtonText.visibility = View.GONE
+            } else {
+                selectionButtonText.text = text
+                selectionButtonText.visibility = View.VISIBLE
+                selectionFade.visibility = View.VISIBLE
+                setButtonIcon(null)
+            }
         }
     }
 
@@ -119,13 +121,15 @@ class Selectionbar(
      * @param icon the button icon as ResourceId or null
      */
     fun setButtonIcon(@DrawableRes icon: Int?) {
-        if (icon == null) {
-            layout.selection_button_icon.visibility = View.GONE
-        } else {
-            layout.selection_button_icon.setImageResource(icon)
-            layout.selection_button_icon.visibility = View.VISIBLE
-            layout.selection_fade.visibility = View.VISIBLE
-            setButtonText(null)
+        binding.apply {
+            if (icon == null) {
+                selectionButtonIcon.visibility = View.GONE
+            } else {
+                selectionButtonIcon.setImageResource(icon)
+                selectionButtonIcon.visibility = View.VISIBLE
+                selectionFade.visibility = View.VISIBLE
+                setButtonText(null)
+            }
         }
     }
 
@@ -135,7 +139,7 @@ class Selectionbar(
      * @param listener action that will be triggered onClick or null
      */
     fun setButtonOnClick(listener: (() -> Unit)?) {
-        layout.selection_button.setOnClickListener { listener?.invoke() }
+        binding.selectionButton.setOnClickListener { listener?.invoke() }
     }
 
     /**
@@ -177,8 +181,8 @@ class Selectionbar(
 
     private fun scrollTo(position: Int?) {
         position?.let {
-            val offset = layout.resources.getDimensionPixelSize(R.dimen.pickpic_thumbnail_size)
-            (layout.selection_list.layoutManager as LinearLayoutManager).scrollToPositionWithOffset(it, offset)
+            val offset = binding.root.resources.getDimensionPixelSize(R.dimen.pickpic_thumbnail_size)
+            (binding.selectionList.layoutManager as LinearLayoutManager).scrollToPositionWithOffset(it, offset)
         }
     }
 
@@ -203,7 +207,7 @@ class Selectionbar(
     }
 
     private fun updateSelectionText() {
-        val res = layout.resources
+        val res = binding.root.resources
         val selected = adapter.getListCount()
         val required = picker.config.minCount - selected
 
@@ -212,8 +216,8 @@ class Selectionbar(
             else -> res.getString(R.string.pickpic_label_count_of_max_selected, selected, picker.config.maxCount)
         }
 
-        layout.selection_text.text = text
-        layout.selection_button.isEnabled = required <= 0 && selected <= picker.config.maxCount
+        binding.selectionText.text = text
+        binding.selectionButton.isEnabled = required <= 0 && selected <= picker.config.maxCount
     }
 
     private fun updateDependingViews(offset: Int) {

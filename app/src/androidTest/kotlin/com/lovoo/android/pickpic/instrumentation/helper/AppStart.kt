@@ -53,6 +53,7 @@ object AppStart {
         val context = InstrumentationRegistry.getInstrumentation().targetContext.applicationContext
         InstrumentationRegistry.getInstrumentation().uiAutomation.grantRuntimePermission(context.packageName, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
         InstrumentationRegistry.getInstrumentation().uiAutomation.grantRuntimePermission(context.packageName, android.Manifest.permission.READ_EXTERNAL_STORAGE)
+        InstrumentationRegistry.getInstrumentation().uiAutomation.grantRuntimePermission(context.packageName, android.Manifest.permission.READ_MEDIA_IMAGES)
 
         // permissions for google camera
         val cameraPackage = getCameraPackageName(context)
