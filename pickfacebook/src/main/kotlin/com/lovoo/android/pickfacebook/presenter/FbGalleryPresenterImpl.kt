@@ -92,7 +92,7 @@ class FbGalleryPresenterImpl(private val view: FbGalleryView) : FbGalleryPresent
                 override fun onError(error: FacebookException?) {
                     error?.let { view.onError(it) }
                 }
-            }
+            },
         )
     }
 

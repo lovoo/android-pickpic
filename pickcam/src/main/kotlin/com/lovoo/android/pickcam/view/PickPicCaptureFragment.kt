@@ -16,12 +16,20 @@
 package com.lovoo.android.pickcam.view
 
 import android.app.Activity
-import android.content.*
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.content.pm.PackageManager
-import android.os.*
-import android.view.*
+import android.os.Build
+import android.os.Bundle
+import android.os.Environment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.*
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import com.lovoo.android.pickcam.R
 import com.lovoo.android.pickcam.worker.CaptureResultWorker
 import com.lovoo.android.pickcore.contract.CameraDestination

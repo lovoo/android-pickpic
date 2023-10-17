@@ -84,7 +84,7 @@ class PictureFragment : Fragment(), PictureView {
             adapter = PictureAdapter(
                 context,
                 { selectionHolder?.isSelected(it.getUri()) == true },
-                { _, picture -> onPictureClick(picture) }
+                { _, picture -> onPictureClick(picture) },
             )
         }
     }
@@ -107,7 +107,7 @@ class PictureFragment : Fragment(), PictureView {
                         }
                     }
                 }
-            }
+            },
         )
         val filter = IntentFilter().apply {
             addAction(CameraLoader.INTENT_INVALIDATE_GALLERY)

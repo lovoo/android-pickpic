@@ -16,7 +16,9 @@
 package com.lovoo.android.pickcore.util
 
 import android.annotation.SuppressLint
-import android.content.*
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.IntentFilter
 import android.os.Build
 
 fun isMinimumQ() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
@@ -33,7 +35,7 @@ fun isMinimumR() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
 fun Context.registerReceiverSafely(
     receiver: BroadcastReceiver,
     filter: IntentFilter,
-    isExported: Boolean = false
+    isExported: Boolean = false,
 ) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
         val exportedFlag = if (isExported) Context.RECEIVER_EXPORTED else Context.RECEIVER_NOT_EXPORTED

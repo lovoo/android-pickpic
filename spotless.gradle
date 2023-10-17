@@ -1,6 +1,6 @@
-apply plugin: "com.diffplug.gradle.spotless"
+apply plugin: "com.diffplug.spotless"
 
-ext.ktlint_version = "0.37.2"
+ext.ktlint_version = "0.48.0"
 
 spotless {
     kotlin {

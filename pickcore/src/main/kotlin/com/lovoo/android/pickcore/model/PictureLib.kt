@@ -25,5 +25,5 @@ package com.lovoo.android.pickcore.model
 data class PictureLib(
     val id: Long,
     val mimeType: String? = "",
-    val size: Long? = 0L
+    val size: Long? = 0L,
 )

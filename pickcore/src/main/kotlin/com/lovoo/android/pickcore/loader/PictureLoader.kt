@@ -39,14 +39,14 @@ import com.lovoo.android.pickcore.model.PictureLib
  */
 class PictureLoader(
     context: Context,
-    private val gallery: GalleryLib
+    private val gallery: GalleryLib,
 ) : CursorLoader(
     context,
     query,
     projection,
     getSelection(gallery),
     getSelectionArgs(gallery),
-    "${MediaStore.Images.Media.DATE_ADDED} DESC"
+    "${MediaStore.Images.Media.DATE_ADDED} DESC",
 ) {
 
     private val cameraEngine: CameraEngine
@@ -82,7 +82,7 @@ class PictureLoader(
             MediaStore.Files.FileColumns._ID,
             MediaStore.MediaColumns.DISPLAY_NAME,
             MediaStore.MediaColumns.MIME_TYPE,
-            MediaStore.MediaColumns.SIZE
+            MediaStore.MediaColumns.SIZE,
         )
 
         private fun getSelection(gallery: GalleryLib) = when (gallery.name) {
@@ -113,7 +113,7 @@ class PictureLoader(
         fun convert(cursor: Cursor) = PictureLib(
             cursor.getLong(cursor.getColumnIndex(MediaStore.Files.FileColumns._ID)),
             cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.MIME_TYPE)),
-            cursor.getLong(cursor.getColumnIndex(MediaStore.MediaColumns.SIZE))
+            cursor.getLong(cursor.getColumnIndex(MediaStore.MediaColumns.SIZE)),
         )
     }
 }

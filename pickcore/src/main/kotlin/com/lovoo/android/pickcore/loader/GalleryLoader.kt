@@ -37,29 +37,33 @@ import com.lovoo.android.pickcore.util.isMinimumQ
  * @see GalleryLoader.convert
  */
 class GalleryLoader(
-    context: Context
+    context: Context,
 ) : CursorLoader(
     context,
     query,
     projection,
     selection,
     selectArguments,
-    "${MediaStore.Images.Media.DISPLAY_NAME} ASC"
+    "${MediaStore.Images.Media.DISPLAY_NAME} ASC",
 ) {
 
-    private val columns = if (isMinimumQ()) arrayOf(
-        MediaStore.Files.FileColumns._ID,
-        COLUMN_NAME_ID,
-        COLUMN_NAME_DISPLAY_NAME,
-        MediaStore.Images.Media._ID,
-        COLUMN_NAME_COUNT
-    ) else arrayOf(
-        MediaStore.Files.FileColumns._ID,
-        COLUMN_NAME_ID,
-        COLUMN_NAME_DISPLAY_NAME,
-        MediaStore.MediaColumns.DATA,
-        COLUMN_NAME_COUNT
-    )
+    private val columns = if (isMinimumQ()) {
+        arrayOf(
+            MediaStore.Files.FileColumns._ID,
+            COLUMN_NAME_ID,
+            COLUMN_NAME_DISPLAY_NAME,
+            MediaStore.Images.Media._ID,
+            COLUMN_NAME_COUNT,
+        )
+    } else {
+        arrayOf(
+            MediaStore.Files.FileColumns._ID,
+            COLUMN_NAME_ID,
+            COLUMN_NAME_DISPLAY_NAME,
+            MediaStore.MediaColumns.DATA,
+            COLUMN_NAME_COUNT,
+        )
+    }
 
     override fun loadInBackground(): Cursor {
         return try {
@@ -130,8 +134,8 @@ class GalleryLoader(
                             bucketId.toString(),
                             bucketDisplayName,
                             uri.toString(),
-                            count.toString()
-                        )
+                            count.toString(),
+                        ),
                     )
 
                     done.add(bucketId)
@@ -146,8 +150,8 @@ class GalleryLoader(
                 -1,
                 Constants.All_FOLDER_NAME,
                 allAlbumCoverUri?.toString(),
-                totalCount
-            )
+                totalCount,
+            ),
         )
 
         return MergeCursor(arrayOf<Cursor>(allEntry, otherAlbums))
@@ -159,19 +163,22 @@ class GalleryLoader(
         private const val COLUMN_NAME_COUNT = "count"
 
         private val query = MediaStore.Files.getContentUri("external")
-        private val projection = if (isMinimumQ()) arrayOf(
-            MediaStore.Files.FileColumns._ID,
-            COLUMN_NAME_ID,
-            COLUMN_NAME_DISPLAY_NAME,
-            MediaStore.Images.Media._ID
-        ) else
+        private val projection = if (isMinimumQ()) {
+            arrayOf(
+                MediaStore.Files.FileColumns._ID,
+                COLUMN_NAME_ID,
+                COLUMN_NAME_DISPLAY_NAME,
+                MediaStore.Images.Media._ID,
+            )
+        } else {
             arrayOf(
                 MediaStore.Files.FileColumns._ID,
                 COLUMN_NAME_ID,
                 COLUMN_NAME_DISPLAY_NAME,
                 MediaStore.MediaColumns.DATA,
-                "COUNT(*) AS $COLUMN_NAME_COUNT"
+                "COUNT(*) AS $COLUMN_NAME_COUNT",
             )
+        }
         private val group = if (isMinimumQ()) "" else ") GROUP BY ($COLUMN_NAME_ID"
         private val selection = "${MediaStore.Files.FileColumns.MEDIA_TYPE}=? AND ${MediaStore.MediaColumns.SIZE}>0$group"
         private val selectArguments = arrayOf(MediaStore.Files.FileColumns.MEDIA_TYPE_IMAGE.toString())
@@ -190,17 +197,21 @@ class GalleryLoader(
          * @param cursor the [Cursor]
          * @return the [GalleryLib] object with the data from the [Cursor]
          */
-        fun convert(cursor: Cursor) = if (isMinimumQ()) GalleryLib(
-            cursor.getString(cursor.getColumnIndex(COLUMN_NAME_ID)),
-            getUri(cursor)?.toString(),
-            cursor.getString(cursor.getColumnIndex(COLUMN_NAME_DISPLAY_NAME)),
-            cursor.getLong(cursor.getColumnIndex(COLUMN_NAME_COUNT))
-        ) else GalleryLib(
-            cursor.getString(cursor.getColumnIndex(COLUMN_NAME_ID)),
-            cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DATA)),
-            cursor.getString(cursor.getColumnIndex(COLUMN_NAME_DISPLAY_NAME)),
-            cursor.getLong(cursor.getColumnIndex(COLUMN_NAME_COUNT))
-        )
+        fun convert(cursor: Cursor) = if (isMinimumQ()) {
+            GalleryLib(
+                cursor.getString(cursor.getColumnIndex(COLUMN_NAME_ID)),
+                getUri(cursor)?.toString(),
+                cursor.getString(cursor.getColumnIndex(COLUMN_NAME_DISPLAY_NAME)),
+                cursor.getLong(cursor.getColumnIndex(COLUMN_NAME_COUNT)),
+            )
+        } else {
+            GalleryLib(
+                cursor.getString(cursor.getColumnIndex(COLUMN_NAME_ID)),
+                cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DATA)),
+                cursor.getString(cursor.getColumnIndex(COLUMN_NAME_DISPLAY_NAME)),
+                cursor.getLong(cursor.getColumnIndex(COLUMN_NAME_COUNT)),
+            )
+        }
 
         private fun getUri(cursor: Cursor): Uri? {
             val id = cursor.getLong(cursor.getColumnIndex(MediaStore.Files.FileColumns._ID))

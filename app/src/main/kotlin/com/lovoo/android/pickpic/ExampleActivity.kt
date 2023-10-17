@@ -45,7 +45,7 @@ class ExampleActivity : AppCompatActivity() {
                     maxCount = 10,
                     sendIcon = R.drawable.ic_send,
                     header = getString(R.string.pickpic_actionbar_header),
-                    title = getString(R.string.pickpic_title)
+                    title = getString(R.string.pickpic_title),
                 )
                 // pass the config to PickPic
                 PickPicActivity.applyConfig(it, config)

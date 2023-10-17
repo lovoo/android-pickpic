@@ -22,7 +22,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.database.Cursor
-import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -77,7 +76,6 @@ class GalleryFragment : Fragment(), GalleryView {
         presenter.onCreate(savedInstanceState)
     }
 
-
     @SuppressLint("UnspecifiedRegisterReceiverFlag")
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -87,7 +85,7 @@ class GalleryFragment : Fragment(), GalleryView {
         val filter = IntentFilter().apply {
             addAction(CameraLoader.INTENT_INVALIDATE_GALLERY)
         }
-        context.registerReceiverSafely(receiver = invalidateReceiver, filter = filter,)
+        context.registerReceiverSafely(receiver = invalidateReceiver, filter = filter)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

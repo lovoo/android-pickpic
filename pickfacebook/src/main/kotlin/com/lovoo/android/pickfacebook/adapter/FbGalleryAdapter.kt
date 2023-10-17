@@ -36,7 +36,7 @@ import com.lovoo.android.pickfacebook.R
  */
 class FbGalleryAdapter(
     context: Context,
-    private val onClick: (View, Gallery) -> Unit
+    private val onClick: (View, Gallery) -> Unit,
 ) : RecyclerView.Adapter<FbGalleryAdapter.ViewHolder>() {
 
     private val inflater = LayoutInflater.from(context)
@@ -77,7 +77,7 @@ class FbGalleryAdapter(
     class ViewHolder(
         view: View,
         private val engine: ImageEngine,
-        private val onClick: (View, Gallery) -> Unit
+        private val onClick: (View, Gallery) -> Unit,
     ) : RecyclerView.ViewHolder(view) {
 
         fun bind(gallery: Gallery) {
@@ -93,7 +93,7 @@ class FbGalleryAdapter(
                         itemView.measuredWidth,
                         Uri.parse(gallery.coverPath),
                         itemView.findViewById(R.id.gallery_cover),
-                        0
+                        0,
                     )
                     return true
                 }
