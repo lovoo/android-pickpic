@@ -16,21 +16,12 @@
 package com.lovoo.android.pickcam.view
 
 import android.app.Activity
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.content.*
 import android.content.pm.PackageManager
-import android.os.Build
-import android.os.Bundle
-import android.os.Environment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.os.*
+import android.view.*
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.*
 import com.lovoo.android.pickcam.R
 import com.lovoo.android.pickcam.worker.CaptureResultWorker
 import com.lovoo.android.pickcore.contract.CameraDestination
@@ -40,6 +31,7 @@ import com.lovoo.android.pickcore.destination.PublicDirectory
 import com.lovoo.android.pickcore.loader.CameraLoader
 import com.lovoo.android.pickcore.permission.Permission
 import com.lovoo.android.pickcore.util.isMinimumR
+import com.lovoo.android.pickcore.util.registerReceiverSafely
 
 /**
  * Ready to use solution to handle Android Camera capture.
@@ -81,7 +73,10 @@ class PickPicCaptureFragment : DialogFragment() {
                 throw (IllegalArgumentException("You have to implement CaptureCallback"))
             }
         }
-        context.registerReceiver(onWorkerDoneReceiver, IntentFilter().apply { addAction(CaptureResultWorker.INTENT_ACTION_ON_RESULT) })
+        context.registerReceiverSafely(
+            receiver = onWorkerDoneReceiver,
+            filter = IntentFilter().apply { addAction(CaptureResultWorker.INTENT_ACTION_ON_RESULT) },
+        )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -131,7 +126,8 @@ class PickPicCaptureFragment : DialogFragment() {
                 preferences.edit().putBoolean(PREF_KEY_PERMISSION, false).apply()
             }
 
-            val deniedPermissions = Permission.getDeniedPermissions(requireActivity(), Permission.cameraPermissions.plus(Permission.galleryPermissions))
+            val deniedPermissions =
+                Permission.getDeniedPermissions(requireActivity(), Permission.cameraPermissions.plus(Permission.galleryPermissions))
             if (deniedPermissions.isEmpty()) {
                 startCamera()
             } else {

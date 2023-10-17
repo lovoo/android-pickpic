@@ -15,8 +15,30 @@
  */
 package com.lovoo.android.pickcore.util
 
+import android.annotation.SuppressLint
+import android.content.*
 import android.os.Build
 
 fun isMinimumQ() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q
 
 fun isMinimumR() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
+
+/**
+ * Registers given [receiver] for all Android versions, including Android 13+, where the "EXPORTED" nature of the receiver must be explicitly passed
+ * to the parameters.
+ *
+ * @param isExported indicates if the BroadcastReceiver is exported or not (i.e. available to external apps). False by default.
+ */
+@SuppressLint("UnspecifiedRegisterReceiverFlag")
+fun Context.registerReceiverSafely(
+    receiver: BroadcastReceiver,
+    filter: IntentFilter,
+    isExported: Boolean = false
+) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        val exportedFlag = if (isExported) Context.RECEIVER_EXPORTED else Context.RECEIVER_NOT_EXPORTED
+        registerReceiver(receiver, filter, exportedFlag)
+    } else {
+        registerReceiver(receiver, filter)
+    }
+}
