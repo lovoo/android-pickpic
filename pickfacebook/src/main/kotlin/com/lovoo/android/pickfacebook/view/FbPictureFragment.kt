@@ -74,7 +74,7 @@ class FbPictureFragment : Fragment(), FbPictureView {
             adapter = FbPictureAdapter(
                 context,
                 { selectionHolder?.isSelected(it.getUri()) == true },
-                { _, picture -> onPictureClick(picture) }
+                { _, picture -> onPictureClick(picture) },
             )
         }
     }
@@ -94,7 +94,7 @@ class FbPictureFragment : Fragment(), FbPictureView {
                         }
                     }
                 }
-            }
+            },
         )
     }
 

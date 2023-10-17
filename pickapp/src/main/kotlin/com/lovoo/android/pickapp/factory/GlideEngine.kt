@@ -70,9 +70,12 @@ class GlideEngine : ImageEngine {
                 RequestOptions()
                     .override(width, height)
                     .also {
-                        if (corner > 0) it.transform(CenterCrop(), RoundedCorners(corner))
-                        else it.centerCrop()
-                    }
+                        if (corner > 0) {
+                            it.transform(CenterCrop(), RoundedCorners(corner))
+                        } else {
+                            it.centerCrop()
+                        }
+                    },
             )
             .apply {
                 if (errorRes != 0) {

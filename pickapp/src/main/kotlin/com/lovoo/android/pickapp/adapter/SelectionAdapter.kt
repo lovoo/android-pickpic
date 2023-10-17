@@ -109,7 +109,7 @@ class SelectionAdapter(
 
     class ViewHolder(
         view: View,
-        private val imageEngine: ImageEngine
+        private val imageEngine: ImageEngine,
     ) : RecyclerView.ViewHolder(view) {
         private val size = view.context.resources.getDimensionPixelSize(R.dimen.pickpic_thumbnail_size)
         private val corner = view.context.resources.getDimensionPixelSize(R.dimen.pickpic_thumbnail_corner_size)

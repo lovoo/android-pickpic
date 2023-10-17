@@ -31,14 +31,14 @@ data class FbPicture(
     val id: String,
     val url: String,
     val width: Int,
-    val height: Int
+    val height: Int,
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readInt(),
-        parcel.readInt()
+        parcel.readInt(),
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

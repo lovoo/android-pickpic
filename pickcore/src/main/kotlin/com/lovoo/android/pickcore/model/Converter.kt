@@ -21,7 +21,7 @@ package com.lovoo.android.pickcore.model
 fun Picture.convertToLib() = PictureLib(
     id,
     mimeType,
-    size
+    size,
 )
 
 /**
@@ -30,7 +30,7 @@ fun Picture.convertToLib() = PictureLib(
 fun PictureLib.convertToUi() = Picture(
     id,
     mimeType ?: "",
-    size ?: 0L
+    size ?: 0L,
 )
 
 /**
@@ -40,7 +40,7 @@ fun Gallery.convertToLib() = GalleryLib(
     id,
     coverPath,
     name,
-    count
+    count,
 )
 
 /**
@@ -50,5 +50,5 @@ fun GalleryLib.convertToUi() = Gallery(
     id ?: "",
     coverPath ?: "",
     name ?: "",
-    count ?: 0L
+    count ?: 0L,
 )

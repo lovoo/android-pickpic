@@ -85,7 +85,7 @@ class PickPicActivity : AppCompatActivity(), SelectionHolder, CameraEngine, Capt
             maxCount = 10,
             sendText = "DONE",
             title = getString(R.string.pickpic_title),
-            header = getString(R.string.pickpic_actionbar_header)
+            header = getString(R.string.pickpic_actionbar_header),
         )
 
         config = intent?.getParcelableExtra(INTENT_IN_CONFIG) ?: default
@@ -140,8 +140,9 @@ class PickPicActivity : AppCompatActivity(), SelectionHolder, CameraEngine, Capt
         try {
             val uris = savedInstanceState.getParcelableArray(BUNDLE_URIS)?.map { it as Uri }?.toTypedArray()
             val galleries = savedInstanceState.getParcelableArray(BUNDLE_GALLERIES)?.map { it as Gallery }?.toTypedArray()
-            if (uris != null && galleries != null)
+            if (uris != null && galleries != null) {
                 picker.toggle(uris, galleries)
+            }
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -219,8 +220,8 @@ class PickPicActivity : AppCompatActivity(), SelectionHolder, CameraEngine, Capt
                         is Picker.State.Select -> selectedUri = state.uri
                     }
                 },
-                { error -> error.printStackTrace() }
-            )
+                { error -> error.printStackTrace() },
+            ),
         )
     }
 
@@ -233,12 +234,12 @@ class PickPicActivity : AppCompatActivity(), SelectionHolder, CameraEngine, Capt
                             {
                                 finishSelection()
                             },
-                            AUTO_FINISH_DELAY
+                            AUTO_FINISH_DELAY,
                         )
                     }
                 },
-                { /* no-op */ }
-            )
+                { /* no-op */ },
+            ),
         )
     }
 
@@ -298,7 +299,7 @@ class PickPicActivity : AppCompatActivity(), SelectionHolder, CameraEngine, Capt
                             this.paddingStart,
                             this.paddingTop,
                             this.paddingEnd,
-                            resources.getDimensionPixelOffset(R.dimen.pickpic_actionbar_headline_margin)
+                            resources.getDimensionPixelOffset(R.dimen.pickpic_actionbar_headline_margin),
                         )
                     }
                     (toolbar.layoutParams as CollapsingToolbarLayout.LayoutParams).collapseMode =
@@ -314,9 +315,8 @@ class PickPicActivity : AppCompatActivity(), SelectionHolder, CameraEngine, Capt
         selectionbar = Selectionbar(
             picker,
             binding.selectionBar,
-            arrayOf(binding.fragmentPager, binding.previewPager)
+            arrayOf(binding.fragmentPager, binding.previewPager),
         ).apply {
-
             setButtonText(this@PickPicActivity.config.sendText)
             setButtonIcon(this@PickPicActivity.config.sendIcon)
             setButtonOnClick { finishSelection() }

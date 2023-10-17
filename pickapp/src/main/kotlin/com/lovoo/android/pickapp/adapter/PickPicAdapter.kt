@@ -34,7 +34,7 @@ import com.lovoo.android.pickui.view.GalleryFragment
 class PickPicAdapter(
     private val context: Context,
     manager: FragmentManager,
-    private val dependencies: PickDependencies
+    private val dependencies: PickDependencies,
 ) : FragmentStatePagerAdapter(manager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     override fun getItem(position: Int) = buildFragment(getType(position))

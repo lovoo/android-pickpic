@@ -30,14 +30,14 @@ data class Gallery(
     val id: String,
     val coverPath: String,
     val name: String,
-    val count: Long
+    val count: Long,
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
         parcel.readString() ?: "",
         parcel.readString() ?: "",
         parcel.readString() ?: "",
-        parcel.readLong()
+        parcel.readLong(),
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

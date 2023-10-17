@@ -21,5 +21,5 @@ package com.lovoo.android.pickapp.model
  */
 enum class PickType {
     GALLERY,
-    FACEBOOK
+    FACEBOOK,
 }

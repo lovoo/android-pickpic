@@ -40,12 +40,12 @@ import java.io.File
  */
 class GalleryAdapter(
     private val allFolderName: String,
-    private val onClick: (View, Gallery) -> Unit
+    private val onClick: (View, Gallery) -> Unit,
 ) : RecyclerViewCursorAdapter<RecyclerView.ViewHolder>(null) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
-        viewType: Int
+        viewType: Int,
     ): ViewHolder {
         val binding = PickpicListItemGalleryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding, allFolderName, onClick)
@@ -74,7 +74,7 @@ class GalleryAdapter(
                             itemView.measuredWidth,
                             Uri.fromFile(File(gallery.coverPath)),
                             galleryCover,
-                            0
+                            0,
                         )
                         return true
                     }

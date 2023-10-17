@@ -27,5 +27,5 @@ data class GalleryLib(
     val id: String? = "",
     val coverPath: String? = "",
     val name: String? = "",
-    val count: Long? = 0L
+    val count: Long? = 0L,
 )

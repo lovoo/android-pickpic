@@ -48,7 +48,7 @@ import java.io.File
  */
 class CaptureResultWorker(
     private val context: Context,
-    params: WorkerParameters
+    params: WorkerParameters,
 ) : RxWorker(context, params) {
 
     private var inputFile: File = File(params.inputData.getString(INPUT_FILE))
@@ -72,7 +72,7 @@ class CaptureResultWorker(
                     // LiveData holds to long the old result so we have to forward the result as broadcast
                     context.sendBroadcast(Intent(INTENT_ACTION_ON_RESULT).putExtra(OUTPUT_URI, uri))
                     emitter.onSuccess(Result.success())
-                }
+                },
             )
         }
     }
@@ -99,7 +99,7 @@ class CaptureResultWorker(
         fun start(context: Context, destination: CameraDestination, name: String = "CaptureResultWorker") {
             val data = workDataOf(
                 INPUT_IS_PUBLIC to (destination !is PrivateDirectory),
-                INPUT_FILE to (destination.file?.path ?: "")
+                INPUT_FILE to (destination.file?.path ?: ""),
             )
 
             val request = OneTimeWorkRequest.Builder(CaptureResultWorker::class.java)

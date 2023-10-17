@@ -54,8 +54,8 @@ class Facebook {
                     User(
                         currentProfile.id,
                         currentProfile.name,
-                        currentProfile.getProfilePictureUri(1000, 1000).path ?: ""
-                    )
+                        currentProfile.getProfilePictureUri(1000, 1000).path ?: "",
+                    ),
                 )
             }
         }
@@ -86,9 +86,8 @@ class Facebook {
     fun requestAccessToken(
         fragment: Fragment,
         permissions: List<String> = listOf("public_profile"),
-        callback: FacebookCallback<LoginResult>?
+        callback: FacebookCallback<LoginResult>?,
     ) {
-
         LoginManager.getInstance().apply {
             registerCallback(callbackManager, callback)
         }.logInWithReadPermissions(fragment, permissions)
@@ -222,6 +221,6 @@ class Facebook {
     data class User(
         val id: String,
         val name: String,
-        val picture: String
+        val picture: String,
     )
 }

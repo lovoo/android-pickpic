@@ -31,13 +31,13 @@ import android.provider.MediaStore
 data class Picture(
     val id: Long,
     val mimeType: String,
-    val size: Long
+    val size: Long,
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
         parcel.readLong(),
         parcel.readString() ?: "",
-        parcel.readLong()
+        parcel.readLong(),
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
