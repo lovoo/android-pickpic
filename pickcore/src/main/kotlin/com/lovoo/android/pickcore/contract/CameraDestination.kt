@@ -55,7 +55,6 @@ fun CameraDestination.getUri(context: Context): Uri? = when {
  * @param fileName optional complete filename or if not set JPEG_<date>.jpg
  */
 fun CameraDestination.createTempFile(fileName: String = ""): File? {
-
     if (Environment.MEDIA_MOUNTED != EnvironmentCompat.getStorageState(directory)) {
         // the storage state is broken
         return null

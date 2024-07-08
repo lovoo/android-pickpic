@@ -39,7 +39,7 @@ import java.io.File
 class PopUpGalleryAdapter(
     private val context: Context,
     private val items: List<Gallery>,
-    private val folderNameLookUp: (Gallery) -> String
+    private val folderNameLookUp: (Gallery) -> String,
 ) : BaseAdapter() {
 
     private val inflater = LayoutInflater.from(context)
@@ -47,7 +47,7 @@ class PopUpGalleryAdapter(
     override fun getView(
         position: Int,
         convertView: View?,
-        container: ViewGroup
+        container: ViewGroup,
     ): View {
         val item = getItem(position) ?: return View(context)
         val binding = convertView?.let { PickpicListItemGalleryBinding.bind(it) } ?: PickpicListItemGalleryBinding.inflate(inflater, container, false)
@@ -61,7 +61,11 @@ class PopUpGalleryAdapter(
                         false -> Uri.parse(item.coverPath)
                     }
                     PickPicProvider.imageEngine.loadThumbnail(
-                        context, galleryCover.measuredHeight, uri, galleryCover, 0
+                        context,
+                        galleryCover.measuredHeight,
+                        uri,
+                        galleryCover,
+                        0,
                     )
                     return true
                 }

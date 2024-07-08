@@ -43,7 +43,7 @@ data class PickPicConfig(
     val sendText: String? = null,
     @DrawableRes val sendIcon: Int? = null,
     val header: String? = null,
-    val faqUrl: String? = null
+    val faqUrl: String? = null,
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
@@ -54,7 +54,7 @@ data class PickPicConfig(
         parcel.readString(),
         parcel.readValue(Int::class.java.classLoader) as? Int,
         parcel.readString(),
-        parcel.readString()
+        parcel.readString(),
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

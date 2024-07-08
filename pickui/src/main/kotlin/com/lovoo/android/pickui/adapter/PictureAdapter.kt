@@ -42,7 +42,7 @@ import com.lovoo.android.pickui.R
 class PictureAdapter(
     context: Context,
     private val selectionLookUp: (Picture) -> Boolean,
-    private val onClick: (View, Picture) -> Unit
+    private val onClick: (View, Picture) -> Unit,
 ) : RecyclerViewCursorAdapter<RecyclerView.ViewHolder>(null) {
 
     private val inflater = LayoutInflater.from(context)
@@ -81,13 +81,13 @@ class PictureAdapter(
     private class ViewHolder(
         view: View,
         selectionLookUp: (Picture) -> Boolean,
-        onClick: (View, Picture) -> Unit
+        onClick: (View, Picture) -> Unit,
     ) : com.lovoo.android.pickui.adapter.ViewHolder<Picture>(
 
         view,
         PickPicProvider.imageEngine,
         selectionLookUp,
-        onClick
+        onClick,
     ) {
 
         override fun getUri(item: Picture) = item.getUri()

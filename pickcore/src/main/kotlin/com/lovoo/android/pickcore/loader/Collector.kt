@@ -34,7 +34,7 @@ import androidx.loader.content.Loader
 class Collector(
     private val manager: LoaderManager,
     private val loader: Loader<Cursor>,
-    private val id: Int
+    private val id: Int,
 ) : LoaderManager.LoaderCallbacks<Cursor> {
 
     /**
