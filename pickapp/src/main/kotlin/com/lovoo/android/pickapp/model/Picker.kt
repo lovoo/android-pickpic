@@ -30,7 +30,7 @@ import io.reactivex.subjects.BehaviorSubject
  * @param config the [PickConfig] to determine the limits
  */
 class Picker(
-    val config: PickConfig
+    val config: PickConfig,
 ) {
 
     /**
@@ -136,7 +136,7 @@ class Picker(
      */
     data class PickConfig(
         val minCount: Int = 1,
-        val maxCount: Int = 1
+        val maxCount: Int = 1,
     )
 
     sealed class State {
@@ -148,7 +148,7 @@ class Picker(
          */
         data class Select(
             val position: Int,
-            val uri: Uri?
+            val uri: Uri?,
         ) : State()
 
         /**
@@ -159,7 +159,7 @@ class Picker(
          */
         data class Add(
             val uri: Uri,
-            val gallery: Gallery
+            val gallery: Gallery,
         ) : State()
 
         /**
@@ -170,7 +170,7 @@ class Picker(
          */
         data class Remove(
             val uri: Uri,
-            val gallery: Gallery
+            val gallery: Gallery,
         ) : State()
     }
 }

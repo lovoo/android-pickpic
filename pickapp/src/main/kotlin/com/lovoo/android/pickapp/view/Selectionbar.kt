@@ -49,7 +49,7 @@ import io.reactivex.disposables.CompositeDisposable
 class Selectionbar(
     private val picker: Picker,
     private val binding: PickpicLayoutSelectionbarBinding,
-    private val dependingViews: Array<View>
+    private val dependingViews: Array<View>,
 ) {
 
     private val adapter = SelectionAdapter(picker.config.maxCount)
@@ -201,8 +201,8 @@ class Selectionbar(
                         }
                     }
                 },
-                { error -> error.printStackTrace() }
-            )
+                { error -> error.printStackTrace() },
+            ),
         )
     }
 

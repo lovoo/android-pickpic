@@ -64,7 +64,7 @@ class PreviewFragment : Fragment() {
                     it.measuredHeight,
                     uri,
                     it,
-                    0
+                    0,
                 )
             }
         }

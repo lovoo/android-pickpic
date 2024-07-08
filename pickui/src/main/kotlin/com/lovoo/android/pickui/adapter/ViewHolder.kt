@@ -41,7 +41,7 @@ abstract class ViewHolder<T>(
     view: View,
     private val engine: ImageEngine,
     private val selectionLookUp: (T) -> Boolean,
-    private val onClick: (View, T) -> Unit
+    private val onClick: (View, T) -> Unit,
 ) : RecyclerView.ViewHolder(view) {
 
     private val size = MutableLiveData<Int>()
@@ -75,7 +75,7 @@ abstract class ViewHolder<T>(
             PlaceHolderDrawable().apply {
                 this.width = width
                 this.height = width
-            }
+            },
         )
     }
 

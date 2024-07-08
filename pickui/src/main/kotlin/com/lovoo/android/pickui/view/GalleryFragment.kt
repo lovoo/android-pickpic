@@ -15,6 +15,7 @@
  */
 package com.lovoo.android.pickui.view
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -37,6 +38,7 @@ import com.lovoo.android.pickcore.model.Gallery
 import com.lovoo.android.pickcore.model.convertToUi
 import com.lovoo.android.pickcore.permission.Permission
 import com.lovoo.android.pickcore.presenter.GalleryPresenterImpl
+import com.lovoo.android.pickcore.util.registerReceiverSafely
 import com.lovoo.android.pickui.R
 import com.lovoo.android.pickui.adapter.GalleryAdapter
 import com.lovoo.android.pickui.adapter.PopUpGalleryAdapter
@@ -74,6 +76,7 @@ class GalleryFragment : Fragment(), GalleryView {
         presenter.onCreate(savedInstanceState)
     }
 
+    @SuppressLint("UnspecifiedRegisterReceiverFlag")
     override fun onAttach(context: Context) {
         super.onAttach(context)
         activity?.let {
@@ -82,7 +85,7 @@ class GalleryFragment : Fragment(), GalleryView {
         val filter = IntentFilter().apply {
             addAction(CameraLoader.INTENT_INVALIDATE_GALLERY)
         }
-        context.registerReceiver(invalidateReceiver, filter)
+        context.registerReceiverSafely(receiver = invalidateReceiver, filter = filter)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

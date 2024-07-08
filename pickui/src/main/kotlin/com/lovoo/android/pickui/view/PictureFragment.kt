@@ -38,6 +38,7 @@ import com.lovoo.android.pickcore.model.Gallery
 import com.lovoo.android.pickcore.model.Picture
 import com.lovoo.android.pickcore.model.convertToUi
 import com.lovoo.android.pickcore.presenter.PicturePresenterImpl
+import com.lovoo.android.pickcore.util.registerReceiverSafely
 import com.lovoo.android.pickui.R
 import com.lovoo.android.pickui.adapter.PictureAdapter
 import com.lovoo.android.pickui.databinding.PickpicFragmentPictureBinding
@@ -83,7 +84,7 @@ class PictureFragment : Fragment(), PictureView {
             adapter = PictureAdapter(
                 context,
                 { selectionHolder?.isSelected(it.getUri()) == true },
-                { _, picture -> onPictureClick(picture) }
+                { _, picture -> onPictureClick(picture) },
             )
         }
     }
@@ -106,12 +107,12 @@ class PictureFragment : Fragment(), PictureView {
                         }
                     }
                 }
-            }
+            },
         )
         val filter = IntentFilter().apply {
             addAction(CameraLoader.INTENT_INVALIDATE_GALLERY)
         }
-        context.registerReceiver(invalidateReceiver, filter)
+        context.registerReceiverSafely(invalidateReceiver, filter)
     }
 
     override fun onDetach() {
