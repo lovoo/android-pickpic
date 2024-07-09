@@ -15,9 +15,7 @@
  */
 package com.lovoo.android.pickcam.worker
 
-import android.content.BroadcastReceiver
 import android.content.Context
-import android.content.Intent
 import android.media.MediaScannerConnection
 import android.net.Uri
 import androidx.work.Data
