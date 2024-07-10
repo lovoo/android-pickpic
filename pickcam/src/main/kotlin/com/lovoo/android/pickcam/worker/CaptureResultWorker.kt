@@ -86,7 +86,7 @@ class CaptureResultWorker(
          * to [Data.EMPTY] the null will be returned by this function.
          * @return the [Uri] to the "normalized" captured image or null
          */
-        fun getUri(data: Data?): Uri? = data?.takeUnless { it != Data.EMPTY }
+        fun getUri(data: Data?): Uri? = data?.takeUnless { it == Data.EMPTY }
             ?.getString(OUTPUT_URI)
             ?.let { Uri.parse(it) }
 

@@ -165,11 +165,15 @@ class PickPicCaptureFragment : DialogFragment() {
         }
     }
 
-    private fun handleWorkInfo(workInfo: WorkInfo) {
+    private fun handleWorkInfo(workInfo: WorkInfo?) {
+        if (workInfo == null) {
+            return
+        }
+
         if (workInfo.state == WorkInfo.State.SUCCEEDED) {
             captureCallback?.onCapture(CaptureResultWorker.getUri(workInfo.outputData))
         }
-        if (workInfo.state != WorkInfo.State.RUNNING) {
+        if (workInfo.state.isFinished) {
             dismissAllowingStateLoss()
         }
     }
