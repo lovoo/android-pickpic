@@ -16,10 +16,8 @@
 package com.lovoo.android.pickcam.view
 
 import android.app.Activity
-import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -30,6 +28,8 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
+import androidx.work.WorkInfo
+import androidx.work.WorkManager
 import com.lovoo.android.pickcam.R
 import com.lovoo.android.pickcam.worker.CaptureResultWorker
 import com.lovoo.android.pickcore.contract.CameraDestination
@@ -39,7 +39,6 @@ import com.lovoo.android.pickcore.destination.PublicDirectory
 import com.lovoo.android.pickcore.loader.CameraLoader
 import com.lovoo.android.pickcore.permission.Permission
 import com.lovoo.android.pickcore.util.isMinimumR
-import com.lovoo.android.pickcore.util.registerReceiverSafely
 
 /**
  * Ready to use solution to handle Android Camera capture.
@@ -56,13 +55,6 @@ class PickPicCaptureFragment : DialogFragment() {
 
     private var captureDestination: CameraDestination? = null
     private var captureCallback: CaptureCallback? = null
-
-    private val onWorkerDoneReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent?) {
-            captureCallback?.onCapture(CaptureResultWorker.getUri(intent))
-            dismissAllowingStateLoss()
-        }
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.pickpic_capture_fragment, container, false)
@@ -81,10 +73,6 @@ class PickPicCaptureFragment : DialogFragment() {
                 throw (IllegalArgumentException("You have to implement CaptureCallback"))
             }
         }
-        context.registerReceiverSafely(
-            receiver = onWorkerDoneReceiver,
-            filter = IntentFilter().apply { addAction(CaptureResultWorker.INTENT_ACTION_ON_RESULT) },
-        )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -110,16 +98,16 @@ class PickPicCaptureFragment : DialogFragment() {
 
         val destination = captureDestination
         if (resultCode == Activity.RESULT_OK && destination != null) {
-            CaptureResultWorker.start(requireContext().applicationContext, destination, WORKER_NAME)
+            val workUuid = CaptureResultWorker.start(requireContext().applicationContext, destination, WORKER_NAME)
+
+            WorkManager.getInstance(this.requireContext())
+                .getWorkInfoByIdLiveData(workUuid).observe(viewLifecycleOwner) { workInfo ->
+                    handleWorkInfo(workInfo)
+                }
         } else {
             captureCallback?.onCapture(null)
             dismissAllowingStateLoss()
         }
-    }
-
-    override fun onDetach() {
-        context?.unregisterReceiver(onWorkerDoneReceiver)
-        super.onDetach()
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
@@ -174,6 +162,19 @@ class PickPicCaptureFragment : DialogFragment() {
             }
         }.also {
             CameraLoader.startCamera(requireContext(), this, CAMERA_REQUEST_CODE, it)
+        }
+    }
+
+    private fun handleWorkInfo(workInfo: WorkInfo?) {
+        if (workInfo == null) {
+            return
+        }
+
+        if (workInfo.state == WorkInfo.State.SUCCEEDED) {
+            captureCallback?.onCapture(CaptureResultWorker.getUri(workInfo.outputData))
+        }
+        if (workInfo.state.isFinished) {
+            dismissAllowingStateLoss()
         }
     }
 
