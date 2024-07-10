@@ -76,7 +76,7 @@ class PictureFragment : Fragment(), PictureView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.listView.apply {
+        binding.pictureListView.apply {
             setHasFixedSize(true)
             isNestedScrollingEnabled = arguments?.getBoolean(ARGUMENT_NESTED_SCROLL) ?: true
             addItemDecoration(PictureDecoration(3, resources.getDimensionPixelOffset(R.dimen.pickpic_picture_item_space)))
@@ -95,7 +95,7 @@ class PictureFragment : Fragment(), PictureView {
             tag,
             object : ToggleCallback {
                 override fun toggle(uri: Uri, gallery: Gallery) {
-                    (_binding?.listView?.adapter as? PictureAdapter)?.let { adapter ->
+                    (_binding?.pictureListView?.adapter as? PictureAdapter)?.let { adapter ->
                         val position = adapter
                             .getItems { PictureLoader.convert(it).convertToUi() }
                             .indexOfFirst { it.getUri() == uri }
@@ -133,7 +133,7 @@ class PictureFragment : Fragment(), PictureView {
     }
 
     override fun onCursorLoaded(cursor: Cursor?) {
-        (_binding?.listView?.adapter as? PictureAdapter)?.apply {
+        (_binding?.pictureListView?.adapter as? PictureAdapter)?.apply {
             changeCursor(cursor)
             _binding?.loadingView?.visibility = View.GONE
         }

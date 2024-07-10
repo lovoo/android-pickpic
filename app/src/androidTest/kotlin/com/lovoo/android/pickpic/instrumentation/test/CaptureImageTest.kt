@@ -16,8 +16,10 @@
 package com.lovoo.android.pickpic.instrumentation.test
 
 import android.content.Context
+import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.By
@@ -39,6 +41,10 @@ class CaptureImageTest : BaseUiTest() {
 
         onView(withId(R.id.button)).perform(click())
         takePictures(2, context)
+
+        device.wait(Until.hasObject(By.res(context.resources.getResourceName(R.id.picture_list_view))), Consts.WAIT_DELAY)
+        onView(withId(R.id.picture_list_view)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(1, click()))
+        onView(withId(R.id.picture_list_view)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(2, click()))
 
         device.wait(Until.hasObject(By.res(context.resources.getResourceName(R.id.selection_button))), Consts.WAIT_DELAY)
         onView(withId(R.id.selection_button)).perform(click())

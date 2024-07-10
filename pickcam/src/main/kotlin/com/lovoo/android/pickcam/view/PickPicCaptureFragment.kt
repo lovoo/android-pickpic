@@ -169,7 +169,9 @@ class PickPicCaptureFragment : DialogFragment() {
         if (workInfo.state == WorkInfo.State.SUCCEEDED) {
             captureCallback?.onCapture(CaptureResultWorker.getUri(workInfo.outputData))
         }
-        dismissAllowingStateLoss()
+        if (workInfo.state != WorkInfo.State.RUNNING) {
+            dismissAllowingStateLoss()
+        }
     }
 
     companion object {
