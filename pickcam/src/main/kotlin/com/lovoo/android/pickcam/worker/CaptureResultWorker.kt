@@ -15,11 +15,10 @@
  */
 package com.lovoo.android.pickcam.worker
 
-import android.content.BroadcastReceiver
 import android.content.Context
-import android.content.Intent
 import android.media.MediaScannerConnection
 import android.net.Uri
+import androidx.work.Data
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequest
 import androidx.work.RxWorker
@@ -33,6 +32,7 @@ import com.lovoo.android.pickcore.loader.CameraLoader
 import com.lovoo.android.pickcore.util.isMinimumQ
 import io.reactivex.Single
 import java.io.File
+import java.util.UUID
 
 /**
  * Worker that handles all the tasks to finalize the captured image from the camera.
@@ -55,11 +55,10 @@ class CaptureResultWorker(
     private var isPublic: Boolean = params.inputData.getBoolean(INPUT_IS_PUBLIC, true)
 
     override fun createWork(): Single<Result> {
-        return Single.create<Result> { emitter ->
+        return Single.create { emitter ->
             val file = if (isPublic || isMinimumQ()) inputFile else inputFile.moveToPublicDirectory().file
 
             if (file == null) {
-                context.sendBroadcast(Intent(INTENT_ACTION_ON_RESULT))
                 emitter.onError(RuntimeException("Captured file is null"))
                 return@create
             }
@@ -70,33 +69,36 @@ class CaptureResultWorker(
                 MediaScannerConnection.OnScanCompletedListener { _, uri ->
                     if (uri == null) return@OnScanCompletedListener
                     // LiveData holds to long the old result so we have to forward the result as broadcast
-                    context.sendBroadcast(Intent(INTENT_ACTION_ON_RESULT).putExtra(OUTPUT_URI, uri))
-                    emitter.onSuccess(Result.success())
+                    emitter.onSuccess(Result.success(Data.Builder().putString(OUTPUT_URI, uri.toString()).build()))
                 },
             )
         }
     }
 
     companion object {
+        const val OUTPUT_URI = "pickcam_output_uri"
         private const val INPUT_FILE = "pickcam_input_file"
         private const val INPUT_IS_PUBLIC = "pickcam_input_is_public"
-        private const val OUTPUT_URI = "pickcam_output_uri"
-        const val INTENT_ACTION_ON_RESULT = "pickcam_result_done"
 
         /**
-         * Receive the [Uri] from the [Intent] provided by the [BroadcastReceiver]
-         * @param intent the result [Intent] provided by the [BroadcastReceiver] or null
+         * Receive the [Uri] from the [Data] provided by the [Worker]
+         * @param data the output data [Data] provided by the [CaptureResultWorker] or null. If equal
+         * to [Data.EMPTY] the null will be returned by this function.
          * @return the [Uri] to the "normalized" captured image or null
          */
-        fun getUri(intent: Intent?): Uri? = intent?.getParcelableExtra(OUTPUT_URI)
+        fun getUri(data: Data?): Uri? = data?.takeUnless { it == Data.EMPTY }
+            ?.getString(OUTPUT_URI)
+            ?.let { Uri.parse(it) }
 
         /**
          * Enqueue the unique [Worker] with REPLACE policy.
          *
          * @param destination the [CameraDestination] that was used to capture the picture
          * @param name optional unique name for the [Worker] (default: CaptureResultWorker)
+         *
+         * @return the uuid of the created WorkRequest
          */
-        fun start(context: Context, destination: CameraDestination, name: String = "CaptureResultWorker") {
+        fun start(context: Context, destination: CameraDestination, name: String = "CaptureResultWorker"): UUID {
             val data = workDataOf(
                 INPUT_IS_PUBLIC to (destination !is PrivateDirectory),
                 INPUT_FILE to (destination.file?.path ?: ""),
@@ -107,6 +109,7 @@ class CaptureResultWorker(
                 .build()
 
             WorkManager.getInstance(context).enqueueUniqueWork(name, ExistingWorkPolicy.REPLACE, request)
+            return request.id
         }
     }
 }
